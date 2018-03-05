@@ -1,6 +1,7 @@
 package com.lazydsr.lazydsrwebtemplate.config;
 
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 
 //import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 
@@ -63,7 +65,9 @@ public class DruidConfiguration {
     @Bean(name = "dataSource")
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource.druid")
-    public DataSource dataSource() {
+    public DataSource dataSource() throws SQLException {
+        //DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
+        //dataSource.init();
         return DruidDataSourceBuilder.create().build();
     }
 
