@@ -2,6 +2,9 @@ package com.lazydsr.lazydsrwebtemplate.repository;
 
 import com.lazydsr.lazydsrwebtemplate.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * UserRepository
@@ -12,4 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Info: @TODO:...
  */
 public interface UserRepository extends JpaRepository<User, String> {
+    public List<User> findByNameLike(String name);
+    @Query("select u from User u where u.name like %:name%")
+    public List<User> findByNameLikeCus(String name);
 }

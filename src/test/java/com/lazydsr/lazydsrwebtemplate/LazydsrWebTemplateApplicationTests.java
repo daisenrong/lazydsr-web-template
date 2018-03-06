@@ -21,5 +21,21 @@ public class LazydsrWebTemplateApplicationTests {
 		userRepository.findAll().stream().forEach(u-> System.out.println(u));
 
 	}
+	@Test
+	public void contextLoads1() {
+		User user = userRepository.save(new User("aa"));
+		System.out.println(user);
+
+		userRepository.findByNameLike("aa").stream().forEach(u-> System.out.println(u));
+
+	}
+	@Test
+	public void contextLoads2() {
+		User user = userRepository.save(new User("aa"));
+		System.out.println(user);
+
+		userRepository.findByNameLikeCus("aa").stream().forEach(u-> System.out.println(u));
+
+	}
 
 }

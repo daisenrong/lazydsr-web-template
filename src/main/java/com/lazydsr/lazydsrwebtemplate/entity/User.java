@@ -22,6 +22,10 @@ public class User {
     private String id;
     @Column(length = 100,nullable = false)
     private String name;
+    @Column(length = 50)
+    private String mobile;
+    @Column(length = 100)
+    private String address;
 
     public User() {
     }
