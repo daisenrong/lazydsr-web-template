@@ -1,6 +1,7 @@
 package com.lazydsr.lazydsrwebtemplate.dao;
 
 import com.lazydsr.lazydsrwebtemplate.entity.User;
+import com.lazydsr.lazydsrwebtemplate.jdbc.UserJdbc;
 import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
 
 import java.util.List;
@@ -13,6 +14,6 @@ import java.util.List;
  * Version: 0.1
  * Info: @TODO:...
  */
-public interface UserDao extends UserRepository {
-    public List<User> find
+public interface UserDao extends UserRepository ,UserJdbc{
+
 }

@@ -1,5 +1,6 @@
 package com.lazydsr.lazydsrwebtemplate;
 
+import com.lazydsr.lazydsrwebtemplate.dao.UserDao;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
 import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
 import org.junit.Test;
@@ -13,6 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class LazydsrWebTemplateApplicationTests {
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private UserDao userDao;
 	@Test
 	public void contextLoads() {
 		User user = userRepository.save(new User("aa"));
@@ -35,6 +38,16 @@ public class LazydsrWebTemplateApplicationTests {
 		System.out.println(user);
 
 		userRepository.findByNameLikeCus("aa").stream().forEach(u-> System.out.println(u));
+
+	}
+	@Test
+	public void contextLoads3() {
+		User user = userRepository.save(new User("aa"));
+		System.out.println(user);
+
+		userDao.findByNameLikeCus("aa").stream().forEach(u-> System.out.println(u));
+		System.out.println("-------------");
+		userDao.findbyNameJdbc("aa").stream().forEach(u -> System.out.println(u));
 
 	}
 
