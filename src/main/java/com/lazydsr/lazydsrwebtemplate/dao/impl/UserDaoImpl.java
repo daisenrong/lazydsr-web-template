@@ -1,10 +1,11 @@
-package com.lazydsr.lazydsrwebtemplate.jdbc.impl;
+package com.lazydsr.lazydsrwebtemplate.dao.impl;
 
 import com.lazydsr.lazydsrwebtemplate.entity.User;
-import com.lazydsr.lazydsrwebtemplate.jdbc.UserJdbc;
+import com.lazydsr.lazydsrwebtemplate.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -16,12 +17,13 @@ import java.util.List;
  * Version: 0.1
  * Info: @TODO:...
  */
-public class UserJdbcImpl implements UserJdbc {
+@Repository
+public class UserDaoImpl implements UserDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Override
     public List<User> findbyNameJdbc(String name) {
-        List<User> list = jdbcTemplate.query("", new BeanPropertyRowMapper<User>());
+        List<User> list = jdbcTemplate.query("select * from user", new BeanPropertyRowMapper<>(User.class));
         return list;
     }
 }

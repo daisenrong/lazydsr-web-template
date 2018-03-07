@@ -16,6 +16,8 @@ public class LazydsrWebTemplateApplicationTests {
 	private UserRepository userRepository;
 	@Autowired
 	private UserDao userDao;
+	//@Autowired
+	//private UserJdbc userJdbc;
 	@Test
 	public void contextLoads() {
 		User user = userRepository.save(new User("aa"));
@@ -37,7 +39,7 @@ public class LazydsrWebTemplateApplicationTests {
 		User user = userRepository.save(new User("aa"));
 		System.out.println(user);
 
-		userRepository.findByNameLikeCus("aa").stream().forEach(u-> System.out.println(u));
+		userRepository.findByNameLike("%a%").stream().forEach(u-> System.out.println(u));
 
 	}
 	@Test
@@ -45,8 +47,9 @@ public class LazydsrWebTemplateApplicationTests {
 		User user = userRepository.save(new User("aa"));
 		System.out.println(user);
 
-		userDao.findByNameLikeCus("aa").stream().forEach(u-> System.out.println(u));
-		System.out.println("-------------");
+		//userRepository.findByNameLikeCus("aa").stream().forEach(u-> System.out.println(u));
+		//userRepository.findByNameLikeCus1("aa").stream().forEach(u-> System.out.println(u));
+		//System.out.println("-------------");
 		userDao.findbyNameJdbc("aa").stream().forEach(u -> System.out.println(u));
 
 	}
