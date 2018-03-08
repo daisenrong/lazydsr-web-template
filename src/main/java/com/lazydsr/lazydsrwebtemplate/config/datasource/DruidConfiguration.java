@@ -1,4 +1,4 @@
-package com.lazydsr.lazydsrwebtemplate.config;
+package com.lazydsr.lazydsrwebtemplate.config.datasource;
 
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
@@ -23,7 +23,7 @@ import java.sql.SQLException;
  * PACKAGE_NAME: com.lazy.web.config
  * Created by Lazy on 2017/9/28 17:16
  * Version: 1.0
- * Info: Druid数据源设置
+ * Info: Druid数据源设置--主数据源
  */
 @Configuration
 @Slf4j

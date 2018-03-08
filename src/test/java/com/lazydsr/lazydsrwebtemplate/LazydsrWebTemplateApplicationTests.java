@@ -1,8 +1,11 @@
 package com.lazydsr.lazydsrwebtemplate;
 
 import com.lazydsr.lazydsrwebtemplate.dao.UserDao;
+import com.lazydsr.lazydsrwebtemplate.entity.DatasourceInfo;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
+import com.lazydsr.lazydsrwebtemplate.repository.DatasourceInfoRepository;
 import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
+import com.lazydsr.util.time.UtilDateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,8 @@ public class LazydsrWebTemplateApplicationTests {
     private UserRepository userRepository;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private DatasourceInfoRepository datasourceInfoRepository;
 
     @Test
     public void contextLoads() {
@@ -31,7 +36,7 @@ public class LazydsrWebTemplateApplicationTests {
         User user = userRepository.save(new User("aa"));
         System.out.println(user);
 
-        userRepository.findByNameLike("aa").stream().forEach(u -> System.out.println(u));
+        //userRepository.findByNameLike("aa").stream().forEach(u -> System.out.println(u));
 
     }
 
@@ -54,6 +59,14 @@ public class LazydsrWebTemplateApplicationTests {
         //userRepository.findByNameLikeCus2("aa").stream().forEach(u-> System.out.println(u));
         //System.out.println("-------------");
         userDao.findbyNameJdbc("aa").stream().forEach(u -> System.out.println(u));
+
+    }
+    @Test
+    public void contextLoads4() {
+        DatasourceInfo datasourceInfo=new DatasourceInfo();
+        datasourceInfo.setName(UtilDateTime.getCurrSecond()+"");
+        DatasourceInfo info = datasourceInfoRepository.save(datasourceInfo);
+        System.out.println(info);
 
     }
 

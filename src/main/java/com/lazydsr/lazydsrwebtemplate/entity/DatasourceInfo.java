@@ -5,29 +5,32 @@ import com.lazydsr.util.time.UtilDateTime;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
- * Admin
+ * DatasourceInfo
  * PROJECT_NAME: lazydsr-web-template
  * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate.entity
- * Created by Lazy on 2018/3/5 22:48
+ * Created by Lazy on 2018/3/8 20:58
  * Version: 0.1
- * Info: @TODO:...
+ * Info: 数据库配置信息实体
  */
 @Entity
+@Table
 @Data
-public class Admin {
+public class DatasourceInfo {
     @Id
     @GenericGenerator(name="Custom_UUID", strategy="com.lazydsr.commons.util.CustomIdentifierGenerator")
     @GeneratedValue(generator="Custom_UUID")
     @Column(length = 32)
-    private int id;
-    @Column
+    private String id;
+    @Column(nullable = false,unique = true)
     private String name;
+    private String url;
+    private String username;
+    private String password;
+    private int minActive;
+    private int maxActive;
 
     private int status=STATICVALUE.ENABLE;
 
@@ -37,4 +40,5 @@ public class Admin {
     private String modifier;
     private String modifyDate=UtilDateTime.getCurrDateTime();
     private int dataStatus= STATICVALUE.ENABLE;
+
 }
