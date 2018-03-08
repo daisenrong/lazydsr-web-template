@@ -1,5 +1,9 @@
 package com.lazydsr.lazydsrwebtemplate.service;
 
+import com.lazydsr.lazydsrwebtemplate.entity.User;
+
+import java.util.List;
+
 /**
  * UserService
  * PROJECT_NAME: lazydsr-web-template
@@ -9,4 +13,13 @@ package com.lazydsr.lazydsrwebtemplate.service;
  * Info: @TODO:...
  */
 public interface UserService {
+    public List<User> findbyNameJdbc(String name);
+
+    public List<User> findByNameLike(String name);
+
+    public List<User> findByNameLikeCus(String username);
+
+    public List<User> findByNameLikeCus1(String username);
+
+    public List<User> findByNameLikeCus2(String username);
 }

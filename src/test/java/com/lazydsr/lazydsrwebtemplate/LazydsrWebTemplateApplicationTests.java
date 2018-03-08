@@ -12,46 +12,49 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LazydsrWebTemplateApplicationTests {
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private UserDao userDao;
-	//@Autowired
-	//private UserJdbc userJdbc;
-	@Test
-	public void contextLoads() {
-		User user = userRepository.save(new User("aa"));
-		System.out.println(user);
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private UserDao userDao;
 
-		userRepository.findAll().stream().forEach(u-> System.out.println(u));
+    @Test
+    public void contextLoads() {
+        User user = userRepository.save(new User("aa"));
+        System.out.println(user);
 
-	}
-	@Test
-	public void contextLoads1() {
-		User user = userRepository.save(new User("aa"));
-		System.out.println(user);
+        userRepository.findAll().stream().forEach(u -> System.out.println(u));
 
-		userRepository.findByNameLike("aa").stream().forEach(u-> System.out.println(u));
+    }
 
-	}
-	@Test
-	public void contextLoads2() {
-		User user = userRepository.save(new User("aa"));
-		System.out.println(user);
+    @Test
+    public void contextLoads1() {
+        User user = userRepository.save(new User("aa"));
+        System.out.println(user);
 
-		userRepository.findByNameLike("%a%").stream().forEach(u-> System.out.println(u));
+        userRepository.findByNameLike("aa").stream().forEach(u -> System.out.println(u));
 
-	}
-	@Test
-	public void contextLoads3() {
-		User user = userRepository.save(new User("aa"));
-		System.out.println(user);
+    }
 
-		//userRepository.findByNameLikeCus("aa").stream().forEach(u-> System.out.println(u));
-		//userRepository.findByNameLikeCus1("aa").stream().forEach(u-> System.out.println(u));
-		//System.out.println("-------------");
-		userDao.findbyNameJdbc("aa").stream().forEach(u -> System.out.println(u));
+    @Test
+    public void contextLoads2() {
+        User user = userRepository.save(new User("aa"));
+        System.out.println(user);
 
-	}
+        userRepository.findByNameLike("%a%").stream().forEach(u -> System.out.println(u));
+
+    }
+
+    @Test
+    public void contextLoads3() {
+        User user = userRepository.save(new User("aa"));
+        System.out.println(user);
+
+        //userRepository.findByNameLikeCus("aa").stream().forEach(u-> System.out.println(u));
+        //userRepository.findByNameLikeCus1("aa").stream().forEach(u-> System.out.println(u));
+        //userRepository.findByNameLikeCus2("aa").stream().forEach(u-> System.out.println(u));
+        //System.out.println("-------------");
+        userDao.findbyNameJdbc("aa").stream().forEach(u -> System.out.println(u));
+
+    }
 
 }

@@ -1,7 +1,10 @@
 package com.lazydsr.lazydsrwebtemplate.service.impl;
 
+import com.lazydsr.lazydsrwebtemplate.entity.User;
 import com.lazydsr.lazydsrwebtemplate.service.UserService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * UserServiceImpl
@@ -13,4 +16,28 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    @Override
+    public List<User> findbyNameJdbc(String name) {
+        return null;
+    }
+
+    @Override
+    public List<User> findByNameLike(String name) {
+        return null;
+    }
+
+    @Override
+    public List<User> findByNameLikeCus(String username) {
+        return null;
+    }
+
+    @Override
+    public List<User> findByNameLikeCus1(String username) {
+        return null;
+    }
+
+    @Override
+    public List<User> findByNameLikeCus2(String username) {
+        return null;
+    }
 }
