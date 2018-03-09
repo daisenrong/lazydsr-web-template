@@ -2,9 +2,9 @@ package com.lazydsr.lazydsrwebtemplate.config.context;
 
 import com.lazydsr.lazydsrwebtemplate.config.datasource.MultiDatasourceConfiguration;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class ContextLoadEvent implements ApplicationRunner {
+    @Autowired
+    private MultiDatasourceConfiguration multiDatasourceConfiguration;
 
     /**
      * Callback used to run the bean.
@@ -28,7 +30,6 @@ public class ContextLoadEvent implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.error("多数据源加载开始");
-        MultiDatasourceConfiguration multiDatasourceConfiguration = new MultiDatasourceConfiguration();
         boolean initResult = multiDatasourceConfiguration.init();
         if (initResult) {
             log.error("多数据源加载成功");

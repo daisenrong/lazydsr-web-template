@@ -1,9 +1,9 @@
 package com.lazydsr.lazydsrwebtemplate;
 
 import com.lazydsr.lazydsrwebtemplate.dao.UserDao;
-import com.lazydsr.lazydsrwebtemplate.entity.DatasourceInfo;
+import com.lazydsr.lazydsrwebtemplate.entity.Datasource;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
-import com.lazydsr.lazydsrwebtemplate.repository.DatasourceInfoRepository;
+import com.lazydsr.lazydsrwebtemplate.repository.DatasourceRepository;
 import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
 import com.lazydsr.util.time.UtilDateTime;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class LazydsrWebTemplateApplicationTests {
     @Autowired
     private UserDao userDao;
     @Autowired
-    private DatasourceInfoRepository datasourceInfoRepository;
+    private DatasourceRepository datasourceRepository;
 
     @Test
     public void contextLoads() {
@@ -63,9 +63,9 @@ public class LazydsrWebTemplateApplicationTests {
     }
     @Test
     public void contextLoads4() {
-        DatasourceInfo datasourceInfo=new DatasourceInfo();
-        datasourceInfo.setName(UtilDateTime.getCurrSecond()+"");
-        DatasourceInfo info = datasourceInfoRepository.save(datasourceInfo);
+        Datasource datasource =new Datasource();
+        datasource.setName(UtilDateTime.getCurrSecond()+"");
+        Datasource info = datasourceRepository.save(datasource);
         System.out.println(info);
 
     }
