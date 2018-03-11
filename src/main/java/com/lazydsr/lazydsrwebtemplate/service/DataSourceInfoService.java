@@ -1,6 +1,6 @@
 package com.lazydsr.lazydsrwebtemplate.service;
 
-import com.lazydsr.lazydsrwebtemplate.entity.Datasource;
+import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * Version: 0.1
  * Info: @TODO:...
  */
-public interface DatasourceService {
-    public List<Datasource> findAll();
-    public List<Datasource> findByStatus(int status);
+public interface DataSourceInfoService {
+    public List<DataSourceInfo> findAll();
+    public List<DataSourceInfo> findByStatus(int status);
 }

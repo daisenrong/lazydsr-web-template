@@ -1,10 +1,12 @@
 package com.lazydsr.lazydsrwebtemplate;
 
 import com.lazydsr.lazydsrwebtemplate.dao.UserDao;
-import com.lazydsr.lazydsrwebtemplate.entity.Datasource;
+import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
-import com.lazydsr.lazydsrwebtemplate.repository.DatasourceRepository;
+import com.lazydsr.lazydsrwebtemplate.repository.DataSourceInfoRepository;
 import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
+import com.lazydsr.lazydsrwebtemplate.service.UserService;
+import com.lazydsr.lazydsrwebtemplate.util.SpringContextUtil;
 import com.lazydsr.util.time.UtilDateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +22,14 @@ public class LazydsrWebTemplateApplicationTests {
     @Autowired
     private UserDao userDao;
     @Autowired
-    private DatasourceRepository datasourceRepository;
+    private DataSourceInfoRepository dataSourceInfoRepository;
+
+    @Test
+    public void contextLoads002() {
+        UserService userService = SpringContextUtil.getBean(UserService.class);
+        System.out.println(userService);
+
+    }
 
     @Test
     public void contextLoads() {
@@ -63,9 +72,9 @@ public class LazydsrWebTemplateApplicationTests {
     }
     @Test
     public void contextLoads4() {
-        Datasource datasource =new Datasource();
-        datasource.setName(UtilDateTime.getCurrSecond()+"");
-        Datasource info = datasourceRepository.save(datasource);
+        DataSourceInfo dataSourceInfo =new DataSourceInfo();
+        dataSourceInfo.setName(UtilDateTime.getCurrSecond()+"");
+        DataSourceInfo info = dataSourceInfoRepository.save(dataSourceInfo);
         System.out.println(info);
 
     }

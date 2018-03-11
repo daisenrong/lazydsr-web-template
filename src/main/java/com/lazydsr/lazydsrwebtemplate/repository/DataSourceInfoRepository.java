@@ -1,6 +1,6 @@
 package com.lazydsr.lazydsrwebtemplate.repository;
 
-import com.lazydsr.lazydsrwebtemplate.entity.Datasource;
+import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -13,6 +13,6 @@ import java.util.List;
  * Version: 0.1
  * Info: @TODO:...
  */
-public interface DatasourceRepository extends JpaRepository<Datasource,String>{
-    public List<Datasource> findByStatus(int status);
+public interface DataSourceInfoRepository extends JpaRepository<DataSourceInfo,String>{
+    public List<DataSourceInfo> findByStatus(int status);
 }

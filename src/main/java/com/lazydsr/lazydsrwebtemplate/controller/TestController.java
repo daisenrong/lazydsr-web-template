@@ -1,7 +1,5 @@
 package com.lazydsr.lazydsrwebtemplate.controller;
 
-import com.lazydsr.lazydsrwebtemplate.config.datasource.MultiDatasourceConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,11 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/test")
 public class TestController {
-    @Autowired
-    private MultiDatasourceConfiguration multiDatasourceConfiguration;
+    //@Autowired
+    //private DynamicDataSourceConfiguration dynamicDataSourceConfiguration;
 
     @GetMapping
     public boolean initData() {
-        return multiDatasourceConfiguration.init();
+        return false;
     }
+
 }

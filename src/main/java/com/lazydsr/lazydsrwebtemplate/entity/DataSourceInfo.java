@@ -17,9 +17,9 @@ import javax.persistence.*;
  * Info: 数据库配置信息实体
  */
 @Entity
-@Table
+@Table(name = "datasourceinfo")
 @Data
-public class Datasource {
+public class DataSourceInfo {
     @Id
     @GenericGenerator(name = "Custom_UUID", strategy = "com.lazydsr.commons.util.CustomIdentifierGenerator")
     @GeneratedValue(generator = "Custom_UUID")

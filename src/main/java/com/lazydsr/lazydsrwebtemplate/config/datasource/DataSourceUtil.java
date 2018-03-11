@@ -8,7 +8,7 @@ package com.lazydsr.lazydsrwebtemplate.config.datasource;
  * Version: 0.1
  * Info: @TODO:...
  */
-public class DatasourceUtil {
+public class DataSourceUtil {
 
     public static String getConnectUrl(String dbType, String address, String prot, String dbname, String enCoding, boolean useSSL) {
         //jdbc:mysql://localhost:3306/lazydsr-web-template?useUnicode=true&characterEncoding=utf-8&useSSL=false
