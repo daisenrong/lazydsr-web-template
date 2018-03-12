@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="commonHead(title)">
+    <!--
+       header
+       PROJECT_NAME: lazydsr-web-template
+       PACKAGE_NAME: templates.thymeleaf.fragment
+       Created by Lazy on 2018/3/12 23:07
+       Version: 0.1
+       Info: 公用head
+    -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title th:text="${title}">AdminLazy v3.0.0 | 控制面板</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/static/plugins/bootstrap/css/bootstrap.min.css}" href="../../static/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/static/plugins/font-awesome/css/font-awesome.min.css}" href="../../static/plugins/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <!--<link rel="stylesheet" href="../static/plugins/Ionicons/css/ionicons.min.css">-->
+
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery 3 -->
+    <script th:src="@{/static/plugins/jquery/js/jquery.min.js}" src="../../static/plugins/jquery/js/jquery.min.js"></script>
+</head>
+<body>
+
+</body>
+</html>

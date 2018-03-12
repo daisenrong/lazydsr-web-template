@@ -1,12 +1,9 @@
 package com.lazydsr.lazydsrwebtemplate.config.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.lazydsr.lazydsrwebtemplate.base.STATICVALUE;
 import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
 import com.lazydsr.lazydsrwebtemplate.repository.DataSourceInfoRepository;
-import com.lazydsr.lazydsrwebtemplate.service.DataSourceInfoService;
-import com.lazydsr.lazydsrwebtemplate.service.impl.DataSourceInfoServiceImpl;
 import com.lazydsr.lazydsrwebtemplate.util.SpringContextUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;

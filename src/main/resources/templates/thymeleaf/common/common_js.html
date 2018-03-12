@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--
+       header
+       PROJECT_NAME: lazydsr-web-template
+       PACKAGE_NAME: templates.thymeleaf.fragment
+       Created by Lazy on 2018/3/12 23:07
+       Version: 0.1
+       Info: 公用头部
+    -->
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="commonJs">
+    <script th:src="@{/static/plugins/bootstrap/js/bootstrap.min.js}" src="../../static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script th:src="@{/static/js/lazyutil.js?v=1.0}" src="../../static/js/lazyutil.js?v=1.0"></script>
+</div>
+</body>
+</html>
