@@ -13,8 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/")
-public class home {
-    public String home(){
-        return "index";
+public class IndexController {
+    @RequestMapping({"/","index"})
+    public String index() {
+        return "/index/index";
     }
+
+    @RequestMapping("home")
+    public String home() {
+        return "/index/home";
+    }
+
 }
