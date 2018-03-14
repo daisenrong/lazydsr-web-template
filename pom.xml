@@ -76,6 +76,16 @@
             <artifactId>lazydsr-utils</artifactId>
             <version>${lazydsr.util.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.hyperic</groupId>-->
+            <!--<artifactId>sigar</artifactId>-->
+            <!--<version>1.6.4</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.fusesource</groupId>
+            <artifactId>sigar</artifactId>
+            <version>1.6.4</version>
+        </dependency>
 
 
         <dependency>

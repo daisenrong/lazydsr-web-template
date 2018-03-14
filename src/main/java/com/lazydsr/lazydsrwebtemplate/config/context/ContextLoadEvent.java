@@ -31,12 +31,6 @@ public class ContextLoadEvent implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         log.error("多数据源加载开始");
         DynamicDataSourceConfiguration.getInstance().init();
-        // boolean initResult = dynamicDataSourceConfiguration.init();
-        // if (initResult) {
-        //     log.error("多数据源加载成功");
-        // } else {
-        //     log.error("多数据源加载失败");
-        // }
         log.error("多数据源加载结束");
     }
 }

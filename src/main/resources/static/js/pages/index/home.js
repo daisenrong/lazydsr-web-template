@@ -5,7 +5,7 @@
  * Created by Lazy on 2018/3/13 22:43
  * Version: 0.1
  * Info: @TODO:...
- */
+ */r
 $(function () {
     console.log("aa");
     cpu();
@@ -22,19 +22,20 @@ $(function () {
 //demo
 
 var myChart = echarts.init(document.getElementById('interactive'));
+option = {
+    xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: 'line'
+    }]
+};
 function cpu() {
-     option = {
-        xAxis: {
-            type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: 'line'
-        }]
-    };
-    myChart.setOption(option);
+
+    myChart.setOption(option,true);
 }
