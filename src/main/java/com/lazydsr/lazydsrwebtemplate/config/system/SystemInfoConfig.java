@@ -40,7 +40,7 @@ public class SystemInfoConfig {
         //获取网络相关
         String ifNames[] = sigar.getNetInterfaceList();
 
-        newsystemInfo.setIp();
+        //newsystemInfo.setIp();
 
 
         return systemInfoService.save(newsystemInfo);
