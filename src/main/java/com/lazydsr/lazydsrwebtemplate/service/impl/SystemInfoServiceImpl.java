@@ -6,6 +6,8 @@ import com.lazydsr.lazydsrwebtemplate.service.SystemInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * SystemInfoServiceImpl
  * PROJECT_NAME: lazydsr-web-template
@@ -24,4 +26,11 @@ public class SystemInfoServiceImpl implements SystemInfoService {
         return systemInfoRepository.save(systemInfo);
 
     }
+
+    @Override
+    public SystemInfo findTopByOrderByCreateDateDesc() {
+        return systemInfoRepository.findTopByOrderByCreateDateDesc();
+    }
+
+
 }

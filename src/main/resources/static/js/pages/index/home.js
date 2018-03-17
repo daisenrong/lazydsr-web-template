@@ -5,7 +5,7 @@
  * Created by Lazy on 2018/3/13 22:43
  * Version: 0.1
  * Info: @TODO:...
- */r
+ */
 $(function () {
     console.log("aa");
     cpu();

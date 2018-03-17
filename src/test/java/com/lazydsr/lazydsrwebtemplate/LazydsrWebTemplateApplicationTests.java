@@ -4,6 +4,7 @@ import com.lazydsr.lazydsrwebtemplate.dao.UserDao;
 import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
 import com.lazydsr.lazydsrwebtemplate.repository.DataSourceInfoRepository;
+import com.lazydsr.lazydsrwebtemplate.repository.SystemInfoRepository;
 import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
 import com.lazydsr.lazydsrwebtemplate.service.UserService;
 import com.lazydsr.lazydsrwebtemplate.util.SpringContextUtil;
@@ -23,6 +24,8 @@ public class LazydsrWebTemplateApplicationTests {
     private UserDao userDao;
     @Autowired
     private DataSourceInfoRepository dataSourceInfoRepository;
+    @Autowired
+    private SystemInfoRepository systemInfoRepository;
 
     @Test
     public void contextLoads002() {
@@ -77,6 +80,10 @@ public class LazydsrWebTemplateApplicationTests {
         DataSourceInfo info = dataSourceInfoRepository.save(dataSourceInfo);
         System.out.println(info);
 
+    }
+    @Test
+    public void test002(){
+        System.out.println(systemInfoRepository.findTopByOrderByCreateDateDesc());
     }
 
 }

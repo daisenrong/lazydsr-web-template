@@ -6,6 +6,8 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.sql.Blob;
+import java.sql.Clob;
 
 /**
  * SystemInfo
@@ -29,7 +31,12 @@ public class SystemInfo {
     @Column(name = "servername")
     private String serverName;
     private String domain;
+
+    //net
+    @Column(name = "netname")
+    private String netName;
     private String ip;
+    @Column(length = 1000)
     private String mac;
     private String host;
 
@@ -46,23 +53,45 @@ public class SystemInfo {
     private String cpuMhz;
     @Column(name = "cpuvendor")
     private String cpuVendor;
-    @Column(name = "cpumodel")
+    @Column(name = "cpumodel", length = 1000)
     private String cpuModel;
+    @Column(name = "cpucachesize")
+    private String cpuCacheSize;
+
+    //mem
+    @Column(name = "memtotal")
+    private double memTotal;
+
 
     //jvm
-    @Column(name = "jvmtotalmemory")
-    private double jvmTotalMemory;
-    @Column(name = "jvmreememory")
-    private double jvmFreeMemory;
+    //-Xms:初始堆大小
+    //-Xmx：最大堆大小
+    //-Xmn：年轻代大小
+    //-XX:NewSize=n:设置年轻代大小
+    //-XX:NewRatio=n:设置年轻代和年老代的比值。如：为3表示年轻代和年老代比值为1：3，年轻代占整个年轻代年老代和的1/4
+    //-XX:SurvivorRatio=n:年轻代中Eden区与两个Survivor区的比值。注意Survivor区有两个。如3表示Eden： 3 Survivor：2，一个Survivor区占整个年轻代的1/5
+    //-XX:MaxPermSize=n:设置持久代大小
+
+
+    //jvm最大堆内存
+    @Column(name = "jvmxmx")
+    private double jvmXmx;
+    //jvm初始堆内存
+    @Column(name = "jvmxms")
+    private double jvmXms;
+    //jvm年轻代大小
+    @Column(name = "jvmxmn")
+    private double jvmXmn;
     @Column(name = "jvmavailableprocessors")
     private int jvmAvailableProcessors;
     @Column(name = "jvmversion")
     private String jvmVersion;
     @Column(name = "jvmhome")
     private String jvmHome;
+    @Column(name = "jvmapphome")
+    private String jvmAppHome;
     @Column(name = "jvmclassversion")
     private String jvmClassVersion;
-
 
 
     private int status = STATICVALUE.ENABLE;

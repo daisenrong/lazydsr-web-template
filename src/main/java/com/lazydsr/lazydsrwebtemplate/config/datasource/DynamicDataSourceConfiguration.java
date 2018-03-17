@@ -3,12 +3,15 @@ package com.lazydsr.lazydsrwebtemplate.config.datasource;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.lazydsr.lazydsrwebtemplate.base.STATICVALUE;
 import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
+import com.lazydsr.lazydsrwebtemplate.propdomian.MainDataSourceInfo;
 import com.lazydsr.lazydsrwebtemplate.repository.DataSourceInfoRepository;
 import com.lazydsr.lazydsrwebtemplate.util.SpringContextUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +46,34 @@ public class DynamicDataSourceConfiguration extends AbstractRoutingDataSource {
     }
 
     public void init() throws SQLException {
+        loadMainDataSourceInfo();
         setTargetDataSources(getDataSourceMap());
+    }
+
+    private void loadMainDataSourceInfo() {
+        Connection connection = null;
+        try {
+            MainDataSourceInfo mainDataSourceInfo = SpringContextUtil.getBean(MainDataSourceInfo.class);
+            DataSource dataSource = SpringContextUtil.getBean(DataSource.class);
+            connection = dataSource.getConnection();
+            DatabaseMetaData metaData = connection.getMetaData();
+            mainDataSourceInfo.setDatabase(metaData.getDatabaseProductName());
+            mainDataSourceInfo.setVersion(metaData.getDatabaseProductVersion());
+            mainDataSourceInfo.setDriver(metaData.getDriverName());
+            mainDataSourceInfo.setDriverVersion(metaData.getDriverVersion());
+            //TODO:可能会有问题，后面在验证吧
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override

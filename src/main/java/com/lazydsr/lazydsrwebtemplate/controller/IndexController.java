@@ -1,7 +1,13 @@
 package com.lazydsr.lazydsrwebtemplate.controller;
 
+import com.lazydsr.lazydsrwebtemplate.propdomian.MainDataSourceInfo;
+import com.lazydsr.lazydsrwebtemplate.entity.SystemInfo;
+import com.lazydsr.lazydsrwebtemplate.service.SystemInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Map;
 
 /**
  * home
@@ -14,13 +20,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class IndexController {
+    @Autowired
+    private SystemInfoService systemInfoService;
+    @Autowired
+    private MainDataSourceInfo mainDataSourceInfo;
+
     @RequestMapping({"/","index"})
     public String index() {
         return "index/index";
     }
 
     @RequestMapping("home")
-    public String home() {
+    public String home(Map map) {
+        SystemInfo systemInfo = systemInfoService.findTopByOrderByCreateDateDesc();
+        map.put("systemInfo",systemInfo);
+        map.put("mainDataSourceInfo",mainDataSourceInfo);
         return "index/home";
     }
 

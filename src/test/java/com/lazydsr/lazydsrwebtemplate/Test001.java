@@ -1,167 +1,114 @@
 package com.lazydsr.lazydsrwebtemplate;
 
+import org.hyperic.sigar.*;
+import org.junit.Test;
 
-import org.hyperic.sigar.Cpu;
-import org.hyperic.sigar.Sigar;
-import org.hyperic.sigar.SigarException;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryUsage;
 
 /**
  * Test001
  * PROJECT_NAME: lazydsr-web-template
  * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate
- * Created by Lazy on 2018/3/14 22:18
+ * Created by Lazy on 2018/3/13 8:58
  * Version: 0.1
  * Info: @TODO:...
  */
 public class Test001 {
+    @Test
+    public void test1() {
+        String s = "aaa,vvv,ccc,";
+        String[] split = s.split(",");
+        System.out.println(split.length);
 
-    private static String macAddressStr = null;
-    private static String computerName = System.getenv().get("COMPUTERNAME");
+    }
 
-    private static final String[] windowsCommand = { "ipconfig", "/all" };
-    private static final String[] linuxCommand = { "/sbin/ifconfig", "-a" };
-    private static final Pattern macPattern = Pattern.compile(".*((:?[0-9a-f]{2}[-:]){5}[0-9a-f]{2}).*",
-            Pattern.CASE_INSENSITIVE);
+    @Test
+    public void test2() throws InterruptedException {
+        Thread a = new Thread();
+        Thread b = new Thread();
+        Thread c = new Thread();
 
-    /**
-     * 获取多个网卡地址
-     *
-     * @return
-     * @throws IOException
-     */
-    private final static List<String> getMacAddressList() throws IOException {
-        final ArrayList<String> macAddressList = new ArrayList<String>();
-        final String os = System.getProperty("os.name");
-        final String command[];
+        a.start();
+        a.join();
 
-        if (os.startsWith("Windows")) {
-            command = windowsCommand;
-        } else if (os.startsWith("Linux")) {
-            command = linuxCommand;
-        } else {
-            throw new IOException("Unknow operating system:" + os);
+        b.start();
+        b.join();
+
+        c.start();
+        c.join();
+
+    }
+
+    @Test
+    public void cpu() throws SigarException {
+        Sigar sigar = new Sigar();
+        CpuInfo infos[] = sigar.getCpuInfoList();
+
+        for (int i = 0; i < infos.length; i++) {// 不管是单块CPU还是多CPU都适用
+            CpuInfo info = infos[i];
+            System.out.println("第" + (i + 1) + "块CPU信息");
+            System.out.println("CPU的总量MHz:    " + info.getMhz());// CPU的总量MHz
+            System.out.println("CPU生产商:    " + info.getVendor());// 获得CPU的卖主，如：Intel
+            System.out.println("CPU类别:    " + info.getModel());// 获得CPU的类别，如：Celeron
+            System.out.println("CPU缓存数量:    " + info.getCacheSize());// 缓冲存储器数量
+            //printCpuPerc(cpuList[i]);
         }
-        // 执行命令
-        final Process process = Runtime.getRuntime().exec(command);
-
-        BufferedReader bufReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        for (String line = null; (line = bufReader.readLine()) != null;) {
-            Matcher matcher = macPattern.matcher(line);
-            if (matcher.matches()) {
-                macAddressList.add(matcher.group(1));
-                System.out.println(matcher.group(1));
-                // macAddressList.add(matcher.group(1).replaceAll("[-:]",
-                // ""));//去掉MAC中的“-”
-            }
-        }
-
-        process.destroy();
-        bufReader.close();
-        return macAddressList;
     }
 
-    /**
-     * 获取一个网卡地址（多个网卡时从中获取一个）
-     *
-     * @return
-     */
-    public static String getMacAddress() {
-        if (macAddressStr == null || macAddressStr.equals("")) {
-            StringBuffer sb = new StringBuffer(); // 存放多个网卡地址用，目前只取一个非0000000000E0隧道的值
-            try {
-                List<String> macList = getMacAddressList();
-                for (Iterator<String> iter = macList.iterator(); iter.hasNext();) {
-                    String amac = iter.next();
-                    if (!amac.equals("0000000000E0")) {
-                        sb.append(amac);
-                        break;
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            macAddressStr = sb.toString();
-
-        }
-
-        return macAddressStr;
-    }
-
-    /**
-     * 获取电脑名
-     *
-     * @return
-     */
-    public static String getComputerName() {
-        if (computerName == null || computerName.equals("")) {
-            computerName = System.getenv().get("COMPUTERNAME");
-        }
-        return computerName;
-    }
-
-    /**
-     * 获取客户端IP地址
-     *
-     * @return
-     */
-    public static String getIpAddrAndName() throws IOException {
-        return InetAddress.getLocalHost().toString();
-    }
-
-    /**
-     * 获取客户端IP地址
-     *
-     * @return
-     */
-    public static String getIpAddr() throws IOException {
-        return InetAddress.getLocalHost().getHostAddress().toString();
-    }
-
-    /**
-     * 获取电脑唯一标识
-     *
-     * @return
-     */
-    public static String getComputerID() {
-        String id = getMacAddress();
-        if (id == null || id.equals("")) {
-            try {
-                id = getIpAddrAndName();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return computerName;
-    }
-
-    /**
-     * 限制创建实例
-     */
-    private Test001() {
+    @Test
+    public void test002() throws SigarException {
+        MemoryMXBean memorymbean = ManagementFactory.getMemoryMXBean();
+        MemoryUsage usage = memorymbean.getHeapMemoryUsage();
+        System.out.println("INIT HEAP: " + usage.getInit()/1024/1024);
+        System.out.println("MAX HEAP: " + usage.getMax()/1024/1024);
+        System.out.println("USE HEAP: " + usage.getUsed()/1024/1024);
+        System.out.println("\nFull Information:");
+        System.out.println("Heap Memory Usage: "
+                + memorymbean.getHeapMemoryUsage());
+        System.out.println("Non-Heap Memory Usage: "
+                + memorymbean.getNonHeapMemoryUsage());
+        Sigar sigar = new Sigar();
+        Mem mem = sigar.getMem();
+        System.out.println(mem.getTotal()/1024/1024);;
 
     }
 
-    public static void main(String[] args) throws IOException, SigarException {
-        //getMacAddressList();
+}
 
-        //System.out.println(Test001.getMacAddress());
-        //System.out.println(Test001.getComputerName());
-        //System.out.println(Test001.getIpAddr());
-        //System.out.println(Test001.getIpAddrAndName());
+class StaticStuff {
+    static int x = 10;
 
-        Sigar sigar=new Sigar();
-        Cpu cpu = sigar.getCpu();
-        System.out.println(cpu.getSys()/1024/4);
+    {
+        x += 15;
+    }
+
+    static {
+        x += 5;
+    }
+
+    public static void main(String args[]) {
+        System.out.println("x=" + x);
+    }
+
+    static {
+        x /= 3;
+    }
+
+}
+
+class StringEqualTest {
+
+    public static void main(String[] args) {
+        String a = "Programming";
+        String b = new String("Programming");
+        String c = "Program" + "ming";
+
+        System.out.println(a == b);
+        System.out.println(a == c);
+        System.out.println(a.equals(b));
+        System.out.println(a.equals(c));
+        System.out.println(a.intern() == b.intern());
     }
 }

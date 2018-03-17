@@ -3,6 +3,8 @@ package com.lazydsr.lazydsrwebtemplate.repository;
 import com.lazydsr.lazydsrwebtemplate.entity.SystemInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * SystemInfoRepository
  * PROJECT_NAME: lazydsr-web-template
@@ -12,4 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Info: @TODO:...
  */
 public interface SystemInfoRepository extends JpaRepository<SystemInfo, String> {
+    public SystemInfo findTopByOrderByCreateDateDesc();
 }

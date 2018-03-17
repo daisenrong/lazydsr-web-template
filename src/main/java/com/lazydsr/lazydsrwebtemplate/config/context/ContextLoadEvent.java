@@ -1,8 +1,8 @@
 package com.lazydsr.lazydsrwebtemplate.config.context;
 
 import com.lazydsr.lazydsrwebtemplate.config.datasource.DynamicDataSourceConfiguration;
+import com.lazydsr.lazydsrwebtemplate.config.system.SystemInfoConfiguration;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -32,5 +32,9 @@ public class ContextLoadEvent implements ApplicationRunner {
         log.error("多数据源加载开始");
         DynamicDataSourceConfiguration.getInstance().init();
         log.error("多数据源加载结束");
+
+        log.error("加载系统基本信息开始");
+        SystemInfoConfiguration.getInstance().init();
+        log.error("加载系统基本信息结束");
     }
 }
