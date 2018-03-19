@@ -1,12 +1,17 @@
 package com.lazydsr.lazydsrwebtemplate.controller;
 
+import com.lazydsr.lazydsrwebtemplate.entity.User;
 import com.lazydsr.lazydsrwebtemplate.propdomian.MainDataSourceInfo;
 import com.lazydsr.lazydsrwebtemplate.entity.SystemInfo;
 import com.lazydsr.lazydsrwebtemplate.service.SystemInfoService;
+import com.lazydsr.lazydsrwebtemplate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.Map;
 
 /**
@@ -24,9 +29,14 @@ public class IndexController {
     private SystemInfoService systemInfoService;
     @Autowired
     private MainDataSourceInfo mainDataSourceInfo;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping({"/","index"})
-    public String index() {
+    public String index(Map map) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+        User user = userService.findByUsername(userDetails.getUsername());
+        map.put("user",user);
         return "index/index";
     }
 

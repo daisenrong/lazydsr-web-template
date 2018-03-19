@@ -1,8 +1,8 @@
 #server port
 server:
   port: 8000
-#  servlet:
-#    context-path: /manager
+  servlet:
+    context-path: /manager
 #spring:
 #  datasource:
 #    driver-class-name: com.mysql.jdbc.Driver
@@ -29,7 +29,7 @@ spring:
         driver-class-name: com.mysql.jdbc.Driver
         url: jdbc:mysql://localhost:3306/lazydsr-web-template?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: root
-        password: Lazy123
+        password: root
         initialSize: 5
         minIdle: 5
         maxActive: 20
@@ -68,8 +68,11 @@ spring:
         connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
         useGlobalDataSourceStat: true
   jpa:
-      hibernate:
-          ddl-auto: update
-      show-sql: true
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        naming:
+            physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect #设置jpa的默认数据引擎为InnoDB
 logging:
   config: classpath:config/logback-spring.xml

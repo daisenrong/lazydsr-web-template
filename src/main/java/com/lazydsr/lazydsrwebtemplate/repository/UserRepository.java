@@ -17,14 +17,20 @@ import java.util.List;
  * Info: @TODO:...
  */
 public interface UserRepository extends JpaRepository<User, String> {
-    public List<User> findByNameLike(String name);
 
-    @Query("select u from User u where u.name like %:username%")
-    public List<User> findByNameLikeCus(@Param("username") String username);
+    public User findByUsername(String username);
 
-    @Query("select u from User u where u.name like %?1%")
-    public List<User> findByNameLikeCus1(String username);
+    public User findByUsernameAndPassword(String username, String password);
 
-    @Query(value = "SELECT * FROM user t WHERE t.name LIKE %?1%", nativeQuery = true)
-    public List<User> findByNameLikeCus2(String username);
+
+    //public List<User> findByNameLike(String name);
+    //
+    //@Query("select u from User u where u.name like %:username%")
+    //public List<User> findByNameLikeCus(@Param("username") String username);
+    //
+    //@Query("select u from User u where u.name like %?1%")
+    //public List<User> findByNameLikeCus1(String username);
+    //
+    //@Query(value = "SELECT * FROM user t WHERE t.name LIKE %?1%", nativeQuery = true)
+    //public List<User> findByNameLikeCus2(String username);
 }

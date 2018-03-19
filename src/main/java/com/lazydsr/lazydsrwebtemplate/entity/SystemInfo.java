@@ -18,7 +18,7 @@ import java.sql.Clob;
  * Info: @TODO:...
  */
 @Entity
-@Table(name = "systeminfo")
+@Table(name = "sysSysteminfo")
 @Data
 public class SystemInfo {
     @Id
@@ -94,12 +94,36 @@ public class SystemInfo {
     private String jvmClassVersion;
 
 
+    /**
+     * 状态
+     * 0  启用
+     * 1  禁用
+     */
     private int status = STATICVALUE.ENABLE;
-
-
+    /**
+     * 创建人
+     */
     private String creator;
+    @Column(length = 19)
+    /**
+     * 创建时间
+     */
     private String createDate = UtilDateTime.getCurrDateTime();
+    /**
+     * 最后修改人
+     */
     private String modifier;
+    /**
+     * 最后修改时间
+     */
+    @Column(length = 19)
     private String modifyDate = UtilDateTime.getCurrDateTime();
+    /**
+     * 数据状态
+     * 0 为正常
+     * 1 为删除
+     */
+    @Column(name = "dataStatus")
     private int dataStatus = STATICVALUE.ENABLE;
+
 }

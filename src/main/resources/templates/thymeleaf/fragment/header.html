@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <!--
        header
@@ -43,7 +43,7 @@
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
                                 <li><!-- start message --> <a href="#">
-                                    <div class="pull-left"><img src="../../static/img/user2-160x160.jpg" class="img-circle" alt="User Image"></div>
+                                    <div class="pull-left"><img th:src="@{/static/img/user2-160x160.jpg}" src="/static/img/user2-160x160.jpg" class="img-circle" alt="User Image"></div>
                                     <h4> 团队支持
                                         <small><i class="fa fa-clock-o"></i> 5 mins</small>
                                     </h4>
@@ -99,17 +99,17 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="../../static/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">系统管理员</span>
+                        <img th:src="@{/static/img/user2-160x160.jpg}" src="/static/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                        <span class="hidden-xs" th:text="${user.getName()}">系统管理员1</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="../../static/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                            <p> 系统管理员
-                                <small>system</small>
-                                <small>最后登录时间：2017-10-16 21:00:00</small>
+                            <img th:src="@{/static/img/user2-160x160.jpg}" src="/static/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <p>
+                                <small th:text="${user.getName()}">system</small>
+                                <small th:text="${user.getUsername()}">system</small>
+                                <small th:text="${'上次登录时间：'+user.lastLoginDate}">上次登录时间：2017-10-16 21:00:00</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -125,7 +125,7 @@
                         <li class="user-footer">
                             <div class="pull-left"><a href="#" class="btn btn-default btn-flat">设置</a>
                             </div>
-                            <div class="pull-right"><a href="#" class="btn btn-default btn-flat">退出</a>
+                            <div class="pull-right"><a th:href="@{/logout}" href="#" class="btn btn-default btn-flat">退出</a>
                             </div>
                         </li>
                     </ul>

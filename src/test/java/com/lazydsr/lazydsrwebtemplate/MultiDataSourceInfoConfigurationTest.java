@@ -5,6 +5,7 @@ import com.lazydsr.lazydsrwebtemplate.config.datasource.DatabaseTypeEnum;
 import com.lazydsr.lazydsrwebtemplate.config.datasource.DynamicDataSourceConfiguration;
 import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
 import com.lazydsr.lazydsrwebtemplate.repository.DataSourceInfoRepository;
+import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ import java.sql.SQLException;
 public class MultiDataSourceInfoConfigurationTest {
 
     @Autowired
-    private DynamicDataSourceConfiguration configuration;
+    private UserRepository userRepository;
     @Autowired
     private DataSourceInfoRepository dataSourceInfoRepository;
 
@@ -35,6 +36,11 @@ public class MultiDataSourceInfoConfigurationTest {
     public void init() {
         //boolean init = configuration.setTargetDataSources(configuratio);
         //System.out.println(init);
+    }
+
+    @Test
+    public void findByUsername() {
+        System.out.println(userRepository.findByUsername("admin"));
     }
 
     @Test
@@ -51,8 +57,10 @@ public class MultiDataSourceInfoConfigurationTest {
         dataSourceInfo.setProt("3306");
         dataSourceInfoRepository.save(dataSourceInfo);
     }
+
     @Resource
     private DruidDataSource dataSource;
+
     @Test
     public void testOtherDatasource() throws SQLException {
         dataSource.getConnection();

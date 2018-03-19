@@ -1,8 +1,8 @@
 #server port
 server:
   port: 8000
-#  servlet:
-#    context-path: /manager
+  servlet:
+    context-path: /manager
 #spring:
 #  datasource:
 #    driver-class-name: com.mysql.jdbc.Driver
@@ -71,5 +71,8 @@ spring:
       hibernate:
           ddl-auto: update
       show-sql: true
+      naming:
+          physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect #设置jpa的默认数据引擎为InnoDB
 #logging:
 #  config: classpath:config/logback-spring.xml

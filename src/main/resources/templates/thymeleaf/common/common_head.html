@@ -21,6 +21,7 @@
     <!-- Ionicons -->
     <!--<link rel="stylesheet" href="../static/plugins/Ionicons/css/ionicons.min.css">-->
     <link rel="stylesheet" th:href="@{/static/css/adminlazy.css?v=1.0}" href="/static/css/adminlazy.css?v=1.0">
+    <link rel="stylesheet" th:href="@{/static/plugins/layui/css/layui.css}" href="/static/plugins/layui/css/layui.css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -28,10 +29,32 @@
     <![endif]-->
     <!-- jQuery 3 -->
     <script th:src="@{/static/plugins/jquery/js/jquery.min.js}" src="/static/plugins/jquery/js/jquery.min.js"></script>
+    <script th:src="@{/static/plugins/layer/layer.js}" src="/static/plugins/layer/layer.js"></script>
     <script type="text/javascript">
+
+        var pathName = window.document.location.pathname;
+        var ctx = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+
+
+        //layui组件
+        var layform, laytable;
+        layer.load();
+        window.onload = function closeLayer() {
+            // console.log("加载完成");
+            layer.closeAll("loading");
+        };
+        setTimeout(function(){
+            layer.closeAll('loading');
+        }, 5000);
         $(function () {
+            layui.use(['form', 'table'], function () {
+
+                layform = layui.form;
+                laytable = layui.table;
+            });
             //解决移动端浏览器300ms延迟
             FastClick.attach(document.body);
+
         });
     </script>
 </head>

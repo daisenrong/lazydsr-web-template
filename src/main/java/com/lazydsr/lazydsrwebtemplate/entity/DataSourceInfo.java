@@ -17,7 +17,7 @@ import javax.persistence.*;
  * Info: 数据库配置信息实体
  */
 @Entity
-@Table(name = "datasourceinfo")
+@Table(name = "sysDatasourceinfo")
 @Data
 public class DataSourceInfo {
     @Id
@@ -71,13 +71,38 @@ public class DataSourceInfo {
     @Column(nullable = false)
     private int maxActive;
 
+
+
+    /**
+     * 状态
+     * 0  启用
+     * 1  禁用
+     */
     private int status = STATICVALUE.ENABLE;
-
-
+    /**
+     * 创建人
+     */
     private String creator;
+    @Column(length = 19)
+    /**
+     * 创建时间
+     */
     private String createDate = UtilDateTime.getCurrDateTime();
+    /**
+     * 最后修改人
+     */
     private String modifier;
+    /**
+     * 最后修改时间
+     */
+    @Column(length = 19)
     private String modifyDate = UtilDateTime.getCurrDateTime();
+    /**
+     * 数据状态
+     * 0 为正常
+     * 1 为删除
+     */
+    @Column(name = "dataStatus")
     private int dataStatus = STATICVALUE.ENABLE;
 
 }

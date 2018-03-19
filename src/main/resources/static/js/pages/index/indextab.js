@@ -24,7 +24,7 @@
             }
         },
         refreshTab: function () {
-            $("#ajax-loader-iframe").fadeIn(500);
+            // $("#ajax-loader-iframe").fadeIn(500);
             var currentId = $('.page-tabs-content').find('.active').attr('data-id');
             var target = $('.LAZY-main-iframe[data-id="' + currentId + '"]');
             var url = target.attr('src');
@@ -35,7 +35,7 @@
 
             target.attr('src', url).load(function () {
                 $.learunindex.changeIframeHeight();
-                $("#ajax-loader-iframe").fadeOut(500);
+                // $("#ajax-loader-iframe").fadeOut(500);
             });
             // target.attr('src', url);
 
@@ -161,7 +161,7 @@
                 }
             });
             if (flag) {
-                $("#ajax-loader-iframe").fadeIn(500);
+                // $("#ajax-loader-iframe").fadeIn(500);
                 var str = '<a href="javascript:;" class="active menuTab" data-id="' + dataUrl + '">' + menuName + ' <i class="fa fa-remove"></i></a>';
                 $('.menuTab').removeClass('active');
                 var str1 = '<iframe class="LAZY-main-iframe" id="iframe' + dataId + '" name="iframe' + dataId + '"  width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" seamless></iframe>';
@@ -173,7 +173,8 @@
                 $('.mainContent iframe:visible').load(function () {
                     $.learunindex.changeIframeHeight();
                     // $.lazyutil.ajaxLoaderHide();
-                    $("#ajax-loader-iframe").fadeOut(500);
+                    //使用了layer的组件
+                    // $("#ajax-loader-iframe").fadeOut(500);
                 });
                 $('.menuTabs .page-tabs-content').append(str);
                 $.learuntab.scrollToTab($('.menuTab.active'));
@@ -294,7 +295,7 @@
         changeIframeHeight: function () {
             //修改iframe的高度
             if ($("body").hasClass("fixed")) {
-                $(".LAZY-main-iframe:visible").height($(window).height() - $('.main-header').height() - $('.content-tabs').height() - 7);
+                $(".LAZY-main-iframe:visible").height($(window).height() - $('.main-header').height() - $('.content-tabs').height() - 5);
                 // $("#ajax-loader-iframe").height($(window).height() - $('.main-header').height() - $('.content-tabs').height() - 7);
                 // $("#ajax-loader-iframe").width($(".content-iframe").width());
 
@@ -350,136 +351,47 @@
             return reval;
         },
         loadMenu: function () {
-            var data = [{
-                "F_ModuleId": "1",
-                "F_ParentId": "0",
-                "F_EnCode": "SysManage",
-                "F_FullName": "系统管理",
-                "F_Icon": "fa fa-desktop",
-                "F_UrlAddress": null,
-                "F_Target": "expand",
-                "F_IsMenu": 0,
-                "F_AllowExpand": 1,
-                "F_IsPublic": 0,
-                "F_AllowEdit": null,
-                "F_AllowDelete": null,
-                "F_SortCode": 1,
-                "F_DeleteMark": 0,
-                "F_EnabledMark": 1,
-                "F_Description": null,
-                "F_CreateDate": null,
-                "F_CreateUserId": null,
-                "F_CreateUserName": null,
-                "F_ModifyDate": "2015-11-17 11:22:46",
-                "F_ModifyUserId": "System",
-                "F_ModifyUserName": "超级管理员"
-            }, {
-                "F_ModuleId": "2",
-                "F_ParentId": "1",
-                "F_EnCode": "AreaManage",
-                "F_FullName": "常用元素",
-                "F_Icon": "fa fa-leaf",
-                "F_UrlAddress": "/basic/index/indexIframe2",
-                "F_Target": "iframe",
-                "F_IsMenu": 1,
-                "F_AllowExpand": 1,
-                "F_IsPublic": 0,
-                "F_AllowEdit": null,
-                "F_AllowDelete": null,
-                "F_SortCode": 1,
-                "F_DeleteMark": 0,
-                "F_EnabledMark": 1,
-                "F_Description": "常用元素",
-                "F_CreateDate": "2015-11-12 14:38:20",
-                "F_CreateUserId": "System",
-                "F_CreateUserName": "超级管理员",
-                "F_ModifyDate": "2016-04-29 14:05:33",
-                "F_ModifyUserId": "System",
-                "F_ModifyUserName": "超级管理员"
-            }, {
-                "F_ModuleId": "4",
-                "F_ParentId": "0",
-                "F_EnCode": "SysManage",
-                "F_FullName": "系统管理2",
-                "F_Icon": "fa fa-desktop",
-                "F_UrlAddress": null,
-                "F_Target": "expand",
-                "F_IsMenu": 0,
-                "F_AllowExpand": 1,
-                "F_IsPublic": 0,
-                "F_AllowEdit": null,
-                "F_AllowDelete": null,
-                "F_SortCode": 1,
-                "F_DeleteMark": 0,
-                "F_EnabledMark": 1,
-                "F_Description": null,
-                "F_CreateDate": null,
-                "F_CreateUserId": null,
-                "F_CreateUserName": null,
-                "F_ModifyDate": "2015-11-17 11:22:46",
-                "F_ModifyUserId": "System",
-                "F_ModifyUserName": "超级管理员"
-            }, {
-                "F_ModuleId": "5",
-                "F_ParentId": "4",
-                "F_EnCode": "AreaManage",
-                "F_FullName": "常用元素2",
-                "F_Icon": "fa fa-leaf",
-                "F_UrlAddress": "examples/404.html",
-                "F_Target": "iframe",
-                "F_IsMenu": 1,
-                "F_AllowExpand": 1,
-                "F_IsPublic": 0,
-                "F_AllowEdit": null,
-                "F_AllowDelete": null,
-                "F_SortCode": 1,
-                "F_DeleteMark": 0,
-                "F_EnabledMark": 1,
-                "F_Description": "常用元素",
-                "F_CreateDate": "2015-11-12 14:38:20",
-                "F_CreateUserId": "System",
-                "F_CreateUserName": "超级管理员",
-                "F_ModifyDate": "2016-04-29 14:05:33",
-                "F_ModifyUserId": "System",
-                "F_ModifyUserName": "超级管理员"
-            }];
+            //菜单数据获取与加载
+            var data = loadMenuJson();
+
             var _html = "";
             $.each(data, function (i) {
+                //console.log(data);
                 var row = data[i];
-                if (row.F_ParentId == "0") {
+                if (row.parentId == "0") {
                     if (i == 0) {
                         _html += '<li class="treeview active">';
                     } else {
                         _html += '<li class="treeview">';
                     }
                     _html += '<a href="#">'
-                    _html += '<i class="' + row.F_Icon + '"></i><span>' + row.F_FullName + '</span><i class="fa fa-angle-left pull-right"></i>'
+                    _html += '<i class="' + row.icon + '"></i><span>' + row.name + '</span><i class="fa fa-angle-left pull-right"></i>'
                     _html += '</a>'
                     var childNodes = $.learunindex.jsonWhere(data, function (v) {
-                        return v.F_ParentId == row.F_ModuleId
+                        return v.parentId == row.id
                     });
                     if (childNodes.length > 0) {
                         _html += '<ul class="treeview-menu">';
                         $.each(childNodes, function (i) {
                             var subrow = childNodes[i];
                             var subchildNodes = $.learunindex.jsonWhere(data, function (v) {
-                                return v.F_ParentId == subrow.F_ModuleId
+                                return v.parentId == subrow.id
                             });
                             _html += '<li>';
                             if (subchildNodes.length > 0) {
-                                _html += '<a href="#"><i class="' + subrow.F_Icon + '"></i>' + subrow.F_FullName + '';
+                                _html += '<a href="#"><i class="' + subrow.icon + '"></i>' + subrow.name + '';
                                 _html += '<i class="fa fa-angle-left pull-right"></i></a>';
                                 _html += '<ul class="treeview-menu">';
                                 $.each(subchildNodes, function (i) {
                                     var subchildNodesrow = subchildNodes[i];
                                     // _html += '<li><a class="menuItem" data-id="'+ctx + subrow.F_ModuleId + '" href="'+ctx + subrow.F_UrlAddress + '"><i class="' + subchildNodesrow.F_Icon + '"></i>' + subchildNodesrow.F_FullName + '</a></li>';
-                                    _html += '<li><a class="menuItem" data-id="'+ subrow.F_ModuleId + '" href="'+ subrow.F_UrlAddress + '"><i class="' + subchildNodesrow.F_Icon + '"></i>' + subchildNodesrow.F_FullName + '</a></li>';
+                                    _html += '<li><a class="menuItem" data-id="' + subrow.id + '" href="' + ctx + subrow.url + '"><i class="' + subchildNodesrow.icon + '"></i>' + subchildNodesrow.name + '</a></li>';
                                 });
                                 _html += '</ul>';
 
                             } else {
                                 // _html += '<a class="menuItem" data-id="'+ctx + subrow.F_ModuleId + '" href="'+ctx + subrow.F_UrlAddress + '"><i class="' + subrow.F_Icon + '"></i>' + subrow.F_FullName + '</a>';
-                                _html += '<a class="menuItem" data-id="' + subrow.F_ModuleId + '" href="' + subrow.F_UrlAddress + '"><i class="' + subrow.F_Icon + '"></i>' + subrow.F_FullName + '</a>';
+                                _html += '<a class="menuItem" data-id="' + subrow.id + '" href="' + ctx + subrow.url + '"><i class="' + subrow.icon + '"></i>' + subrow.name + '</a>';
                             }
                             _html += '</li>';
                         });
@@ -526,4 +438,21 @@
         $.learunindex.loadMenu();
         $.learuntab.init();
     });
+
+    function loadMenuJson() {
+        var url = ctx + "/menu/json";
+        var data;
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: url,
+            data: {},
+            cache: false,
+            async: false,
+            success: function (menus) {
+                data = menus;
+            }
+        });
+        return data;
+    }
 })(jQuery);

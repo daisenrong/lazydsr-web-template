@@ -10,11 +10,12 @@ package com.lazydsr.lazydsrwebtemplate.base;
  */
 public class STATICVALUE {
     /**
-     * 正常、启用
+     * 正常、启用、成功
      */
     public static final int ENABLE = 0;
     /**
-     * 删除、禁用，异常
+     * 删除、禁用，异常、失败
      */
     public static final int DISABLE = 1;
+
 }

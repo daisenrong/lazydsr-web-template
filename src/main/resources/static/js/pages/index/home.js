@@ -7,15 +7,15 @@
  * Info: @TODO:...
  */
 $(function () {
-    console.log("aa");
-    cpu();
-    $(top.window).resize(function (e) {
-        console.log("aaaaaaaaaaaaaaaaaa");
-        // myChart.setOption(option,true);
-        // $(".content-wrapper").find('.mainContent').height($(window).height() - 91);
-        cpu();
-    });
-    console.log("bb");
+    // console.log("aa");
+    // cpu();
+    // $(top.window).resize(function (e) {
+    //     console.log("aaaaaaaaaaaaaaaaaa");
+    //     // myChart.setOption(option,true);
+    //     // $(".content-wrapper").find('.mainContent').height($(window).height() - 91);
+    //     cpu();
+    // });
+    // console.log("bb");
 });
 
 
@@ -35,7 +35,8 @@ option = {
         type: 'line'
     }]
 };
+
 function cpu() {
 
-    myChart.setOption(option,true);
+    myChart.setOption(option, true);
 }

@@ -13,13 +13,16 @@ import java.util.List;
  * Info: @TODO:...
  */
 public interface UserService {
-    public List<User> findbyNameJdbc(String name);
+    public User save(User user);
+    public User findByUsername(String username);
 
-    public List<User> findByNameLike(String name);
-
-    public List<User> findByNameLikeCus(String username);
-
-    public List<User> findByNameLikeCus1(String username);
-
-    public List<User> findByNameLikeCus2(String username);
+    //public List<User> findbyNameJdbc(String name);
+    //
+    //public List<User> findByNameLike(String name);
+    //
+    //public List<User> findByNameLikeCus(String username);
+    //
+    //public List<User> findByNameLikeCus1(String username);
+    //
+    //public List<User> findByNameLikeCus2(String username);
 }
