@@ -54,15 +54,18 @@ public class LazydsrWebTemplateApplicationTests {
 
     @Test
     public void menuAdd() {
-        Menu menu = new Menu();
-        menu.setParentId("6KTEKT24AUNYR8EJ8SQN4378PJ34J91Z");
-        menu.setName("菜单管理");
-        menu.setEnName("Menu Manager");
-        menu.setDescription("菜单管理");
-        menu.setIcon("fa fa-bars");
-        menu.setTarget("iframe");
-        menu.setUrl("/home");
-        menuService.save(menu);
+        for (int i=0;i<1000;i++){
+
+            Menu menu = new Menu();
+            menu.setParentId("6KTEKT24AUNYR8EJ8SQN4378PJ34J91Z");
+            menu.setName("用户管理"+i);
+            menu.setEnName("User Manager");
+            menu.setDescription("用户管理");
+            menu.setIcon("fa fa-user");
+            menu.setTarget("iframe");
+            menu.setUrl("/user");
+            menuService.save(menu);
+        }
     }
 
     @Test

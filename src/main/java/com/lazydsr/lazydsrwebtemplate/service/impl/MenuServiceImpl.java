@@ -34,13 +34,13 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> findByUserIdAndStatus() {
-        return menuRepository.findByStatus(STATICVALUE.ENABLE);
+        return menuRepository.findByStatusOrderByOrdernumAsc(STATICVALUE.ENABLE);
     }
 
     @Override
     public Page<Menu> findAll(int page,int size) {
         //menuRepository.count();
-        return menuRepository.findAll(new PageRequest(page,size));
+        return menuRepository.findAllByNameIsNotNullOrderByOrdernum(new PageRequest(page,size));
     }
 
 

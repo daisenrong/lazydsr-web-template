@@ -2,6 +2,7 @@ package com.lazydsr.lazydsrwebtemplate.repository;
 
 import com.lazydsr.lazydsrwebtemplate.entity.Menu;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  * Info: @TODO:...
  */
 public interface MenuRepository extends JpaRepository<Menu, String> {
-    public List<Menu> findByStatus(int status);
+    public List<Menu> findByStatusOrderByOrdernumAsc(int status);
+    public Page<Menu> findAllByNameIsNotNullOrderByOrdernum(Pageable pageable);
     //public int
 }

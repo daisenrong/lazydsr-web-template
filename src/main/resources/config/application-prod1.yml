@@ -1,0 +1,78 @@
+#server port
+server:
+  port: 80
+#  servlet:
+#    context-path: /manager
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/sell?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#    username: root
+#    password: root
+########################################################
+###FREEMARKER (FreeMarkerAutoConfiguration)
+########################################################
+spring:
+  thymeleaf:
+     cache: false
+     prefix: classpath:/templates/thymeleaf/
+     suffix: .html
+     encoding: UTF-8
+     mode: HTML5
+     servlet:
+       content-type: text/html
+
+  datasource:
+    druid:
+        name: mainDataSource
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/lazydsr-web-template?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: root
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        filters: stat,wall,log4j2
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        useGlobalDataSourceStat: true
+    other:
+        name: otherDataSource
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/lazydsr-web-template?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: root
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        filters: stat,wall,log4j2
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        useGlobalDataSourceStat: true
+  jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        naming:
+            physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect #设置jpa的默认数据引擎为InnoDB
+logging:
+  config: classpath:config/logback-spring.xml
