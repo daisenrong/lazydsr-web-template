@@ -80,11 +80,16 @@
             , height: 'full-80'
             , url: ctx + '/menu/json/all' //数据接口
             , page: {page: true,} //开启分页
+            , size:'sm'
             , cols: [
                 [
                     {type: 'checkbox'}
                     , {field: 'id', title: 'ID', width: 80, sort: true}
-                    , {field: 'name', title: '名称', width: 80}
+                    , {
+                    field: 'name', title: '名称', width: 80, templet: function (d) {
+                        return 'ID：' + d.name + '，标题：<a  style="color: #c00;">' + d.name + '</a>'
+                    }
+                }
                     , {field: 'enName', title: '英文名称', width: 80, sort: true}
                     , {field: 'parentId', title: '父菜单', width: 80}
                     , {field: 'icon', title: '图标', width: 80}
@@ -116,12 +121,12 @@
             });
             layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
         });
-        form.on('switch(allowEdit)', function (obj) {
+        table.on('switch(allowEdit)', function (obj) {
             layer.tips($(obj.data) + '  aaaa  ' + this.name + '：' + obj.elem.checked, obj.othis);
             console.log(obj);
             console.log(this);
         });
-        form.on('switch(allowDelete)', function (obj) {
+        table.on('switch(allowDelete)', function (obj) {
             layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
         });
 
