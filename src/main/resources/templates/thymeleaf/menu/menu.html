@@ -65,7 +65,7 @@
 </script>
 <script type="text/html" id="status">
     <!-- 这里的 checked 的状态只是演示 -->
-    <input type="checkbox" name="status" value="{{d.status}}" title="锁定" lay-filter="status" {{d.status!= 0 ? 'checked' : '' }}>
+    <input type="checkbox" name="status" value="{{d.status}}" title="禁用" lay-filter="status" {{d.status!=0 ? 'checked' : '' }}>
 </script>
 
 <script type="text/javascript">
@@ -89,15 +89,15 @@
                     , {field: 'parentId', title: '父菜单', width: 80}
                     , {field: 'icon', title: '图标', width: 80}
                     , {field: 'url', title: 'URL', width: 80, sort: true}
-                    , {field: 'target', title: '打开方式', width: 80, sort: true}
+                    // , {field: 'target', title: '打开方式', width: 80, sort: true}
                     , {field: 'publics', title: '是否公开', width: 80, sort: true, templet: '#publics', unresize: true}
                     , {field: 'allowEdit', title: '是否可编辑', width: 135, sort: true, templet: '#allowEdit', unresize: true}
                     , {field: 'ordernum', title: '排序', width: 80, sort: true}
                     , {field: 'description', title: '描述', width: 100, sort: true}
                     , {field: 'allowDelete', title: '是否可删除', width: 110, sort: true, templet: '#allowDelete', unresize: true}
-                    , {field: 'status', title: '是否锁定', width: 110, sort: true, templet: '#status', unresize: true}
+                    , {field: 'status', title: '是否禁用', width: 110, sort: true, templet: '#status', unresize: true}
                     // , {field: 'sex', title: '性别', width: 85, templet: '#switchTpl', unresize: true}
-                    // , {field: 'lock', title: '是否锁定', width: 110, templet: '#checkboxTpl', unresize: true}
+                    // , {field: 'lock', title: '是否禁用', width: 110, templet: '#checkboxTpl', unresize: true}
                 ]
             ]
         });
@@ -117,14 +117,15 @@
             layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
         });
         form.on('switch(allowEdit)', function (obj) {
-            layer.tips(obj.data+ '  aaaa  ' + this.name + '：' + obj.elem.checked, obj.othis);
-            console.log(obj.data);
+            layer.tips($(obj.data) + '  aaaa  ' + this.name + '：' + obj.elem.checked, obj.othis);
+            console.log(obj);
+            console.log(this);
         });
         form.on('switch(allowDelete)', function (obj) {
             layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
         });
 
-        //监听锁定操作
+        //监听禁用操作
         form.on('checkbox(status)', function (obj) {
             layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
         });
