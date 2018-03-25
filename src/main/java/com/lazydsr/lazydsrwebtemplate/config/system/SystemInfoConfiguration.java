@@ -128,6 +128,6 @@ public class SystemInfoConfiguration {
         //
 
 
-        return systemInfoService.save(newsystemInfo);
+        return systemInfoService.add(newsystemInfo);
     }
 }

@@ -14,5 +14,4 @@ import java.util.List;
  * Info: @TODO:...
  */
 public interface SystemInfoRepository extends JpaRepository<SystemInfo, String> {
-    public SystemInfo findTopByOrderByCreateDateDesc();
 }

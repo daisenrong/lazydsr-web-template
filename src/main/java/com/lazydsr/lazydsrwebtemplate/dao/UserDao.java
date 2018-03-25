@@ -15,5 +15,15 @@ import java.util.List;
  */
 
 public interface UserDao {
-    public List<User> findbyNameJdbc(String name);
+    User add(User user);
+
+    int delete(String id);
+
+    User update(User user);
+
+    User findById(String id);
+
+    User findByUsername(String Username);
+
+
 }

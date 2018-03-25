@@ -19,44 +19,28 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserDao userDao;
-
     @Override
-    public User save(User user) {
-        return userRepository.save(user);
+    public User add(User user) {
+        return null;
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public int delete(String id) {
+        return 0;
     }
 
+    @Override
+    public User update(User user) {
+        return null;
+    }
 
-    //@Override
-    //public List<User> findbyNameJdbc(String name) {
-    //    return null;
-    //}
-    //
-    //@Override
-    //public List<User> findByNameLike(String name) {
-    //    return null;
-    //}
-    //
-    //@Override
-    //public List<User> findByNameLikeCus(String username) {
-    //    return null;
-    //}
-    //
-    //@Override
-    //public List<User> findByNameLikeCus1(String username) {
-    //    return null;
-    //}
-    //
-    //@Override
-    //public List<User> findByNameLikeCus2(String username) {
-    //    return null;
-    //}
+    @Override
+    public User findById(String id) {
+        return null;
+    }
+
+    @Override
+    public User findByUsername(String Username) {
+        return null;
+    }
 }

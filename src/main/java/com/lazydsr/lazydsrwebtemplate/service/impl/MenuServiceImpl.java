@@ -24,24 +24,35 @@ import java.util.List;
 @Service
 @Slf4j
 public class MenuServiceImpl implements MenuService {
-    @Autowired
-    private MenuRepository menuRepository;
+
 
     @Override
-    public Menu save(Menu menu) {
-        return menuRepository.save(menu);
+    public Menu add(Menu menu) {
+        return null;
     }
 
     @Override
-    public List<Menu> findByUserIdAndStatus() {
-        return menuRepository.findByStatusOrderByOrdernumAsc(STATICVALUE.ENABLE);
+    public int delete(String id) {
+        return 0;
     }
 
     @Override
-    public Page<Menu> findAll(int page,int size) {
-        //menuRepository.count();
-        return menuRepository.findAllByNameIsNotNullOrderByOrdernum(new PageRequest(page,size));
+    public Menu update(Menu menu) {
+        return null;
     }
 
+    @Override
+    public Menu findById(String id) {
+        return null;
+    }
 
+    @Override
+    public List<Menu> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<Menu> findPage(int page, int limit) {
+        return null;
+    }
 }

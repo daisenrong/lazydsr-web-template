@@ -29,22 +29,22 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
-    @GetMapping("json")
-    @ResponseBody
-    public List<Menu> findJson() {
-        return menuService.findByUserIdAndStatus();
-    }
+    //@GetMapping("json")
+    //@ResponseBody
+    //public List<Menu> findJson() {
+    //    return menuService.findByUserIdAndStatus();
+    //}
 
     @GetMapping("json/all")
     @ResponseBody
     public Map findAllJson(int page, int limit) {
 
         Map map=new HashMap();
-        Page<Menu> menus = menuService.findAll(page>0?page-1:0, limit);
+        List<Menu> menus = menuService.findPage(page>0?page-1:0, limit);
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", menus.getTotalElements());
-        map.put("data", menus.getContent());
+        map.put("count", menus.size());
+        map.put("data", menus);
         return map;
 
     }

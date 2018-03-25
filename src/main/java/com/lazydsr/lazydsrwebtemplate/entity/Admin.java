@@ -16,16 +16,9 @@ import java.util.Date;
  * Version: 0.1
  * Info: @TODO:...
  */
-@Entity
 @Data
-@Table(name = "sysAdmin")
 public class Admin {
-    @Id
-    @GenericGenerator(name = "Custom_UUID", strategy = "com.lazydsr.commons.util.CustomIdentifierGenerator")
-    @GeneratedValue(generator = "Custom_UUID")
-    @Column(length = 32)
     private int id;
-    @Column
     private String name;
 
 
@@ -39,7 +32,6 @@ public class Admin {
      * 创建人
      */
     private String creator;
-    @Column(length = 19)
     /**
      * 创建时间
      */
@@ -51,14 +43,7 @@ public class Admin {
     /**
      * 最后修改时间
      */
-    @Column(length = 19)
     private String modifyDate = UtilDateTime.getCurrDateTime();
-    /**
-     * 数据状态
-     * 0 为正常
-     * 1 为删除
-     */
-    @Column(name = "dataStatus")
-    private int dataStatus = STATICVALUE.ENABLE;
+
 
 }

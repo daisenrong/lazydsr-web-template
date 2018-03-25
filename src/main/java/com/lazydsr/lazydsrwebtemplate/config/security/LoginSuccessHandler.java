@@ -46,7 +46,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         user.setSumpasswordwrong(0);
         user.setLastLoginDate(user.getCurrentLoginDate());
         user.setCurrentLoginDate(currentDate);
-        userService.save(user);
+        userService.update(user);
 
         UserLoginRecord userLoginRecord = new UserLoginRecord();
         userLoginRecord.setUserId(user.getId());
@@ -56,7 +56,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         userLoginRecord.setType(STATICVALUE.ENABLE);
         userLoginRecord.setLoginStatus(STATICVALUE.ENABLE);
         userLoginRecord.setIp(request.getRemoteAddr());
-        userLoginRecordService.save(userLoginRecord);
+        userLoginRecordService.add(userLoginRecord);
 
 
         log.info("用户登录成功：username=" + userDetails.getUsername() + ", uri=" + request.getRemoteAddr());

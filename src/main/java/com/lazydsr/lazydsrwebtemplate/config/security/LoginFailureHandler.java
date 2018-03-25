@@ -43,7 +43,7 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
             user.setSumpasswordwrong(user.getSumpasswordwrong()+1);
             //user.setLastLoginDate(user.getCurrentLoginDate());
             //user.setCurrentLoginDate(currentDate);
-            userService.save(user);
+            userService.update(user);
 
             UserLoginRecord userLoginRecord = new UserLoginRecord();
             userLoginRecord.setUserId(user.getId());
@@ -53,7 +53,7 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
             userLoginRecord.setType(STATICVALUE.ENABLE);
             userLoginRecord.setLoginStatus(STATICVALUE.DISABLE);
             userLoginRecord.setIp(request.getRemoteAddr());
-            userLoginRecordService.save(userLoginRecord);
+            userLoginRecordService.add(userLoginRecord);
         }
 
 

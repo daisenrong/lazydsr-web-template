@@ -1,19 +1,19 @@
-package com.lazydsr.lazydsrwebtemplate.service;
+package com.lazydsr.lazydsrwebtemplate.dao;
 
 import com.lazydsr.lazydsrwebtemplate.entity.Menu;
-import org.springframework.data.domain.Page;
+import com.lazydsr.lazydsrwebtemplate.entity.User;
 
 import java.util.List;
 
 /**
- * MenuService
+ * MenuDao
  * PROJECT_NAME: lazydsr-web-template
- * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate.service
- * Created by Lazy on 2018/3/19 15:58
+ * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate.dao
+ * Created by Lazy on 2018/3/25 0:06
  * Version: 0.1
  * Info: @TODO:...
  */
-public interface MenuService {
+public interface MenuDao {
     Menu add(Menu menu);
 
     int delete(String id);

@@ -17,13 +17,9 @@ import java.util.Date;
  * Info: 权限角色po
  */
 @Data
-@Entity
-@Table(name = "sysPermissionRole")
+
 public class PermissionRole {
-    @Id
-    @GenericGenerator(name = "Custom_UUID", strategy = "com.lazydsr.commons.util.CustomIdentifierGenerator")
-    @GeneratedValue(generator = "Custom_UUID")
-    @Column(length = 32)
+
     String id;
     String pid;
     String rid;
@@ -39,7 +35,7 @@ public class PermissionRole {
      * 创建人
      */
     private String creator;
-    @Column(length = 19)
+
     /**
      * 创建时间
      */
@@ -51,13 +47,7 @@ public class PermissionRole {
     /**
      * 最后修改时间
      */
-    @Column(length = 19)
+
     private String modifyDate = UtilDateTime.getCurrDateTime();
-    /**
-     * 数据状态
-     * 0 为正常
-     * 1 为删除
-     */
-    @Column(name = "dataStatus")
-    private int dataStatus = STATICVALUE.ENABLE;
+
 }

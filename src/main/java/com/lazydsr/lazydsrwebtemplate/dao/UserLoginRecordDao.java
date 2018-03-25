@@ -1,16 +1,16 @@
-package com.lazydsr.lazydsrwebtemplate.service;
+package com.lazydsr.lazydsrwebtemplate.dao;
 
 import com.lazydsr.lazydsrwebtemplate.entity.UserLoginRecord;
 
 /**
- * UserLoginRecordService
+ * UserLoginRecord
  * PROJECT_NAME: lazydsr-web-template
- * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate.service
- * Created by Lazy on 2018/3/19 0:51
+ * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate.dao
+ * Created by Lazy on 2018/3/24 23:57
  * Version: 0.1
  * Info: @TODO:...
  */
-public interface UserLoginRecordService {
+public interface UserLoginRecordDao {
     UserLoginRecord add(UserLoginRecord userLoginRecord);
 
     int delete(String id);

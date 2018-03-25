@@ -42,7 +42,7 @@ public class IndexController {
 
     @RequestMapping("home")
     public String home(Map map) {
-        SystemInfo systemInfo = systemInfoService.findTopByOrderByCreateDateDesc();
+        SystemInfo systemInfo = systemInfoService.findLastRecord();
         map.put("systemInfo",systemInfo);
         map.put("mainDataSourceInfo",mainDataSourceInfo);
         return "index/home";

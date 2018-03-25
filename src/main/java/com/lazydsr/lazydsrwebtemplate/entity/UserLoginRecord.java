@@ -15,24 +15,19 @@ import javax.persistence.*;
  * Version: 0.1
  * Info: @TODO:...
  */
-@Entity
-@Table(name = "sysUserLoginRecord")
+
 @Data
 public class UserLoginRecord {
-    @Id
-    @GenericGenerator(name = "Custom_UUID", strategy = "com.lazydsr.commons.util.CustomIdentifierGenerator")
-    @GeneratedValue(generator = "Custom_UUID")
-    @Column(length = 32)
+
     String id;
 
-    @Column(name = "userid")
     private String userId;
     private String username;
     private String ip;
     /**
      * 登录时间
      */
-    @Column(length = 19)
+
     private String date;
     /**
      * 登录方式
@@ -56,7 +51,7 @@ public class UserLoginRecord {
      * 创建人
      */
     private String creator;
-    @Column(length = 19)
+
     /**
      * 创建时间
      */
@@ -68,13 +63,7 @@ public class UserLoginRecord {
     /**
      * 最后修改时间
      */
-    @Column(length = 19)
+
     private String modifyDate = UtilDateTime.getCurrDateTime();
-    /**
-     * 数据状态
-     * 0 为正常
-     * 1 为删除
-     */
-    @Column(name = "dataStatus")
-    private int dataStatus = STATICVALUE.ENABLE;
+
 }

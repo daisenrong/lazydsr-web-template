@@ -16,7 +16,4 @@ import java.util.List;
  * Info: @TODO:...
  */
 public interface MenuRepository extends JpaRepository<Menu, String> {
-    public List<Menu> findByStatusOrderByOrdernumAsc(int status);
-    public Page<Menu> findAllByNameIsNotNullOrderByOrdernum(Pageable pageable);
-    //public int
 }

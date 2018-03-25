@@ -14,5 +14,4 @@ import java.util.List;
  * Info: @TODO:...
  */
 public interface DataSourceInfoRepository extends JpaRepository<DataSourceInfo,String>{
-    public List<DataSourceInfo> findByStatus(int status);
 }

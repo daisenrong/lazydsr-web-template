@@ -17,15 +17,10 @@ import java.util.Date;
  * Info:权限po
  */
 @Data
-@Entity
-@Table(name = "sysPermission")
+
 public class Permission {
-    @Id
-    @GenericGenerator(name = "Custom_UUID", strategy = "com.lazydsr.commons.util.CustomIdentifierGenerator")
-    @GeneratedValue(generator = "Custom_UUID")
-    @Column(length = 32)
+
     String id;
-    @Column(unique = true, nullable = false)
     String name;
     String url;
     String pid;
@@ -42,7 +37,7 @@ public class Permission {
      * 创建人
      */
     private String creator;
-    @Column(length = 19)
+
     /**
      * 创建时间
      */
@@ -54,13 +49,7 @@ public class Permission {
     /**
      * 最后修改时间
      */
-    @Column(length = 19)
+
     private String modifyDate = UtilDateTime.getCurrDateTime();
-    /**
-     * 数据状态
-     * 0 为正常
-     * 1 为删除
-     */
-    @Column(name = "dataStatus")
-    private int dataStatus = STATICVALUE.ENABLE;
+
 }

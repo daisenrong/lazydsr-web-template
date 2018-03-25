@@ -1,19 +1,16 @@
-package com.lazydsr.lazydsrwebtemplate.service;
+package com.lazydsr.lazydsrwebtemplate.dao;
 
 import com.lazydsr.lazydsrwebtemplate.entity.SystemInfo;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 /**
- * SystemInfoRepository
+ * SystemInfo
  * PROJECT_NAME: lazydsr-web-template
- * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate.repository
- * Created by Lazy on 2018/3/15 0:04
+ * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate.dao
+ * Created by Lazy on 2018/3/25 0:01
  * Version: 0.1
  * Info: @TODO:...
  */
-public interface SystemInfoService {
+public interface SystemInfoDao {
     SystemInfo add(SystemInfo systemInfo);
 
     int delete(String id);

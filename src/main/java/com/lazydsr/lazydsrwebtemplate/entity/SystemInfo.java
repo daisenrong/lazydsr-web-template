@@ -17,49 +17,33 @@ import java.sql.Clob;
  * Version: 0.1
  * Info: @TODO:...
  */
-@Entity
-@Table(name = "sysSysteminfo")
+
 @Data
 public class SystemInfo {
-    @Id
-    @GenericGenerator(name = "Custom_UUID", strategy = "com.lazydsr.commons.util.CustomIdentifierGenerator")
-    @GeneratedValue(generator = "Custom_UUID")
-    @Column(length = 32)
+
     private String id;
-    @Column(name = "username")
     private String userName;
-    @Column(name = "servername")
     private String serverName;
     private String domain;
 
     //net
-    @Column(name = "netname")
     private String netName;
     private String ip;
-    @Column(length = 1000)
     private String mac;
     private String host;
 
     //os
-    @Column(name = "osarch")
     private String osArch;
-    @Column(name = "osname")
     private String osName;
-    @Column(name = "osversion")
     private String osVersion;
 
     //cpu
-    @Column(name = "cpumhz")
     private String cpuMhz;
-    @Column(name = "cpuvendor")
     private String cpuVendor;
-    @Column(name = "cpumodel", length = 1000)
     private String cpuModel;
-    @Column(name = "cpucachesize")
     private String cpuCacheSize;
 
     //mem
-    @Column(name = "memtotal")
     private double memTotal;
 
 
@@ -74,23 +58,15 @@ public class SystemInfo {
 
 
     //jvm最大堆内存
-    @Column(name = "jvmxmx")
     private double jvmXmx;
     //jvm初始堆内存
-    @Column(name = "jvmxms")
     private double jvmXms;
     //jvm年轻代大小
-    @Column(name = "jvmxmn")
     private double jvmXmn;
-    @Column(name = "jvmavailableprocessors")
     private int jvmAvailableProcessors;
-    @Column(name = "jvmversion")
     private String jvmVersion;
-    @Column(name = "jvmhome")
     private String jvmHome;
-    @Column(name = "jvmapphome")
     private String jvmAppHome;
-    @Column(name = "jvmclassversion")
     private String jvmClassVersion;
 
 
@@ -104,7 +80,7 @@ public class SystemInfo {
      * 创建人
      */
     private String creator;
-    @Column(length = 19)
+
     /**
      * 创建时间
      */
@@ -116,14 +92,8 @@ public class SystemInfo {
     /**
      * 最后修改时间
      */
-    @Column(length = 19)
+
     private String modifyDate = UtilDateTime.getCurrDateTime();
-    /**
-     * 数据状态
-     * 0 为正常
-     * 1 为删除
-     */
-    @Column(name = "dataStatus")
-    private int dataStatus = STATICVALUE.ENABLE;
+
 
 }

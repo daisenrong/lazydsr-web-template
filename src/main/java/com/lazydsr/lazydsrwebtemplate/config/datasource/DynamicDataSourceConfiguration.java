@@ -90,7 +90,7 @@ public class DynamicDataSourceConfiguration extends AbstractRoutingDataSource {
         Map<Object, Object> result = new HashMap<Object, Object>();
         //result.put("dataSource", SpringContextUtil.getBean("dataSource"));
         DataSourceInfoRepository dataSourceInfoRepository = SpringContextUtil.getBean(DataSourceInfoRepository.class);
-        List<DataSourceInfo> dataSourcesListInfo = dataSourceInfoRepository.findByStatus(STATICVALUE.ENABLE);
+        List<DataSourceInfo> dataSourcesListInfo = dataSourceInfoRepository.findAll();
         for (DataSourceInfo ds : dataSourcesListInfo) {
             result.put(ds.getName(), buildDatasource(ds));
         }

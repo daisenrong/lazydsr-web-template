@@ -18,18 +18,6 @@ import java.util.List;
  */
 @Service
 public class DataSourceInfoServiceImpl implements DataSourceInfoService {
-    @Autowired
-    private DataSourceInfoRepository dataSourceInfoRepository;
 
-    @Override
-    public List<DataSourceInfo> findAll() {
-        List<DataSourceInfo> dataSourceInfos = dataSourceInfoRepository.findAll();
-        return dataSourceInfos;
-    }
 
-    @Override
-    public List<DataSourceInfo> findByStatus(int status) {
-        List<DataSourceInfo> dataSourceInfos = dataSourceInfoRepository.findByStatus(status);
-        return dataSourceInfos;
-    }
 }

@@ -5,6 +5,7 @@ import com.lazydsr.lazydsrwebtemplate.entity.Permission;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
 import com.lazydsr.lazydsrwebtemplate.repository.PermissionRepository;
 import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
+import com.lazydsr.lazydsrwebtemplate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,13 +28,13 @@ import java.util.List;
 @Service
 public class CustomUserService implements UserDetailsService {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
     @Autowired
     private PermissionRepository permissionRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        User user = userService.findByUsername(username);
         if (user != null) {
             List<Permission> permissionList = permissionRepository.findByUserId(user.getId());
             List<GrantedAuthority> grantedAuthorities = new ArrayList<>();

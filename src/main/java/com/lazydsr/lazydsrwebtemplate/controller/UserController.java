@@ -25,20 +25,22 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
-    @GetMapping
-    public String findAll() {
-        return "test";
-    }
 
-    @GetMapping("/{id}")
-    public String findOne(@PathVariable String id, Model model) {
-        model.addAttribute("id", id);
-        System.out.println(id);
-        return "test";
-    }
+    //@GetMapping
+    //public String findAll() {
+    //    return "test";
+    //}
+
+    //@GetMapping("/{id}")
+    //public String findOne(@PathVariable String id, Model model) {
+    //    model.addAttribute("id", id);
+    //    System.out.println(id);
+    //    return "test";
+    //}
+
     @PostMapping
-    public String save(User user){
-        userService.save(user);
+    public String save(User user) {
+        userService.add(user);
         return "user/user";
     }
 }

@@ -1,21 +1,17 @@
-package com.lazydsr.lazydsrwebtemplate.service.impl;
+package com.lazydsr.lazydsrwebtemplate.dao.impl;
 
+import com.lazydsr.lazydsrwebtemplate.dao.UserLoginRecordDao;
 import com.lazydsr.lazydsrwebtemplate.entity.UserLoginRecord;
-import com.lazydsr.lazydsrwebtemplate.repository.UserLoginRecordRepository;
-import com.lazydsr.lazydsrwebtemplate.service.UserLoginRecordService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
- * UserLoginRecordServiceImpl
+ * UserLoginRecordDaoImpl
  * PROJECT_NAME: lazydsr-web-template
- * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate.service.impl
- * Created by Lazy on 2018/3/19 0:52
+ * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate.dao.impl
+ * Created by Lazy on 2018/3/24 23:59
  * Version: 0.1
  * Info: @TODO:...
  */
-@Service
-public class UserLoginRecordServiceImpl implements UserLoginRecordService {
+public class UserLoginRecordDaoImpl implements UserLoginRecordDao {
     @Override
     public UserLoginRecord add(UserLoginRecord userLoginRecord) {
         return null;
