@@ -1,5 +1,6 @@
 package com.lazydsr.lazydsrwebtemplate.service;
 
+import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
 import com.lazydsr.lazydsrwebtemplate.entity.Menu;
 
 import java.util.List;
@@ -14,7 +15,21 @@ import java.util.List;
  */
 public interface MenuService {
     public Menu add(Menu menu);
+
+    int delete(String id);
+
+    Menu update(Menu menu);
+
+    Menu findById(String id);
+
+    List<Menu> findAll();
+
+    List<Menu> findAllNormal();
+
+    List<Menu> findAllNormal(int page, int size);
+
     public List<Menu> findByUserId(String userId);
-    public List<Menu> findAll(int page,int size);
-    public List<Menu> findAll();
- }
+
+    public List<Menu> findAll(int page, int size);
+
+}
