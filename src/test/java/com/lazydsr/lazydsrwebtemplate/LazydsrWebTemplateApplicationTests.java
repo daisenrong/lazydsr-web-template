@@ -1,36 +1,34 @@
 package com.lazydsr.lazydsrwebtemplate;
 
-import com.lazydsr.lazydsrwebtemplate.dao.UserDao;
+import com.lazydsr.lazydsrwebtemplate.config.system.SystemInfoConfiguration;
 import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
 import com.lazydsr.lazydsrwebtemplate.entity.Menu;
+import com.lazydsr.lazydsrwebtemplate.entity.SystemInfo;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
-import com.lazydsr.lazydsrwebtemplate.repository.DataSourceInfoRepository;
-import com.lazydsr.lazydsrwebtemplate.repository.SystemInfoRepository;
-import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
+import com.lazydsr.lazydsrwebtemplate.mapper.UserMapper;
 import com.lazydsr.lazydsrwebtemplate.service.MenuService;
+import com.lazydsr.lazydsrwebtemplate.service.SystemInfoService;
 import com.lazydsr.lazydsrwebtemplate.service.UserService;
 import com.lazydsr.lazydsrwebtemplate.util.SpringContextUtil;
+import com.lazydsr.util.id.UtilUUId;
 import com.lazydsr.util.time.UtilDateTime;
+import org.hyperic.sigar.SigarException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.net.UnknownHostException;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LazydsrWebTemplateApplicationTests {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserDao userDao;
-    @Autowired
-    private DataSourceInfoRepository dataSourceInfoRepository;
-    @Autowired
-    private SystemInfoRepository systemInfoRepository;
+
     @Autowired
     private MenuService menuService;
-
+    @Autowired
+    private UserMapper userMapper;
     @Test
     public void contextLoads002() {
         UserService userService = SpringContextUtil.getBean(UserService.class);
@@ -41,14 +39,32 @@ public class LazydsrWebTemplateApplicationTests {
     @Test
     public void contextLoads() {
         User user1 = new User();
+        user1.setId(UtilUUId.getId());
         user1.setName("admin");
         user1.setUsername("admin");
         user1.setPassword("admin");
         user1.setMobile("1111");
-        User user = userRepository.save(user1);
+        int count = userMapper.insert(user1);
+        User user = userMapper.selectByPrimaryKey(user1.getId());
         System.out.println(user);
 
-        userRepository.findAll().stream().forEach(u -> System.out.println(u));
+        //userRepository.findAll().stream().forEach(u -> System.out.println(u));
+
+    }
+
+    @Autowired
+    private SystemInfoService systemInfoService;
+    @Test
+    public void addSystemInfo() {
+        try {
+            SystemInfoConfiguration.getInstance().init();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (SigarException e) {
+            e.printStackTrace();
+        }
+
+        //userRepository.findAll().stream().forEach(u -> System.out.println(u));
 
     }
 
@@ -64,13 +80,13 @@ public class LazydsrWebTemplateApplicationTests {
             menu.setIcon("fa fa-user");
             menu.setTarget("iframe");
             menu.setUrl("/user");
-            menuService.save(menu);
+            menuService.add(menu);
         }
     }
 
     @Test
     public void contextLoads1() {
-        //User user = userRepository.save(new User("aa"));
+        //User user = userRepository.add(new User("aa"));
         //System.out.println(user);
 
         //userRepository.findByNameLike("aa").stream().forEach(u -> System.out.println(u));
@@ -79,7 +95,7 @@ public class LazydsrWebTemplateApplicationTests {
 
     @Test
     public void contextLoads2() {
-        //User user = userRepository.save(new User("aa"));
+        //User user = userRepository.add(new User("aa"));
         //System.out.println(user);
 
         //userRepository.findByNameLike("%a%").stream().forEach(u -> System.out.println(u));
@@ -88,14 +104,14 @@ public class LazydsrWebTemplateApplicationTests {
 
     @Test
     public void contextLoads3() {
-        //User user = userRepository.save(new User("aa"));
+        //User user = userRepository.add(new User("aa"));
         //System.out.println(user);
 
         //userRepository.findByNameLikeCus("aa").stream().forEach(u-> System.out.println(u));
         //userRepository.findByNameLikeCus1("aa").stream().forEach(u-> System.out.println(u));
         //userRepository.findByNameLikeCus2("aa").stream().forEach(u-> System.out.println(u));
         //System.out.println("-------------");
-        userDao.findbyNameJdbc("aa").stream().forEach(u -> System.out.println(u));
+        //userDao.findbyNameJdbc("aa").stream().forEach(u -> System.out.println(u));
 
     }
 
@@ -103,14 +119,15 @@ public class LazydsrWebTemplateApplicationTests {
     public void contextLoads4() {
         DataSourceInfo dataSourceInfo = new DataSourceInfo();
         dataSourceInfo.setName(UtilDateTime.getCurrSecond() + "");
-        DataSourceInfo info = dataSourceInfoRepository.save(dataSourceInfo);
+        //DataSourceInfo info = dataSourceInfoRepository.add(dataSourceInfo);
+        DataSourceInfo info =null;
         System.out.println(info);
 
     }
 
     @Test
     public void test002() {
-        System.out.println(systemInfoRepository.findTopByOrderByCreateDateDesc());
+        //System.out.println(systemInfoRepository.findTopByOrderByCreateDateDesc());
     }
 
 }

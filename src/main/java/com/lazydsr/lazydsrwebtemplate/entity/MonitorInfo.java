@@ -1,96 +1,165 @@
 package com.lazydsr.lazydsrwebtemplate.entity;
 
-import com.lazydsr.lazydsrwebtemplate.base.STATICVALUE;
 import com.lazydsr.util.time.UtilDateTime;
-import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
-
-/**
- * SystemInfo
- * PROJECT_NAME: lazydsr-web-template
- * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate.entity
- * Created by Lazy on 2018/3/14 22:07
- * Version: 0.1
- * Info: @TODO:...
- */
-
-@Data
 public class MonitorInfo {
-
     private String id;
+
     private String serverId;
-    /**
-     * 可使用内存.
-     */
-    private long totalMemory;
 
-    /**
-     * 剩余内存.
-     */
-    private long freeMemory;
+    private Long totalMemory=0L;
 
-    /**
-     * 最大可使用内存.
-     */
-    private long maxMemory;
+    private Long freeMemory=0L;
 
-    /**
-     * 操作系统.
-     */
+    private Long maxMemory=0L;
+
     private String osName;
 
-    /**
-     * 总的物理内存.
-     */
-    private long totalMemorySize;
+    private Long totalMemorySize=0L;
 
-    /**
-     * 剩余的物理内存.
-     */
-    private long freePhysicalMemorySize;
+    private Long freePhysicalMemorySize=0L;
 
-    /**
-     * 已使用的物理内存.
-     */
-    private long usedMemory;
+    private Long usedMemory=0L;
 
-    /**
-     * 线程总数.
-     */
-    private int totalThread;
+    private Integer totalThread=0;
 
-    /**
-     * cpu使用率.
-     */
-    private double cpuRatio;
+    private Double cpuRatio=0.0;
 
-
-
-    /**
-     * 状态
-     * 0  启用
-     * 1  禁用
-     */
-    private int status = STATICVALUE.ENABLE;
-    /**
-     * 创建人
-     */
     private String creator;
 
-    /**
-     * 创建时间
-     */
-    private String createDate = UtilDateTime.getCurrDateTime();
-    /**
-     * 最后修改人
-     */
+    private String createDate= UtilDateTime.getCurrDateTime();
+
     private String modifier;
-    /**
-     * 最后修改时间
-     */
 
-    private String modifyDate = UtilDateTime.getCurrDateTime();
+    private String modifyDate=UtilDateTime.getCurrDateTime();
 
+    private Integer status=0;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
+    public String getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(String serverId) {
+        this.serverId = serverId == null ? null : serverId.trim();
+    }
+
+    public Long getTotalMemory() {
+        return totalMemory;
+    }
+
+    public void setTotalMemory(Long totalMemory) {
+        this.totalMemory = totalMemory;
+    }
+
+    public Long getFreeMemory() {
+        return freeMemory;
+    }
+
+    public void setFreeMemory(Long freeMemory) {
+        this.freeMemory = freeMemory;
+    }
+
+    public Long getMaxMemory() {
+        return maxMemory;
+    }
+
+    public void setMaxMemory(Long maxMemory) {
+        this.maxMemory = maxMemory;
+    }
+
+    public String getOsName() {
+        return osName;
+    }
+
+    public void setOsName(String osName) {
+        this.osName = osName == null ? null : osName.trim();
+    }
+
+    public Long getTotalMemorySize() {
+        return totalMemorySize;
+    }
+
+    public void setTotalMemorySize(Long totalMemorySize) {
+        this.totalMemorySize = totalMemorySize;
+    }
+
+    public Long getFreePhysicalMemorySize() {
+        return freePhysicalMemorySize;
+    }
+
+    public void setFreePhysicalMemorySize(Long freePhysicalMemorySize) {
+        this.freePhysicalMemorySize = freePhysicalMemorySize;
+    }
+
+    public Long getUsedMemory() {
+        return usedMemory;
+    }
+
+    public void setUsedMemory(Long usedMemory) {
+        this.usedMemory = usedMemory;
+    }
+
+    public Integer getTotalThread() {
+        return totalThread;
+    }
+
+    public void setTotalThread(Integer totalThread) {
+        this.totalThread = totalThread;
+    }
+
+    public Double getCpuRatio() {
+        return cpuRatio;
+    }
+
+    public void setCpuRatio(Double cpuRatio) {
+        this.cpuRatio = cpuRatio;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator == null ? null : creator.trim();
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate == null ? null : createDate.trim();
+    }
+
+    public String getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(String modifier) {
+        this.modifier = modifier == null ? null : modifier.trim();
+    }
+
+    public String getModifyDate() {
+        return modifyDate;
+    }
+
+    public void setModifyDate(String modifyDate) {
+        this.modifyDate = modifyDate == null ? null : modifyDate.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

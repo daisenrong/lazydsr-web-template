@@ -2,12 +2,10 @@ package com.lazydsr.lazydsrwebtemplate.service.impl;
 
 import com.lazydsr.lazydsrwebtemplate.dao.UserDao;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
-import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
+import com.lazydsr.lazydsrwebtemplate.mapper.UserMapper;
 import com.lazydsr.lazydsrwebtemplate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * UserServiceImpl
@@ -19,28 +17,46 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private UserDao userDao;
+
     @Override
-    public User add(User user) {
+    public User save(User user) {
+        //return userMapper.add(user);
         return null;
     }
 
     @Override
-    public int delete(String id) {
-        return 0;
+    public User findByUsername(String username) {
+        //return userMapper.findByUsername(username);
+        return userMapper.selectByUsername(username);
     }
 
-    @Override
-    public User update(User user) {
-        return null;
-    }
 
-    @Override
-    public User findById(String id) {
-        return null;
-    }
-
-    @Override
-    public User findByUsername(String Username) {
-        return null;
-    }
+    //@Override
+    //public List<User> findbyNameJdbc(String name) {
+    //    return null;
+    //}
+    //
+    //@Override
+    //public List<User> findByNameLike(String name) {
+    //    return null;
+    //}
+    //
+    //@Override
+    //public List<User> findByNameLikeCus(String username) {
+    //    return null;
+    //}
+    //
+    //@Override
+    //public List<User> findByNameLikeCus1(String username) {
+    //    return null;
+    //}
+    //
+    //@Override
+    //public List<User> findByNameLikeCus2(String username) {
+    //    return null;
+    //}
 }

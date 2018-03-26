@@ -43,10 +43,10 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         User userDetails = (User) authentication.getPrincipal();
         //针对用户登录成功之后修改用户表中的一些信息
         com.lazydsr.lazydsrwebtemplate.entity.User user = userService.findByUsername(userDetails.getUsername());
-        user.setSumpasswordwrong(0);
+        user.setSumPasswordWrong(0);
         user.setLastLoginDate(user.getCurrentLoginDate());
         user.setCurrentLoginDate(currentDate);
-        userService.update(user);
+        userService.save(user);
 
         UserLoginRecord userLoginRecord = new UserLoginRecord();
         userLoginRecord.setUserId(user.getId());

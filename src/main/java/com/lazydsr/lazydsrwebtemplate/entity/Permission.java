@@ -1,55 +1,105 @@
 package com.lazydsr.lazydsrwebtemplate.entity;
 
-import com.lazydsr.lazydsrwebtemplate.base.STATICVALUE;
 import com.lazydsr.util.time.UtilDateTime;
-import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
-import java.util.Date;
-
-/**
- * PermissionDao
- * PROJECT_NAME: lazydsr-application
- * PACKAGE_NAME: com.lazydsr.manager.po
- * Created by Lazy on 2018/1/10 21:48
- * Version: 0.1
- * Info:权限po
- */
-@Data
 
 public class Permission {
+    private String id;
 
-    String id;
-    String name;
-    String url;
-    String pid;
-    String description;
+    private String name;
 
+    private String url;
 
-    /**
-     * 状态
-     * 0  启用
-     * 1  禁用
-     */
-    private int status = STATICVALUE.ENABLE;
-    /**
-     * 创建人
-     */
+    private String pid;
+
+    private String description;
+
     private String creator;
 
-    /**
-     * 创建时间
-     */
-    private String createDate = UtilDateTime.getCurrDateTime();
-    /**
-     * 最后修改人
-     */
+    private String createDate= UtilDateTime.getCurrDateTime();
+
     private String modifier;
-    /**
-     * 最后修改时间
-     */
 
-    private String modifyDate = UtilDateTime.getCurrDateTime();
+    private String modifyDate=UtilDateTime.getCurrDateTime();
 
+    private Integer status=0;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid == null ? null : pid.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator == null ? null : creator.trim();
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate == null ? null : createDate.trim();
+    }
+
+    public String getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(String modifier) {
+        this.modifier = modifier == null ? null : modifier.trim();
+    }
+
+    public String getModifyDate() {
+        return modifyDate;
+    }
+
+    public void setModifyDate(String modifyDate) {
+        this.modifyDate = modifyDate == null ? null : modifyDate.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

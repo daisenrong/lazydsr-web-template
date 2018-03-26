@@ -8,7 +8,6 @@ import com.lazydsr.util.time.UtilDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
@@ -40,10 +39,10 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
         //针对用户登录失败之后修改用户表中的一些信息
         com.lazydsr.lazydsrwebtemplate.entity.User user = userService.findByUsername(username);
         if (user != null) {
-            user.setSumpasswordwrong(user.getSumpasswordwrong()+1);
+            user.setSumPasswordWrong(user.getSumPasswordWrong()+1);
             //user.setLastLoginDate(user.getCurrentLoginDate());
             //user.setCurrentLoginDate(currentDate);
-            userService.update(user);
+            userService.save(user);
 
             UserLoginRecord userLoginRecord = new UserLoginRecord();
             userLoginRecord.setUserId(user.getId());

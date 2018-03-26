@@ -11,11 +11,5 @@ import com.lazydsr.lazydsrwebtemplate.entity.UserLoginRecord;
  * Info: @TODO:...
  */
 public interface UserLoginRecordService {
-    UserLoginRecord add(UserLoginRecord userLoginRecord);
-
-    int delete(String id);
-
-    UserLoginRecord update(UserLoginRecord userLoginRecord);
-
-    UserLoginRecord findById(String id);
+    public UserLoginRecord add(UserLoginRecord userLoginRecord);
 }

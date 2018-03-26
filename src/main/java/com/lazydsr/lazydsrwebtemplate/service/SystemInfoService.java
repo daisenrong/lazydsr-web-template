@@ -1,9 +1,6 @@
 package com.lazydsr.lazydsrwebtemplate.service;
 
 import com.lazydsr.lazydsrwebtemplate.entity.SystemInfo;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 /**
  * SystemInfoRepository
@@ -14,13 +11,6 @@ import java.util.List;
  * Info: @TODO:...
  */
 public interface SystemInfoService {
-    SystemInfo add(SystemInfo systemInfo);
-
-    int delete(String id);
-
-    SystemInfo update(SystemInfo systemInfo);
-
-    SystemInfo findById(String id);
-
-    SystemInfo findLastRecord();
+    public SystemInfo add(SystemInfo systemInfo);
+    public SystemInfo findByMaxCreateDate();
 }

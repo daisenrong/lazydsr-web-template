@@ -13,4 +13,6 @@ import java.util.List;
  * Info: @TODO:...
  */
 public interface DataSourceInfoService {
+    public List<DataSourceInfo> findAll();
+    public List<DataSourceInfo> findByStatus(int status);
 }

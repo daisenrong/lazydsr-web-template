@@ -67,12 +67,21 @@ spring:
         filters: stat,wall,log4j2
         connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
         useGlobalDataSourceStat: true
-  jpa:
-      hibernate:
-          ddl-auto: update
-      show-sql: true
-      naming:
-          physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect #设置jpa的默认数据引擎为InnoDB
+mybatis:
+  configuration:
+   #配置项：开启下划线到驼峰的自动转换. 作用：将数据库字段根据驼峰规则自动注入到对象属性。
+   map-underscore-to-camel-case: true
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+#  jpa:
+#      hibernate:
+#          ddl-auto: update
+#      show-sql: true
+#      naming:
+#          physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+#      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect #设置jpa的默认数据引擎为InnoDB
 #logging:
 #  config: classpath:config/logback-spring.xml

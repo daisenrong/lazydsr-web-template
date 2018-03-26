@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.security.Principal;
 import java.util.Map;
 
 /**
@@ -42,7 +41,7 @@ public class IndexController {
 
     @RequestMapping("home")
     public String home(Map map) {
-        SystemInfo systemInfo = systemInfoService.findLastRecord();
+        SystemInfo systemInfo = systemInfoService.findByMaxCreateDate();
         map.put("systemInfo",systemInfo);
         map.put("mainDataSourceInfo",mainDataSourceInfo);
         return "index/home";

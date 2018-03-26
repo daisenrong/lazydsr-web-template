@@ -1,10 +1,9 @@
 package com.lazydsr.lazydsrwebtemplate.config.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.lazydsr.lazydsrwebtemplate.base.STATICVALUE;
 import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
+import com.lazydsr.lazydsrwebtemplate.mapper.DataSourceInfoMapper;
 import com.lazydsr.lazydsrwebtemplate.propdomian.MainDataSourceInfo;
-import com.lazydsr.lazydsrwebtemplate.repository.DataSourceInfoRepository;
 import com.lazydsr.lazydsrwebtemplate.util.SpringContextUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
@@ -89,8 +88,8 @@ public class DynamicDataSourceConfiguration extends AbstractRoutingDataSource {
     public Map<Object, Object> getDataSourceMap() throws SQLException {
         Map<Object, Object> result = new HashMap<Object, Object>();
         //result.put("dataSource", SpringContextUtil.getBean("dataSource"));
-        DataSourceInfoRepository dataSourceInfoRepository = SpringContextUtil.getBean(DataSourceInfoRepository.class);
-        List<DataSourceInfo> dataSourcesListInfo = dataSourceInfoRepository.findAll();
+        DataSourceInfoMapper dataSourceInfoMapper = SpringContextUtil.getBean(DataSourceInfoMapper.class);
+        List<DataSourceInfo> dataSourcesListInfo = dataSourceInfoMapper.selectAllNormal();
         for (DataSourceInfo ds : dataSourcesListInfo) {
             result.put(ds.getName(), buildDatasource(ds));
         }

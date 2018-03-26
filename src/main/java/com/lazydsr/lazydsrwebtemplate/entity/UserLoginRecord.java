@@ -1,69 +1,125 @@
 package com.lazydsr.lazydsrwebtemplate.entity;
 
-import com.lazydsr.lazydsrwebtemplate.base.STATICVALUE;
 import com.lazydsr.util.time.UtilDateTime;
-import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
-
-/**
- * UserLoginRecord
- * PROJECT_NAME: lazydsr-web-template
- * PACKAGE_NAME: com.lazydsr.lazydsrwebtemplate.entity
- * Created by Lazy on 2018/3/19 0:15
- * Version: 0.1
- * Info: @TODO:...
- */
-
-@Data
 public class UserLoginRecord {
-
-    String id;
+    private String id;
 
     private String userId;
+
     private String username;
+
     private String ip;
-    /**
-     * 登录时间
-     */
 
     private String date;
-    /**
-     * 登录方式
-     */
-    private int type;
-    /**
-     * 登录状态
-     * 0 为成功
-     * 1 为失败
-     */
-    private int loginStatus;
 
+    private Integer type=0;
 
-    /**
-     * 状态
-     * 0  启用
-     * 1  禁用
-     */
-    private int status = STATICVALUE.ENABLE;
-    /**
-     * 创建人
-     */
+    private Integer loginStatus=0;
+
     private String creator;
 
-    /**
-     * 创建时间
-     */
-    private String createDate = UtilDateTime.getCurrDateTime();
-    /**
-     * 最后修改人
-     */
+    private String createDate= UtilDateTime.getCurrDateTime();
+
     private String modifier;
-    /**
-     * 最后修改时间
-     */
 
-    private String modifyDate = UtilDateTime.getCurrDateTime();
+    private String modifyDate=UtilDateTime.getCurrDateTime();
 
+    private Integer status=0;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip == null ? null : ip.trim();
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date == null ? null : date.trim();
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(Integer loginStatus) {
+        this.loginStatus = loginStatus;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator == null ? null : creator.trim();
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate == null ? null : createDate.trim();
+    }
+
+    public String getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(String modifier) {
+        this.modifier = modifier == null ? null : modifier.trim();
+    }
+
+    public String getModifyDate() {
+        return modifyDate;
+    }
+
+    public void setModifyDate(String modifyDate) {
+        this.modifyDate = modifyDate == null ? null : modifyDate.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

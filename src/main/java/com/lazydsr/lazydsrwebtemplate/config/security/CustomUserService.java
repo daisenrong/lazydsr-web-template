@@ -3,9 +3,8 @@ package com.lazydsr.lazydsrwebtemplate.config.security;
 
 import com.lazydsr.lazydsrwebtemplate.entity.Permission;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
-import com.lazydsr.lazydsrwebtemplate.repository.PermissionRepository;
-import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
-import com.lazydsr.lazydsrwebtemplate.service.UserService;
+import com.lazydsr.lazydsrwebtemplate.mapper.PermissionMapper;
+import com.lazydsr.lazydsrwebtemplate.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,15 +27,15 @@ import java.util.List;
 @Service
 public class CustomUserService implements UserDetailsService {
     @Autowired
-    private UserService userService;
+    private UserMapper userMapper;
     @Autowired
-    private PermissionRepository permissionRepository;
+    private PermissionMapper permissionMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByUsername(username);
+        User user = userMapper.selectByUsername(username);
         if (user != null) {
-            List<Permission> permissionList = permissionRepository.findByUserId(user.getId());
+            List<Permission> permissionList = permissionMapper.selectByUserId(user.getId());
             List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
             for (Permission permission : permissionList) {
                 if (permission != null && permission.getName() != null) {

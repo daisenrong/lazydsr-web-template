@@ -25,7 +25,7 @@ import java.util.Properties;
 public class SystemInfoConfiguration {
     private static SystemInfoConfiguration instance;
     private static byte[] lock = new byte[0];
-    private static int M = 1024 * 1024;
+    private static Double M = 1024 * 1024.0;
 
     public static synchronized SystemInfoConfiguration getInstance() {
         if (instance == null) {
@@ -50,7 +50,7 @@ public class SystemInfoConfiguration {
         Map<String, String> map = System.getenv();
 
 
-        newsystemInfo.setUserName(props.getProperty("user.name"));
+        newsystemInfo.setUsername(props.getProperty("user.name"));
         newsystemInfo.setServerName(addr.getHostName());
         newsystemInfo.setDomain(System.getenv("USERDOMAIN"));
 
@@ -106,7 +106,7 @@ public class SystemInfoConfiguration {
         newsystemInfo.setCpuMhz(cpuMhz.toString().substring(0, cpuMhz.length() - 1));
         newsystemInfo.setCpuVendor(cpuVendor.toString().substring(0, cpuVendor.length() - 1));
         newsystemInfo.setCpuModel(cpuModel.toString().substring(0, cpuModel.length() - 1));
-        newsystemInfo.setCpuCacheSize(cpuCacheSize.toString().substring(0, cpuCacheSize.length() - 1));
+        newsystemInfo.setCpuCachesize(cpuCacheSize.toString().substring(0, cpuCacheSize.length() - 1));
 
         //mem
         Mem mem = sigar.getMem();
@@ -118,12 +118,12 @@ public class SystemInfoConfiguration {
         MemoryUsage usage = memorymbean.getHeapMemoryUsage();
         newsystemInfo.setJvmXmx(usage.getMax() / M);
         newsystemInfo.setJvmXms(usage.getInit() / M);
-        newsystemInfo.setJvmXmn(0);
-        newsystemInfo.setJvmAvailableProcessors(runtime.availableProcessors());
+        newsystemInfo.setJvmXmn(0.0);
+        newsystemInfo.setJvmAvailableprocessors(runtime.availableProcessors());
         newsystemInfo.setJvmVersion(props.getProperty("java.version"));
         newsystemInfo.setJvmHome(props.getProperty("java.home"));
-        newsystemInfo.setJvmAppHome(props.getProperty("user.dir"));
-        newsystemInfo.setJvmClassVersion(props.getProperty("java.class.version"));
+        newsystemInfo.setJvmApphome(props.getProperty("user.dir"));
+        newsystemInfo.setJvmClassversion(props.getProperty("java.class.version"));
 
         //
 

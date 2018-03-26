@@ -21,29 +21,9 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
     @Override
-    public User add(User user) {
-        return null;
-    }
-
-    @Override
-    public int delete(String id) {
-        return 0;
-    }
-
-    @Override
-    public User update(User user) {
-        return null;
-    }
-
-    @Override
-    public User findById(String id) {
-        return null;
-    }
-
-    @Override
-    public User findByUsername(String Username) {
-        return null;
+    public List<User> findbyNameJdbc(String name) {
+        List<User> list = jdbcTemplate.query("select * from user", new BeanPropertyRowMapper<>(User.class));
+        return list;
     }
 }

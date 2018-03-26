@@ -1,8 +1,9 @@
 package com.lazydsr.lazydsrwebtemplate.service.impl;
 
 import com.lazydsr.lazydsrwebtemplate.entity.UserLoginRecord;
-import com.lazydsr.lazydsrwebtemplate.repository.UserLoginRecordRepository;
+import com.lazydsr.lazydsrwebtemplate.mapper.UserLoginRecordMapper;
 import com.lazydsr.lazydsrwebtemplate.service.UserLoginRecordService;
+import com.lazydsr.util.id.UtilUUId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,23 +17,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserLoginRecordServiceImpl implements UserLoginRecordService {
+    @Autowired
+    private UserLoginRecordMapper userLoginRecordMapper;
+
     @Override
     public UserLoginRecord add(UserLoginRecord userLoginRecord) {
+        //if (userLoginRecord.getId() == null || userLoginRecord.getId().equals(""))
+        userLoginRecord.setId(UtilUUId.getId());
+        userLoginRecordMapper.insert(userLoginRecord);
         return null;
-    }
 
-    @Override
-    public int delete(String id) {
-        return 0;
-    }
-
-    @Override
-    public UserLoginRecord update(UserLoginRecord userLoginRecord) {
-        return null;
-    }
-
-    @Override
-    public UserLoginRecord findById(String id) {
-        return null;
     }
 }

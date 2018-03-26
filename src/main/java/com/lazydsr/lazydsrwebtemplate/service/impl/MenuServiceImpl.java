@@ -1,14 +1,10 @@
 package com.lazydsr.lazydsrwebtemplate.service.impl;
 
-import com.lazydsr.lazydsrwebtemplate.base.STATICVALUE;
 import com.lazydsr.lazydsrwebtemplate.entity.Menu;
-import com.lazydsr.lazydsrwebtemplate.repository.MenuRepository;
+import com.lazydsr.lazydsrwebtemplate.mapper.MenuMapper;
 import com.lazydsr.lazydsrwebtemplate.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,35 +20,28 @@ import java.util.List;
 @Service
 @Slf4j
 public class MenuServiceImpl implements MenuService {
-
+    @Autowired
+    private MenuMapper menuMapper;
 
     @Override
     public Menu add(Menu menu) {
-        return null;
+        int count = menuMapper.insert(menu);
+        return menuMapper.selectByPrimaryKey(menu.getId());
+
     }
 
     @Override
-    public int delete(String id) {
-        return 0;
+    public List<Menu> findByUserId(String userId) {
+        return findAll();
     }
 
     @Override
-    public Menu update(Menu menu) {
-        return null;
-    }
-
-    @Override
-    public Menu findById(String id) {
+    public List<Menu> findAll(int page, int size) {
         return null;
     }
 
     @Override
     public List<Menu> findAll() {
-        return null;
-    }
-
-    @Override
-    public List<Menu> findPage(int page, int limit) {
-        return null;
+        return menuMapper.selectAllNormal();
     }
 }

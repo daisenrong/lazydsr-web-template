@@ -2,13 +2,9 @@ package com.lazydsr.lazydsrwebtemplate;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.lazydsr.lazydsrwebtemplate.config.datasource.DatabaseTypeEnum;
-import com.lazydsr.lazydsrwebtemplate.config.datasource.DynamicDataSourceConfiguration;
 import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
-import com.lazydsr.lazydsrwebtemplate.repository.DataSourceInfoRepository;
-import com.lazydsr.lazydsrwebtemplate.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -27,11 +23,6 @@ import java.sql.SQLException;
 @SpringBootTest
 public class MultiDataSourceInfoConfigurationTest {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private DataSourceInfoRepository dataSourceInfoRepository;
-
     @Test
     public void init() {
         //boolean init = configuration.setTargetDataSources(configuratio);
@@ -40,7 +31,7 @@ public class MultiDataSourceInfoConfigurationTest {
 
     @Test
     public void findByUsername() {
-        System.out.println(userRepository.findByUsername("admin"));
+        //System.out.println(userRepository.findByUsername("admin"));
     }
 
     @Test
@@ -55,7 +46,7 @@ public class MultiDataSourceInfoConfigurationTest {
         dataSourceInfo.setMinActive(5);
         dataSourceInfo.setMaxActive(50);
         dataSourceInfo.setProt("3306");
-        dataSourceInfoRepository.save(dataSourceInfo);
+        //dataSourceInfoRepository.add(dataSourceInfo);
     }
 
     @Resource

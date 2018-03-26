@@ -1,12 +1,11 @@
 package com.lazydsr.lazydsrwebtemplate.service.impl;
 
 import com.lazydsr.lazydsrwebtemplate.entity.SystemInfo;
-import com.lazydsr.lazydsrwebtemplate.repository.SystemInfoRepository;
+import com.lazydsr.lazydsrwebtemplate.mapper.SystemInfoMapper;
 import com.lazydsr.lazydsrwebtemplate.service.SystemInfoService;
+import com.lazydsr.util.id.UtilUUId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * SystemInfoServiceImpl
@@ -18,29 +17,23 @@ import java.util.List;
  */
 @Service
 public class SystemInfoServiceImpl implements SystemInfoService {
+    @Autowired
+    private SystemInfoMapper systemInfoMapper;
 
     @Override
     public SystemInfo add(SystemInfo systemInfo) {
-        return null;
+        if (systemInfo.getId() == null || systemInfo.getId().equals(""))
+            systemInfo.setId(UtilUUId.getId());
+        int count = systemInfoMapper.insert(systemInfo);
+        return systemInfoMapper.selectByPrimaryKey(systemInfo.getId());
+
     }
 
     @Override
-    public int delete(String id) {
-        return 0;
+    public SystemInfo findByMaxCreateDate() {
+        //return systemInfoMapper.findTopByOrderByCreateDateDesc();
+        return systemInfoMapper.selectByMaxCreateDate();
     }
 
-    @Override
-    public SystemInfo update(SystemInfo systemInfo) {
-        return null;
-    }
 
-    @Override
-    public SystemInfo findById(String id) {
-        return null;
-    }
-
-    @Override
-    public SystemInfo findLastRecord() {
-        return null;
-    }
 }

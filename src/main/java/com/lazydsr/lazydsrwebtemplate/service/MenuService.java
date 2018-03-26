@@ -1,7 +1,6 @@
 package com.lazydsr.lazydsrwebtemplate.service;
 
 import com.lazydsr.lazydsrwebtemplate.entity.Menu;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -14,15 +13,8 @@ import java.util.List;
  * Info: @TODO:...
  */
 public interface MenuService {
-    Menu add(Menu menu);
-
-    int delete(String id);
-
-    Menu update(Menu menu);
-
-    Menu findById(String id);
-
-    List<Menu> findAll();
-
-    List<Menu> findPage(int page, int limit);
-}
+    public Menu add(Menu menu);
+    public List<Menu> findByUserId(String userId);
+    public List<Menu> findAll(int page,int size);
+    public List<Menu> findAll();
+ }

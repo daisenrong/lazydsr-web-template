@@ -4,7 +4,6 @@ import com.lazydsr.lazydsrwebtemplate.entity.Menu;
 import com.lazydsr.lazydsrwebtemplate.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,22 +28,22 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
-    //@GetMapping("json")
-    //@ResponseBody
-    //public List<Menu> findJson() {
-    //    return menuService.findByUserIdAndStatus();
-    //}
+    @GetMapping("json")
+    @ResponseBody
+    public List<Menu> findJson() {
+        return menuService.findAll();
+    }
 
     @GetMapping("json/all")
     @ResponseBody
     public Map findAllJson(int page, int limit) {
 
         Map map=new HashMap();
-        List<Menu> menus = menuService.findPage(page>0?page-1:0, limit);
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count", menus.size());
-        map.put("data", menus);
+        //Page<Menu> menus = menuService.findAll(page>0?page-1:0, limit);
+        //map.put("code", 0);
+        //map.put("msg", "");
+        //map.put("count", menus.getTotalElements());
+        //map.put("data", menus.getContent());
         return map;
 
     }
