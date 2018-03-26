@@ -1,0 +1,167 @@
+package com.lazydsr.lazydsrwebtemplate.mapper;
+
+import com.lazydsr.lazydsrwebtemplate.entity.SystemInfo;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.JdbcType;
+@Mapper
+public interface SystemInfoMapper {
+    @Delete({
+        "delete from sys_systeminfo",
+        "where id = #{id,jdbcType=VARCHAR}"
+    })
+    int deleteByPrimaryKey(String id);
+
+    @Insert({
+        "add into sys_systeminfo (id, username, ",
+        "server_name, domain, ",
+        "net_name, ip, mac, ",
+        "host, os_arch, os_name, ",
+        "os_version, cpu_mhz, ",
+        "cpu_vendor, cpu_model, ",
+        "cpu_cachesize, mem_total, ",
+        "jvm_xmx, jvm_xms, jvm_xmn, ",
+        "jvm_availableprocessors, jvm_version, ",
+        "jvm_home, jvm_apphome, ",
+        "jvm_classversion, creator, ",
+        "create_date, modifier, ",
+        "modify_date, status)",
+        "values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, ",
+        "#{serverName,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR}, ",
+        "#{netName,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, ",
+        "#{host,jdbcType=VARCHAR}, #{osArch,jdbcType=VARCHAR}, #{osName,jdbcType=VARCHAR}, ",
+        "#{osVersion,jdbcType=VARCHAR}, #{cpuMhz,jdbcType=VARCHAR}, ",
+        "#{cpuVendor,jdbcType=VARCHAR}, #{cpuModel,jdbcType=VARCHAR}, ",
+        "#{cpuCachesize,jdbcType=VARCHAR}, #{memTotal,jdbcType=DOUBLE}, ",
+        "#{jvmXmx,jdbcType=DOUBLE}, #{jvmXms,jdbcType=DOUBLE}, #{jvmXmn,jdbcType=DOUBLE}, ",
+        "#{jvmAvailableprocessors,jdbcType=INTEGER}, #{jvmVersion,jdbcType=VARCHAR}, ",
+        "#{jvmHome,jdbcType=VARCHAR}, #{jvmApphome,jdbcType=VARCHAR}, ",
+        "#{jvmClassversion,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, ",
+        "#{createDate,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, ",
+        "#{modifyDate,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})"
+    })
+    int insert(SystemInfo record);
+
+    @InsertProvider(type=SystemInfoSqlProvider.class, method="insertSelective")
+    int insertSelective(SystemInfo record);
+
+    @Select({
+        "select",
+        "id, username, server_name, domain, net_name, ip, mac, host, os_arch, os_name, ",
+        "os_version, cpu_mhz, cpu_vendor, cpu_model, cpu_cachesize, mem_total, jvm_xmx, ",
+        "jvm_xms, jvm_xmn, jvm_availableprocessors, jvm_version, jvm_home, jvm_apphome, ",
+        "jvm_classversion, creator, create_date, modifier, modify_date, status",
+        "from sys_systeminfo",
+        "where id = #{id,jdbcType=VARCHAR}"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
+        @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
+        @Result(column="server_name", property="serverName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="domain", property="domain", jdbcType=JdbcType.VARCHAR),
+        @Result(column="net_name", property="netName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="ip", property="ip", jdbcType=JdbcType.VARCHAR),
+        @Result(column="mac", property="mac", jdbcType=JdbcType.VARCHAR),
+        @Result(column="host", property="host", jdbcType=JdbcType.VARCHAR),
+        @Result(column="os_arch", property="osArch", jdbcType=JdbcType.VARCHAR),
+        @Result(column="os_name", property="osName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="os_version", property="osVersion", jdbcType=JdbcType.VARCHAR),
+        @Result(column="cpu_mhz", property="cpuMhz", jdbcType=JdbcType.VARCHAR),
+        @Result(column="cpu_vendor", property="cpuVendor", jdbcType=JdbcType.VARCHAR),
+        @Result(column="cpu_model", property="cpuModel", jdbcType=JdbcType.VARCHAR),
+        @Result(column="cpu_cachesize", property="cpuCachesize", jdbcType=JdbcType.VARCHAR),
+        @Result(column="mem_total", property="memTotal", jdbcType=JdbcType.DOUBLE),
+        @Result(column="jvm_xmx", property="jvmXmx", jdbcType=JdbcType.DOUBLE),
+        @Result(column="jvm_xms", property="jvmXms", jdbcType=JdbcType.DOUBLE),
+        @Result(column="jvm_xmn", property="jvmXmn", jdbcType=JdbcType.DOUBLE),
+        @Result(column="jvm_availableprocessors", property="jvmAvailableprocessors", jdbcType=JdbcType.INTEGER),
+        @Result(column="jvm_version", property="jvmVersion", jdbcType=JdbcType.VARCHAR),
+        @Result(column="jvm_home", property="jvmHome", jdbcType=JdbcType.VARCHAR),
+        @Result(column="jvm_apphome", property="jvmApphome", jdbcType=JdbcType.VARCHAR),
+        @Result(column="jvm_classversion", property="jvmClassversion", jdbcType=JdbcType.VARCHAR),
+        @Result(column="creator", property="creator", jdbcType=JdbcType.VARCHAR),
+        @Result(column="create_date", property="createDate", jdbcType=JdbcType.VARCHAR),
+        @Result(column="modifier", property="modifier", jdbcType=JdbcType.VARCHAR),
+        @Result(column="modify_date", property="modifyDate", jdbcType=JdbcType.VARCHAR),
+        @Result(column="status", property="status", jdbcType=JdbcType.INTEGER)
+    })
+    SystemInfo selectByPrimaryKey(String id);
+
+    @Select({
+            "select",
+            "id, username, server_name, domain, net_name, ip, mac, host, os_arch, os_name, ",
+            "os_version, cpu_mhz, cpu_vendor, cpu_model, cpu_cachesize, mem_total, jvm_xmx, ",
+            "jvm_xms, jvm_xmn, jvm_availableprocessors, jvm_version, jvm_home, jvm_apphome, ",
+            "jvm_classversion, creator, create_date, modifier, modify_date, status ,max(create_date)",
+            "from sys_systeminfo",
+            //"where id = #{id,jdbcType=VARCHAR}"
+    })
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
+            @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
+            @Result(column="server_name", property="serverName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="domain", property="domain", jdbcType=JdbcType.VARCHAR),
+            @Result(column="net_name", property="netName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="ip", property="ip", jdbcType=JdbcType.VARCHAR),
+            @Result(column="mac", property="mac", jdbcType=JdbcType.VARCHAR),
+            @Result(column="host", property="host", jdbcType=JdbcType.VARCHAR),
+            @Result(column="os_arch", property="osArch", jdbcType=JdbcType.VARCHAR),
+            @Result(column="os_name", property="osName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="os_version", property="osVersion", jdbcType=JdbcType.VARCHAR),
+            @Result(column="cpu_mhz", property="cpuMhz", jdbcType=JdbcType.VARCHAR),
+            @Result(column="cpu_vendor", property="cpuVendor", jdbcType=JdbcType.VARCHAR),
+            @Result(column="cpu_model", property="cpuModel", jdbcType=JdbcType.VARCHAR),
+            @Result(column="cpu_cachesize", property="cpuCachesize", jdbcType=JdbcType.VARCHAR),
+            @Result(column="mem_total", property="memTotal", jdbcType=JdbcType.DOUBLE),
+            @Result(column="jvm_xmx", property="jvmXmx", jdbcType=JdbcType.DOUBLE),
+            @Result(column="jvm_xms", property="jvmXms", jdbcType=JdbcType.DOUBLE),
+            @Result(column="jvm_xmn", property="jvmXmn", jdbcType=JdbcType.DOUBLE),
+            @Result(column="jvm_availableprocessors", property="jvmAvailableprocessors", jdbcType=JdbcType.INTEGER),
+            @Result(column="jvm_version", property="jvmVersion", jdbcType=JdbcType.VARCHAR),
+            @Result(column="jvm_home", property="jvmHome", jdbcType=JdbcType.VARCHAR),
+            @Result(column="jvm_apphome", property="jvmApphome", jdbcType=JdbcType.VARCHAR),
+            @Result(column="jvm_classversion", property="jvmClassversion", jdbcType=JdbcType.VARCHAR),
+            @Result(column="creator", property="creator", jdbcType=JdbcType.VARCHAR),
+            @Result(column="create_date", property="createDate", jdbcType=JdbcType.VARCHAR),
+            @Result(column="modifier", property="modifier", jdbcType=JdbcType.VARCHAR),
+            @Result(column="modify_date", property="modifyDate", jdbcType=JdbcType.VARCHAR),
+            @Result(column="status", property="status", jdbcType=JdbcType.INTEGER)
+    })
+    SystemInfo selectByMaxCreateDate();
+
+    @UpdateProvider(type=SystemInfoSqlProvider.class, method="updateByPrimaryKeySelective")
+    int updateByPrimaryKeySelective(SystemInfo record);
+
+    @Update({
+        "update sys_systeminfo",
+        "set username = #{username,jdbcType=VARCHAR},",
+          "server_name = #{serverName,jdbcType=VARCHAR},",
+          "domain = #{domain,jdbcType=VARCHAR},",
+          "net_name = #{netName,jdbcType=VARCHAR},",
+          "ip = #{ip,jdbcType=VARCHAR},",
+          "mac = #{mac,jdbcType=VARCHAR},",
+          "host = #{host,jdbcType=VARCHAR},",
+          "os_arch = #{osArch,jdbcType=VARCHAR},",
+          "os_name = #{osName,jdbcType=VARCHAR},",
+          "os_version = #{osVersion,jdbcType=VARCHAR},",
+          "cpu_mhz = #{cpuMhz,jdbcType=VARCHAR},",
+          "cpu_vendor = #{cpuVendor,jdbcType=VARCHAR},",
+          "cpu_model = #{cpuModel,jdbcType=VARCHAR},",
+          "cpu_cachesize = #{cpuCachesize,jdbcType=VARCHAR},",
+          "mem_total = #{memTotal,jdbcType=DOUBLE},",
+          "jvm_xmx = #{jvmXmx,jdbcType=DOUBLE},",
+          "jvm_xms = #{jvmXms,jdbcType=DOUBLE},",
+          "jvm_xmn = #{jvmXmn,jdbcType=DOUBLE},",
+          "jvm_availableprocessors = #{jvmAvailableprocessors,jdbcType=INTEGER},",
+          "jvm_version = #{jvmVersion,jdbcType=VARCHAR},",
+          "jvm_home = #{jvmHome,jdbcType=VARCHAR},",
+          "jvm_apphome = #{jvmApphome,jdbcType=VARCHAR},",
+          "jvm_classversion = #{jvmClassversion,jdbcType=VARCHAR},",
+          "creator = #{creator,jdbcType=VARCHAR},",
+          "create_date = #{createDate,jdbcType=VARCHAR},",
+          "modifier = #{modifier,jdbcType=VARCHAR},",
+          "modify_date = #{modifyDate,jdbcType=VARCHAR},",
+          "status = #{status,jdbcType=INTEGER}",
+        "where id = #{id,jdbcType=VARCHAR}"
+    })
+    int updateByPrimaryKey(SystemInfo record);
+}
