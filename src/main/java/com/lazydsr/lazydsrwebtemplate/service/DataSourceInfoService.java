@@ -13,6 +13,17 @@ import java.util.List;
  * Info: @TODO:...
  */
 public interface DataSourceInfoService {
+    DataSourceInfo add(DataSourceInfo dataSourceInfo);
+
+    int delete(String id);
+
+    DataSourceInfo update(DataSourceInfo dataSourceInfo);
+
+    DataSourceInfo findById(String id);
+
     public List<DataSourceInfo> findAll();
-    public List<DataSourceInfo> findByStatus(int status);
+
+    public List<DataSourceInfo> findAllNormal();
+
+
 }

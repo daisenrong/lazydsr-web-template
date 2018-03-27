@@ -45,7 +45,6 @@ public class MenuController {
         //map.put("count", menus.getTotalElements());
         //map.put("data", menus.getContent());
         return map;
-
     }
 
     @GetMapping

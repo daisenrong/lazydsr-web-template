@@ -3,6 +3,7 @@ package com.lazydsr.lazydsrwebtemplate.service.impl;
 import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
 import com.lazydsr.lazydsrwebtemplate.mapper.DataSourceInfoMapper;
 import com.lazydsr.lazydsrwebtemplate.service.DataSourceInfoService;
+import com.lazydsr.util.id.UtilUUId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,14 +23,39 @@ public class DataSourceInfoServiceImpl implements DataSourceInfoService {
     private DataSourceInfoMapper dataSourceInfoMapper;
 
     @Override
+    public DataSourceInfo add(DataSourceInfo dataSourceInfo) {
+        if (dataSourceInfo.getId() == null)
+            dataSourceInfo.setId(UtilUUId.getId());
+        int count = dataSourceInfoMapper.insert(dataSourceInfo);
+        return dataSourceInfoMapper.selectByPrimaryKey(dataSourceInfo.getId());
+    }
+
+    @Override
+    public int delete(String id) {
+        return dataSourceInfoMapper.delete(id);
+    }
+
+    @Override
+    public DataSourceInfo update(DataSourceInfo dataSourceInfo) {
+        int count = dataSourceInfoMapper.update(dataSourceInfo);
+        return dataSourceInfoMapper.selectByPrimaryKey(dataSourceInfo.getId());
+    }
+
+    @Override
+    public DataSourceInfo findById(String id) {
+        return dataSourceInfoMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List<DataSourceInfo> findAll() {
         List<DataSourceInfo> dataSourceInfos = dataSourceInfoMapper.selectAll();
         return dataSourceInfos;
     }
 
     @Override
-    public List<DataSourceInfo> findByStatus(int status) {
-        List<DataSourceInfo> dataSourceInfos = dataSourceInfoMapper.selectAllNormal();
-        return dataSourceInfos;
+    public List<DataSourceInfo> findAllNormal() {
+        return dataSourceInfoMapper.selectAllNormal();
     }
+
+
 }

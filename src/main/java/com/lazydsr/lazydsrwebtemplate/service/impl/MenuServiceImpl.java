@@ -31,8 +31,39 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public int delete(String id) {
+        return menuMapper.delete(id);
+    }
+
+    @Override
+    public Menu update(Menu menu) {
+        int count=menuMapper.update(menu);
+        return menuMapper.selectByPrimaryKey(menu.getId());
+    }
+
+    @Override
+    public Menu findById(String id) {
+        return null;
+    }
+
+    @Override
+    public List<Menu> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<Menu> findAllNormal() {
+        return null;
+    }
+
+    @Override
+    public List<Menu> findAllNormal(int page, int size) {
+        return null;
+    }
+
+    @Override
     public List<Menu> findByUserId(String userId) {
-        return findAll();
+        return null;
     }
 
     @Override
@@ -40,8 +71,5 @@ public class MenuServiceImpl implements MenuService {
         return null;
     }
 
-    @Override
-    public List<Menu> findAll() {
-        return menuMapper.selectAllNormal();
-    }
+
 }
