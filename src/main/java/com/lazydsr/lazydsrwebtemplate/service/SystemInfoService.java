@@ -11,6 +11,7 @@ import com.lazydsr.lazydsrwebtemplate.entity.SystemInfo;
  * Info: @TODO:...
  */
 public interface SystemInfoService {
-    public SystemInfo add(SystemInfo systemInfo);
-    public SystemInfo findByMaxCreateDate();
+    SystemInfo add(SystemInfo systemInfo);
+
+    SystemInfo findByMaxCreateDate();
 }

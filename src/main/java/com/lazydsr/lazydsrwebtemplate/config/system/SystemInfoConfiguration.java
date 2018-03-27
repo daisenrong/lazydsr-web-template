@@ -106,7 +106,7 @@ public class SystemInfoConfiguration {
         newsystemInfo.setCpuMhz(cpuMhz.toString().substring(0, cpuMhz.length() - 1));
         newsystemInfo.setCpuVendor(cpuVendor.toString().substring(0, cpuVendor.length() - 1));
         newsystemInfo.setCpuModel(cpuModel.toString().substring(0, cpuModel.length() - 1));
-        newsystemInfo.setCpuCachesize(cpuCacheSize.toString().substring(0, cpuCacheSize.length() - 1));
+        newsystemInfo.setCpuCacheSize(cpuCacheSize.toString().substring(0, cpuCacheSize.length() - 1));
 
         //mem
         Mem mem = sigar.getMem();
@@ -119,11 +119,11 @@ public class SystemInfoConfiguration {
         newsystemInfo.setJvmXmx(usage.getMax() / M);
         newsystemInfo.setJvmXms(usage.getInit() / M);
         newsystemInfo.setJvmXmn(0.0);
-        newsystemInfo.setJvmAvailableprocessors(runtime.availableProcessors());
+        newsystemInfo.setJvmAvailableProcessors(runtime.availableProcessors());
         newsystemInfo.setJvmVersion(props.getProperty("java.version"));
         newsystemInfo.setJvmHome(props.getProperty("java.home"));
-        newsystemInfo.setJvmApphome(props.getProperty("user.dir"));
-        newsystemInfo.setJvmClassversion(props.getProperty("java.class.version"));
+        newsystemInfo.setJvmAppHome(props.getProperty("user.dir"));
+        newsystemInfo.setJvmClassVersion(props.getProperty("java.class.version"));
 
         //
 

@@ -95,6 +95,11 @@
             <artifactId>lazydsr-utils</artifactId>
             <version>${lazydsr.util.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.lazydsr</groupId>
+            <artifactId>lazydsr-commons</artifactId>
+            <version>1.1.0</version>
+        </dependency>
         <!--<dependency>-->
         <!--<groupId>org.hyperic</groupId>-->
         <!--<artifactId>sigar</artifactId>-->

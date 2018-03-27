@@ -15,7 +15,7 @@ public interface MenuMapper {
     int deleteByPrimaryKey(String id);
 
     @Insert({
-            "add into sys_menu (id, name, ",
+            "insert into sys_menu (id, name, ",
             "en_name, description, ",
             "parent_id, icon, ",
             "url, target, publics, ",
@@ -69,8 +69,8 @@ public interface MenuMapper {
             "select",
             "id, name, en_name, description, parent_id, icon, url, target, publics, allow_edit, ",
             "allow_delete, orderNum, creator, create_date, modifier, modify_date, status",
-            "from sys_menu",
-            //"where id = #{id,jdbcType=VARCHAR}"
+            "from sys_menu ",
+            "where status =0  order by ordernum"
     })
     @Results({
             @Result(column = "id", property = "id", jdbcType = JdbcType.VARCHAR, id = true),
@@ -92,6 +92,34 @@ public interface MenuMapper {
             @Result(column = "status", property = "status", jdbcType = JdbcType.INTEGER)
     })
     List<Menu> selectAllNormal();
+
+    @Select({
+            "select",
+            "id, name, en_name, description, parent_id, icon, url, target, publics, allow_edit, ",
+            "allow_delete, orderNum, creator, create_date, modifier, modify_date, status",
+            "from sys_menu order by ordernum ",
+            //"where id = #{id,jdbcType=VARCHAR}"
+    })
+    @Results({
+            @Result(column = "id", property = "id", jdbcType = JdbcType.VARCHAR, id = true),
+            @Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "en_name", property = "enName", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "description", property = "description", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "parent_id", property = "parentId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "icon", property = "icon", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "url", property = "url", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "target", property = "target", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "publics", property = "publics", jdbcType = JdbcType.INTEGER),
+            @Result(column = "allow_edit", property = "allowEdit", jdbcType = JdbcType.INTEGER),
+            @Result(column = "allow_delete", property = "allowDelete", jdbcType = JdbcType.INTEGER),
+            @Result(column = "orderNum", property = "ordernum", jdbcType = JdbcType.DOUBLE),
+            @Result(column = "creator", property = "creator", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "create_date", property = "createDate", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "modifier", property = "modifier", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "modify_date", property = "modifyDate", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "status", property = "status", jdbcType = JdbcType.INTEGER)
+    })
+    List<Menu> selectAll();
 
 
     @UpdateProvider(type = MenuSqlProvider.class, method = "updateByPrimaryKeySelective")

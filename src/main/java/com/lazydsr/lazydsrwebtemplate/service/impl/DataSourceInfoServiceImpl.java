@@ -32,12 +32,12 @@ public class DataSourceInfoServiceImpl implements DataSourceInfoService {
 
     @Override
     public int delete(String id) {
-        return dataSourceInfoMapper.delete(id);
+        return dataSourceInfoMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public DataSourceInfo update(DataSourceInfo dataSourceInfo) {
-        int count = dataSourceInfoMapper.update(dataSourceInfo);
+        int count = dataSourceInfoMapper.updateByPrimaryKey(dataSourceInfo);
         return dataSourceInfoMapper.selectByPrimaryKey(dataSourceInfo.getId());
     }
 

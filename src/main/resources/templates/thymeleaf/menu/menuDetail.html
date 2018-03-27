@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/common_head :: commonHead('MENU')">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div>
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1 th:inline="text">
+            [[${menu.name}]]
+            <small>详细信息</small>
+        </h1>
+        <!--<ol class="breadcrumb">-->
+        <!--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>-->
+        <!--<li><a href="#">Charts</a></li>-->
+        <!--<li class="active">Flot</li>-->
+        <!--</ol>-->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!--menu列表-->
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单行输入框</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">验证必填项</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">验证手机</label>
+                        <div class="layui-input-inline">
+                            <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">验证邮箱</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">多规则验证</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">验证日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">验证链接</label>
+                        <div class="layui-input-inline">
+                            <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+
+    </section>
+</div>
+
+<!-- ./wrapper -->
+<div th:include="common/common_js :: commonJs"></div>
+
+
+</body>
+</html>

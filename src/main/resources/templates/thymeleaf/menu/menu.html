@@ -26,113 +26,104 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <div id="demo"></div>
+                <table class="layui-hide" id="menu"  lay-filter="menu"></table>
+                <!--<div  id="menu"></div>-->
+                <!--<table class="layui-table" lay-data="{height:'full-80',url:ctx+'/menu/json/page', page:true, id:'menu'}" lay-filter="menu">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                <!--<th lay-data="{type: 'checkbox'}">选择</th>-->
+                <!--<th lay-data="{field:'id', width:80, sort: true}">ID</th>-->
+                <!--<th lay-data="{field:'name', width:120}">名称</th>-->
+                <!--<th lay-data="{field:'icon', width:100, sort: true,templet:'#icon_convert'}">icon</th>-->
+                <!--<th lay-data="{field:'url', width:100, sort: true,templet:'#url'}">url</th>-->
+                <!--<th lay-data="{field:'parentId',width:100}">父菜单</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--</table>-->
             </div>
             <!-- /.col -->
         </div>
 
     </section>
-    <!-- /.content -->
-
-    <!-- /.content-wrapper -->
-    <!--<footer class="main-footer">-->
-    <!--<div class="pull-right hidden-xs">-->
-    <!--<b>Version</b> 2.4.0-->
-    <!--</div>-->
-    <!--<strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights-->
-    <!--reserved.-->
-    <!--</footer>-->
-
-
-    <!--<div class="control-sidebar-bg"></div>-->
 </div>
+
 <!-- ./wrapper -->
 <div th:include="common/common_js :: commonJs"></div>
 
-<script type="text/html" id="publics">
-    <!-- 这里的 checked 的状态只是演示 -->
-    <input type="checkbox" name="publics" value="{{d.publics}}" lay-skin="switch" lay-text="是|否" lay-filter="publics" {{ d.publics== 0 ? 'checked' : '' }}>
-</script>
 
-<script type="text/html" id="allowEdit">
-    <!-- 这里的 checked 的状态只是演示 -->
-    <input type="checkbox" name="allowEdit" value="{{d.allowEdit}}" lay-skin="switch" lay-text="是|否" lay-filter="allowEdit" {{ d.allowEdit== 0 ? 'checked' : '' }}>
-</script>
-
-<script type="text/html" id="allowDelete">
-    <!-- 这里的 checked 的状态只是演示 -->
-    <input type="checkbox" name="allowDelete" value="{{d.allowDelete}}" lay-skin="switch" lay-text="是|否" lay-filter="allowDelete" {{d.allowDelete== 0 ? 'checked' : '' }}>
-</script>
-<script type="text/html" id="status">
-    <!-- 这里的 checked 的状态只是演示 -->
-    <input type="checkbox" name="status" value="{{d.status}}" title="禁用" lay-filter="status" {{d.status!=0 ? 'checked' : '' }}>
+<script type="text/html" id="menuBar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
 <script type="text/javascript">
     layui.use('table', function () {
         var table = layui.table, form = layui.form;
-        ;
 
         //第一个实例
         table.render({
-            elem: '#demo'
+            elem: '#menu'
             // , height: 'full-162'
             , height: 'full-80'
-            , url: ctx + '/menu/json/all' //数据接口
+            , url: ctx + '/menu/json/page' //数据接口
             , page: {page: true,} //开启分页
-            , size:'sm'
             , cols: [
                 [
                     {type: 'checkbox'}
                     , {field: 'id', title: 'ID', width: 80, sort: true}
-                    , {
-                    field: 'name', title: '名称', width: 80, templet: function (d) {
-                        return 'ID：' + d.name + '，标题：<a  style="color: #c00;">' + d.name + '</a>'
-                    }
-                }
-                    , {field: 'enName', title: '英文名称', width: 80, sort: true}
-                    , {field: 'parentId', title: '父菜单', width: 80}
-                    , {field: 'icon', title: '图标', width: 80}
-                    , {field: 'url', title: 'URL', width: 80, sort: true}
+                    , {field: 'name', title: '名称', width: 100}
+                    // , {field: 'enName', title: '英文名称', width: 80, sort: true}
+                    , {field: 'parentId', title: '父菜单', width: 100}
+                    , {field: 'icon', title: '图标', width: 80,align:'center',templet:function (d) {
+                        return '<i class="'+d.icon+'"></i>';
+                    }}
+                    , {field: 'url', title: 'URL', width: 80, sort: true,templet:function (d) {
+                        return '<a target="_blank" href="'+ctx+d.url+'">'+d.url+'</a>';
+                    }}
                     // , {field: 'target', title: '打开方式', width: 80, sort: true}
-                    , {field: 'publics', title: '是否公开', width: 80, sort: true, templet: '#publics', unresize: true}
-                    , {field: 'allowEdit', title: '是否可编辑', width: 135, sort: true, templet: '#allowEdit', unresize: true}
+                    , {field: 'publics', title: '可公开', width: 80, sort: true, templet: function (d) {
+                        return getIsOrNo(d.publics);
+                    }, unresize: true}
+                    , {field: 'allowEdit', title: '可编辑', width: 80, sort: true, templet: function (d) {
+                        return getIsOrNo(d.allowEdit);
+                    }, unresize: true}
                     , {field: 'ordernum', title: '排序', width: 80, sort: true}
-                    , {field: 'description', title: '描述', width: 100, sort: true}
-                    , {field: 'allowDelete', title: '是否可删除', width: 110, sort: true, templet: '#allowDelete', unresize: true}
-                    , {field: 'status', title: '是否禁用', width: 110, sort: true, templet: '#status', unresize: true}
-                    // , {field: 'sex', title: '性别', width: 85, templet: '#switchTpl', unresize: true}
-                    // , {field: 'lock', title: '是否禁用', width: 110, templet: '#checkboxTpl', unresize: true}
+                    // , {field: 'description', title: '描述', width: 100, sort: true}
+                    // , {field: 'allowDelete', title: '可删除', width: 110, sort: true, templet:function (d) {
+                    //     return getIsOrNo(d.allowDelete);
+                    // }, unresize: true}
+                    , {field: 'status', title: '禁用', width: 80, sort: true, templet: function (d) {
+                        if (d.status==0){
+                            return '正常';
+                        }else {
+                            return '<span style="color: #f50305;">禁用</span>';
+                        }
+                    }, unresize: true}
+                    , {fixed:'right', title: '是否禁用', width: 178, templet: '#menuBar', unresize: true}
                 ]
             ]
         });
 
-        form.on('switch(publics)', function (obj) {
-            $.ajax({
-                type: 'get',
-                dataType: 'json',
-                url: url,
-                data: {},
-                cache: false,
-                async: false,
-                success: function (menus) {
-                    data = menus;
-                }
-            });
-            layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
-        });
-        table.on('switch(allowEdit)', function (obj) {
-            layer.tips($(obj.data) + '  aaaa  ' + this.name + '：' + obj.elem.checked, obj.othis);
-            console.log(obj);
-            console.log(this);
-        });
-        table.on('switch(allowDelete)', function (obj) {
-            layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
-        });
-
-        //监听禁用操作
-        form.on('checkbox(status)', function (obj) {
-            layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+        table.on('tool(menu)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+                // layer.msg('ID：'+ data.id + ' 的查看操作');
+                layer.open({
+                    type: 2,
+                    area: ['700px', '450px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: ctx+'/menu/'+data.id
+                });
+            } else if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            }
         });
 
     });

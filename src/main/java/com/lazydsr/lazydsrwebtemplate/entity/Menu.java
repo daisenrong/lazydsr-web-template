@@ -1,7 +1,9 @@
 package com.lazydsr.lazydsrwebtemplate.entity;
 
 import com.lazydsr.util.time.UtilDateTime;
+import lombok.ToString;
 
+@ToString
 public class Menu {
     private String id;
 
@@ -25,7 +27,7 @@ public class Menu {
 
     private Integer allowDelete=0;
 
-    private Double ordernum=0.0;
+    private Double ordernum=1000.0;
 
     private String creator;
 

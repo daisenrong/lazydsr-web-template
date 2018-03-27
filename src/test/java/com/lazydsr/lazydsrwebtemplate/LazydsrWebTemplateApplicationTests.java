@@ -1,5 +1,7 @@
 package com.lazydsr.lazydsrwebtemplate;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lazydsr.lazydsrwebtemplate.config.system.SystemInfoConfiguration;
 import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
 import com.lazydsr.lazydsrwebtemplate.entity.Menu;
@@ -20,6 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.UnknownHostException;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,6 +32,7 @@ public class LazydsrWebTemplateApplicationTests {
     private MenuService menuService;
     @Autowired
     private UserMapper userMapper;
+
     @Test
     public void contextLoads002() {
         UserService userService = SpringContextUtil.getBean(UserService.class);
@@ -54,6 +58,7 @@ public class LazydsrWebTemplateApplicationTests {
 
     @Autowired
     private SystemInfoService systemInfoService;
+
     @Test
     public void addSystemInfo() {
         try {
@@ -69,12 +74,38 @@ public class LazydsrWebTemplateApplicationTests {
     }
 
     @Test
+    public void menuSelectAll() {
+        //PageInfo<Menu> pageInfo = menuService.findAllNormal();
+        //List<Menu> list = pageInfo.getList();
+        //System.out.println(pageInfo);
+        //System.out.println(list);
+    }
+
+    @Test
+    public void menuAddOne() {
+        //for (int i=0;i<1000;i++){
+
+        Menu menu = new Menu();
+        menu.setId(UtilUUId.getId());
+        menu.setParentId("MUUE9WW3TA1KCY2JGQMRTJ6ZNRMTKWGF");
+        menu.setName("菜单管理");
+        menu.setEnName("Menu Manager");
+        menu.setDescription("菜单管理");
+        menu.setIcon("fa fa-bars");
+        menu.setTarget("iframe");
+        menu.setUrl("/menu");
+        menuService.add(menu);
+        //}
+    }
+
+    @Test
     public void menuAdd() {
-        for (int i=0;i<1000;i++){
+        for (int i = 0; i < 1000; i++) {
 
             Menu menu = new Menu();
-            menu.setParentId("6KTEKT24AUNYR8EJ8SQN4378PJ34J91Z");
-            menu.setName("用户管理"+i);
+            menu.setId(UtilUUId.getId());
+            menu.setParentId("MUUE9WW3TA1KCY2JGQMRTJ6ZNRMTKWGF");
+            menu.setName("用户管理");
             menu.setEnName("User Manager");
             menu.setDescription("用户管理");
             menu.setIcon("fa fa-user");
@@ -120,7 +151,7 @@ public class LazydsrWebTemplateApplicationTests {
         DataSourceInfo dataSourceInfo = new DataSourceInfo();
         dataSourceInfo.setName(UtilDateTime.getCurrSecond() + "");
         //DataSourceInfo info = dataSourceInfoRepository.add(dataSourceInfo);
-        DataSourceInfo info =null;
+        DataSourceInfo info = null;
         System.out.println(info);
 
     }

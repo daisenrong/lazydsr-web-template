@@ -89,7 +89,7 @@ public class DynamicDataSourceConfiguration_bak extends AbstractRoutingDataSourc
 
     public Map<Object, Object> getDataSourceMap() {
         //获取数据库中的数据源信息
-        List<DataSourceInfo> dataSourceInfos = dataSourceInfoService.findByStatus(STATICVALUE.ENABLE);
+        List<DataSourceInfo> dataSourceInfos = dataSourceInfoService.findAllNormal();
         Map<Object, Object> dataSourceMap = new HashMap<>();
         for (DataSourceInfo dataSourceInfo : dataSourceInfos) {
             try {

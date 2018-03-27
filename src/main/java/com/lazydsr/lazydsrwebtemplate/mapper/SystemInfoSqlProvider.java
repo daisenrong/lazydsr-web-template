@@ -65,7 +65,7 @@ public class SystemInfoSqlProvider {
             sql.VALUES("cpu_model", "#{cpuModel,jdbcType=VARCHAR}");
         }
         
-        if (record.getCpuCachesize() != null) {
+        if (record.getCpuCacheSize() != null) {
             sql.VALUES("cpu_cachesize", "#{cpuCachesize,jdbcType=VARCHAR}");
         }
         
@@ -85,7 +85,7 @@ public class SystemInfoSqlProvider {
             sql.VALUES("jvm_xmn", "#{jvmXmn,jdbcType=DOUBLE}");
         }
         
-        if (record.getJvmAvailableprocessors() != null) {
+        if (record.getJvmAvailableProcessors() != null) {
             sql.VALUES("jvm_availableprocessors", "#{jvmAvailableprocessors,jdbcType=INTEGER}");
         }
         
@@ -97,11 +97,11 @@ public class SystemInfoSqlProvider {
             sql.VALUES("jvm_home", "#{jvmHome,jdbcType=VARCHAR}");
         }
         
-        if (record.getJvmApphome() != null) {
+        if (record.getJvmAppHome() != null) {
             sql.VALUES("jvm_apphome", "#{jvmApphome,jdbcType=VARCHAR}");
         }
         
-        if (record.getJvmClassversion() != null) {
+        if (record.getJvmClassVersion() != null) {
             sql.VALUES("jvm_classversion", "#{jvmClassversion,jdbcType=VARCHAR}");
         }
         
@@ -184,7 +184,7 @@ public class SystemInfoSqlProvider {
             sql.SET("cpu_model = #{cpuModel,jdbcType=VARCHAR}");
         }
         
-        if (record.getCpuCachesize() != null) {
+        if (record.getCpuCacheSize() != null) {
             sql.SET("cpu_cachesize = #{cpuCachesize,jdbcType=VARCHAR}");
         }
         
@@ -204,7 +204,7 @@ public class SystemInfoSqlProvider {
             sql.SET("jvm_xmn = #{jvmXmn,jdbcType=DOUBLE}");
         }
         
-        if (record.getJvmAvailableprocessors() != null) {
+        if (record.getJvmAvailableProcessors() != null) {
             sql.SET("jvm_availableprocessors = #{jvmAvailableprocessors,jdbcType=INTEGER}");
         }
         
@@ -216,11 +216,11 @@ public class SystemInfoSqlProvider {
             sql.SET("jvm_home = #{jvmHome,jdbcType=VARCHAR}");
         }
         
-        if (record.getJvmApphome() != null) {
+        if (record.getJvmAppHome() != null) {
             sql.SET("jvm_apphome = #{jvmApphome,jdbcType=VARCHAR}");
         }
         
-        if (record.getJvmClassversion() != null) {
+        if (record.getJvmClassVersion() != null) {
             sql.SET("jvm_classversion = #{jvmClassversion,jdbcType=VARCHAR}");
         }
         

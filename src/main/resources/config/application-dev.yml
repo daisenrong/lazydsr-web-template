@@ -76,6 +76,9 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+logging:
+  level:
+    com.lazydsr.lazydsrwebtemplate.mapper: debug
 #  jpa:
 #      hibernate:
 #          ddl-auto: update

@@ -12,7 +12,7 @@ public interface UserLoginRecordMapper {
     int deleteByPrimaryKey(String id);
 
     @Insert({
-        "add into sys_user_login_record (id, user_id, ",
+        "insert into sys_user_login_record (id, user_id, ",
         "username, ip, date, ",
         "type, login_status, ",
         "creator, create_date, ",

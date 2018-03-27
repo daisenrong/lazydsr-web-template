@@ -28,3 +28,19 @@
         }
     }
 });
+function getIsOrNo(v) {
+
+    if (v=="0"){
+        return "是";
+    }else {
+        return "否";
+    }
+}
+function getIsOrNoCus(v,str) {
+
+    if (v==0){
+        return str.split(",")[0];
+    }else {
+        return str.split(",")[1];
+    }
+}

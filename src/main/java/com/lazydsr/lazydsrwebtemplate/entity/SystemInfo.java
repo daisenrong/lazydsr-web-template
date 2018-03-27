@@ -31,7 +31,7 @@ public class SystemInfo {
 
     private String cpuModel;
 
-    private String cpuCachesize;
+    private String cpuCacheSize;
 
     private Double memTotal=0.0;
 
@@ -41,15 +41,15 @@ public class SystemInfo {
 
     private Double jvmXmn=0.0;
 
-    private Integer jvmAvailableprocessors=0;
+    private Integer jvmAvailableProcessors =0;
 
     private String jvmVersion;
 
     private String jvmHome;
 
-    private String jvmApphome;
+    private String jvmAppHome;
 
-    private String jvmClassversion;
+    private String jvmClassVersion;
 
     private String creator;
 
@@ -173,12 +173,12 @@ public class SystemInfo {
         this.cpuModel = cpuModel == null ? null : cpuModel.trim();
     }
 
-    public String getCpuCachesize() {
-        return cpuCachesize;
+    public String getCpuCacheSize() {
+        return cpuCacheSize;
     }
 
-    public void setCpuCachesize(String cpuCachesize) {
-        this.cpuCachesize = cpuCachesize == null ? null : cpuCachesize.trim();
+    public void setCpuCacheSize(String cpuCacheSize) {
+        this.cpuCacheSize = cpuCacheSize == null ? null : cpuCacheSize.trim();
     }
 
     public Double getMemTotal() {
@@ -213,12 +213,12 @@ public class SystemInfo {
         this.jvmXmn = jvmXmn;
     }
 
-    public Integer getJvmAvailableprocessors() {
-        return jvmAvailableprocessors;
+    public Integer getJvmAvailableProcessors() {
+        return jvmAvailableProcessors;
     }
 
-    public void setJvmAvailableprocessors(Integer jvmAvailableprocessors) {
-        this.jvmAvailableprocessors = jvmAvailableprocessors;
+    public void setJvmAvailableProcessors(Integer jvmAvailableProcessors) {
+        this.jvmAvailableProcessors = jvmAvailableProcessors;
     }
 
     public String getJvmVersion() {
@@ -237,20 +237,20 @@ public class SystemInfo {
         this.jvmHome = jvmHome == null ? null : jvmHome.trim();
     }
 
-    public String getJvmApphome() {
-        return jvmApphome;
+    public String getJvmAppHome() {
+        return jvmAppHome;
     }
 
-    public void setJvmApphome(String jvmApphome) {
-        this.jvmApphome = jvmApphome == null ? null : jvmApphome.trim();
+    public void setJvmAppHome(String jvmAppHome) {
+        this.jvmAppHome = jvmAppHome == null ? null : jvmAppHome.trim();
     }
 
-    public String getJvmClassversion() {
-        return jvmClassversion;
+    public String getJvmClassVersion() {
+        return jvmClassVersion;
     }
 
-    public void setJvmClassversion(String jvmClassversion) {
-        this.jvmClassversion = jvmClassversion == null ? null : jvmClassversion.trim();
+    public void setJvmClassVersion(String jvmClassVersion) {
+        this.jvmClassVersion = jvmClassVersion == null ? null : jvmClassVersion.trim();
     }
 
     public String getCreator() {
