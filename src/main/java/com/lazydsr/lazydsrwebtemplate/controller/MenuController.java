@@ -7,10 +7,7 @@ import com.lazydsr.lazydsrwebtemplate.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.HashMap;
@@ -78,11 +75,25 @@ public class MenuController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable("id") String id,Map map) {
-        System.out.println("aaaaaaaaaaa"+id);
+    public String findById(@PathVariable("id") String id, Map map) {
+        //System.out.println("aaaaaaaaaaa"+id);
         Menu menu = menuService.findById(id);
         map.put("menu", menu);
-        System.out.println(menu);
+        //System.out.println(menu);
         return "menu/menuDetail";
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public Map deleteById(@PathVariable("id") String id) {
+        Map<String, String> map = new HashMap<>();
+        int count = menuService.delete(id);
+        if (count > 0) {
+            map.put("status", "0");
+        } else {
+            map.put("status", "1");
+        }
+        return map;
+
     }
 }

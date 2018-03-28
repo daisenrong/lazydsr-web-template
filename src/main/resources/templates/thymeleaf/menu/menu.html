@@ -26,7 +26,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <table class="layui-hide" id="menu"  lay-filter="menu"></table>
+                <table class="layui-hide" id="menu" lay-filter="menu"></table>
                 <!--<div  id="menu"></div>-->
                 <!--<table class="layui-table" lay-data="{height:'full-80',url:ctx+'/menu/json/page', page:true, id:'menu'}" lay-filter="menu">-->
                 <!--<thead>-->
@@ -67,62 +67,90 @@
             // , height: 'full-162'
             , height: 'full-80'
             , url: ctx + '/menu/json/page' //数据接口
-            , page: {page: true,} //开启分页
+            , page: {page: true} //开启分页
             , cols: [
                 [
-                    {type: 'checkbox'}
+                    {type: 'checkbox', fixed: 'left'}
                     , {field: 'id', title: 'ID', width: 80, sort: true}
                     , {field: 'name', title: '名称', width: 100}
                     // , {field: 'enName', title: '英文名称', width: 80, sort: true}
                     , {field: 'parentId', title: '父菜单', width: 100}
-                    , {field: 'icon', title: '图标', width: 80,align:'center',templet:function (d) {
-                        return '<i class="'+d.icon+'"></i>';
-                    }}
-                    , {field: 'url', title: 'URL', width: 80, sort: true,templet:function (d) {
-                        return '<a target="_blank" href="'+ctx+d.url+'">'+d.url+'</a>';
-                    }}
+                    , {
+                    field: 'icon', title: '图标', width: 80, align: 'center', templet: function (d) {
+                        return '<i class="' + d.icon + '"></i>';
+                    }
+                }
+                    , {
+                    field: 'url', title: 'URL', width: 80, sort: true, templet: function (d) {
+                        return '<a target="_blank" href="' + ctx + d.url + '">' + d.url + '</a>';
+                    }
+                }
                     // , {field: 'target', title: '打开方式', width: 80, sort: true}
-                    , {field: 'publics', title: '可公开', width: 80, sort: true, templet: function (d) {
+                    , {
+                    field: 'publics', title: '可公开', width: 80, sort: true, templet: function (d) {
                         return getIsOrNo(d.publics);
-                    }, unresize: true}
-                    , {field: 'allowEdit', title: '可编辑', width: 80, sort: true, templet: function (d) {
+                    }, unresize: true
+                }
+                    , {
+                    field: 'allowEdit', title: '可编辑', width: 80, sort: true, templet: function (d) {
                         return getIsOrNo(d.allowEdit);
-                    }, unresize: true}
+                    }, unresize: true
+                }
                     , {field: 'ordernum', title: '排序', width: 80, sort: true}
                     // , {field: 'description', title: '描述', width: 100, sort: true}
                     // , {field: 'allowDelete', title: '可删除', width: 110, sort: true, templet:function (d) {
                     //     return getIsOrNo(d.allowDelete);
                     // }, unresize: true}
-                    , {field: 'status', title: '禁用', width: 80, sort: true, templet: function (d) {
-                        if (d.status==0){
+                    , {
+                    field: 'status', title: '禁用', width: 80, sort: true, templet: function (d) {
+                        if (d.status == 0) {
                             return '正常';
-                        }else {
+                        } else {
                             return '<span style="color: #f50305;">禁用</span>';
                         }
-                    }, unresize: true}
-                    , {fixed:'right', title: '是否禁用', width: 178, templet: '#menuBar', unresize: true}
+                    }, unresize: true
+                }
+                    , {fixed: 'right', title: '是否禁用', width: 178, templet: '#menuBar', unresize: true}
                 ]
             ]
         });
 
-        table.on('tool(menu)', function(obj){
+        table.on('tool(menu)', function (obj) {
             var data = obj.data;
-            if(obj.event === 'detail'){
+            if (obj.event === 'detail') {
                 // layer.msg('ID：'+ data.id + ' 的查看操作');
                 layer.open({
                     type: 2,
-                    area: ['700px', '450px'],
+                    area: ['400px', '600px'],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: ctx+'/menu/'+data.id
+                    content: ctx + '/menu/' + data.id
                 });
-            } else if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del();
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+
                     layer.close(index);
+
+                    $.ajax({
+                        type: 'delete',
+                        url: ctx + '/menu/' + data.id,
+                        contentType: 'application/json',
+                        dataType: "json",
+                        // data: JSON.stringify(arr),
+                        success: function (d) {
+                            if (d.status == "0") {
+                                layer.msg("删除成功");
+                                obj.del();
+                                table.reload("menu", {})
+                            } else {
+                                layer.msg("删除失败，请联系管理员或重试。");
+                            }
+                        }
+                    });
+
                 });
-            } else if(obj.event === 'edit'){
-                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            } else if (obj.event === 'edit') {
+                layer.alert('编辑行：<br>' + JSON.stringify(data))
             }
         });
 
