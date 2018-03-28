@@ -1,7 +1,9 @@
 package com.lazydsr.lazydsrwebtemplate.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.HttpPutFormContentFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -35,5 +37,14 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
         //if (userStatus.isStatus()) {
         //    //registry.addInterceptor(new UserInterceptor()).addPathPatterns("/**").excludePathPatterns("/error", "/login");
         //}
+    }
+
+    /**
+     * 添加过滤器，增加表单的put方法
+     * @return
+     */
+    @Bean
+    public HttpPutFormContentFilter httpPutFormContentFilter() {
+        return new HttpPutFormContentFilter();
     }
 }

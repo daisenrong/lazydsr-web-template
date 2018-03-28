@@ -74,13 +74,23 @@ public class MenuController {
         return "menu/menu";
     }
 
-    @GetMapping("/{id}")
-    public String findById(@PathVariable("id") String id, Map map) {
-        //System.out.println("aaaaaaaaaaa"+id);
+    @GetMapping("/{type}/{id}")
+    public String findById(@PathVariable("type") String type, @PathVariable("id") String id, Map map) {
+        String url = "";
+        if (type != null && type.equalsIgnoreCase("edit")) {
+            url = "menu/menuEdit";
+        } else {
+            url = "menu/menuView";
+        }
         Menu menu = menuService.findById(id);
         map.put("menu", menu);
-        //System.out.println(menu);
-        return "menu/menuDetail";
+        return url;
+    }
+    @PutMapping
+    public String edit(Menu menu){
+        System.out.println(menu);
+        menuService.update(menu);
+        return "redirect:/menu/view/"+menu.getId();
     }
 
     @DeleteMapping("/{id}")
@@ -94,6 +104,5 @@ public class MenuController {
             map.put("status", "1");
         }
         return map;
-
     }
 }

@@ -52,7 +52,7 @@
 
 
 <script type="text/html" id="menuBar">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
@@ -117,14 +117,14 @@
 
         table.on('tool(menu)', function (obj) {
             var data = obj.data;
-            if (obj.event === 'detail') {
+            if (obj.event === 'view') {
                 // layer.msg('ID：'+ data.id + ' 的查看操作');
                 layer.open({
                     type: 2,
                     area: ['400px', '600px'],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: ctx + '/menu/' + data.id
+                    content: ctx + '/menu/view/' + data.id
                 });
             } else if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
@@ -150,7 +150,13 @@
 
                 });
             } else if (obj.event === 'edit') {
-                layer.alert('编辑行：<br>' + JSON.stringify(data))
+                layer.open({
+                    type: 2,
+                    area: ['400px', '600px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: ctx + '/menu/edit/' + data.id
+                });
             }
         });
 
