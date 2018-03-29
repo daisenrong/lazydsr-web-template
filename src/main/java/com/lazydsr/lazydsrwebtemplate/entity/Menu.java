@@ -1,9 +1,5 @@
 package com.lazydsr.lazydsrwebtemplate.entity;
 
-import com.lazydsr.util.time.UtilDateTime;
-import lombok.ToString;
-
-@ToString
 public class Menu {
     private String id;
 
@@ -21,23 +17,23 @@ public class Menu {
 
     private String target;
 
-    private Integer publics=0;
+    private Integer publics;
 
-    private Integer allowEdit=0;
+    private Integer allowEdit;
 
-    private Integer allowDelete=0;
+    private Integer allowDelete;
 
-    private Double ordernum=1000.0;
+    private Double ordernum;
 
     private String creator;
 
-    private String createDate= UtilDateTime.getCurrDateTime();
+    private String createDate;
 
     private String modifier;
 
-    private String modifyDate=UtilDateTime.getCurrDateTime();
+    private String modifyDate;
 
-    private Integer status=0;
+    private Integer status;
 
     public String getId() {
         return id;

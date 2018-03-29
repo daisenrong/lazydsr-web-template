@@ -1,11 +1,16 @@
 package com.lazydsr.lazydsrwebtemplate.mapper;
 
 import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
-import java.util.List;
-@Mapper
 public interface DataSourceInfoMapper {
     @Delete({
         "delete from sys_datasourceinfo",
@@ -14,7 +19,7 @@ public interface DataSourceInfoMapper {
     int deleteByPrimaryKey(String id);
 
     @Insert({
-        "add into sys_datasourceinfo (id, name, ",
+        "insert into sys_datasourceinfo (id, name, ",
         "dbtype, address, ",
         "prot, dbname, username, ",
         "password, min_active, ",
@@ -59,57 +64,6 @@ public interface DataSourceInfoMapper {
         @Result(column="status", property="status", jdbcType=JdbcType.INTEGER)
     })
     DataSourceInfo selectByPrimaryKey(String id);
-
-    @Select({
-            "select",
-            "id, name, dbtype, address, prot, dbname, username, password, min_active, max_active, ",
-            "creator, create_date, modifier, modify_date, status",
-            "from sys_datasourceinfo",
-            "where status=0"
-    })
-    @Results({
-            @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
-            @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
-            @Result(column="dbtype", property="dbtype", jdbcType=JdbcType.VARCHAR),
-            @Result(column="address", property="address", jdbcType=JdbcType.VARCHAR),
-            @Result(column="prot", property="prot", jdbcType=JdbcType.VARCHAR),
-            @Result(column="dbname", property="dbname", jdbcType=JdbcType.VARCHAR),
-            @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-            @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
-            @Result(column="min_active", property="minActive", jdbcType=JdbcType.INTEGER),
-            @Result(column="max_active", property="maxActive", jdbcType=JdbcType.INTEGER),
-            @Result(column="creator", property="creator", jdbcType=JdbcType.VARCHAR),
-            @Result(column="create_date", property="createDate", jdbcType=JdbcType.VARCHAR),
-            @Result(column="modifier", property="modifier", jdbcType=JdbcType.VARCHAR),
-            @Result(column="modify_date", property="modifyDate", jdbcType=JdbcType.VARCHAR),
-            @Result(column="status", property="status", jdbcType=JdbcType.INTEGER)
-    })
-    List<DataSourceInfo> selectAllNormal();
-    @Select({
-            "select",
-            "id, name, dbtype, address, prot, dbname, username, password, min_active, max_active, ",
-            "creator, create_date, modifier, modify_date, status",
-            "from sys_datasourceinfo",
-            "where status=0"
-    })
-    @Results({
-            @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
-            @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
-            @Result(column="dbtype", property="dbtype", jdbcType=JdbcType.VARCHAR),
-            @Result(column="address", property="address", jdbcType=JdbcType.VARCHAR),
-            @Result(column="prot", property="prot", jdbcType=JdbcType.VARCHAR),
-            @Result(column="dbname", property="dbname", jdbcType=JdbcType.VARCHAR),
-            @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-            @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
-            @Result(column="min_active", property="minActive", jdbcType=JdbcType.INTEGER),
-            @Result(column="max_active", property="maxActive", jdbcType=JdbcType.INTEGER),
-            @Result(column="creator", property="creator", jdbcType=JdbcType.VARCHAR),
-            @Result(column="create_date", property="createDate", jdbcType=JdbcType.VARCHAR),
-            @Result(column="modifier", property="modifier", jdbcType=JdbcType.VARCHAR),
-            @Result(column="modify_date", property="modifyDate", jdbcType=JdbcType.VARCHAR),
-            @Result(column="status", property="status", jdbcType=JdbcType.INTEGER)
-    })
-    List<DataSourceInfo> selectAll();
 
     @UpdateProvider(type=DataSourceInfoSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(DataSourceInfo record);

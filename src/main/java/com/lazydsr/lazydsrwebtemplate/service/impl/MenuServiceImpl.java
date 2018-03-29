@@ -38,7 +38,11 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Menu update(Menu menu) {
         int count = menuMapper.updateByPrimaryKey(menu);
-        return menuMapper.selectByPrimaryKey(menu.getId());
+        if (count > 0) {
+            return menuMapper.selectByPrimaryKey(menu.getId());
+        } else {
+            return null;
+        }
     }
 
     @Override

@@ -58,8 +58,9 @@
 </script>
 
 <script type="text/javascript">
+    var table
     layui.use('table', function () {
-        var table = layui.table, form = layui.form;
+        table = layui.table, form = layui.form;
 
         //第一个实例
         table.render({
@@ -82,7 +83,7 @@
                 }
                     , {
                     field: 'url', title: 'URL', width: 80, sort: true, templet: function (d) {
-                        return '<a target="_blank" href="' + ctx + d.url + '">' + d.url + '</a>';
+                        return '<a target="_blank" style="color: #5769ff;" href="' + ctx + d.url + '">' + d.url + '</a>';
                     }
                 }
                     // , {field: 'target', title: '打开方式', width: 80, sort: true}
@@ -110,7 +111,7 @@
                         }
                     }, unresize: true
                 }
-                    , {fixed: 'right', title: '是否禁用', width: 178, templet: '#menuBar', unresize: true}
+                    , {fixed: 'right', title: '操作', width: 178, templet: '#menuBar', unresize: true}
                 ]
             ]
         });

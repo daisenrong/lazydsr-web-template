@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.lazydsr.lazydsrwebtemplate.entity.Menu;
 import com.lazydsr.lazydsrwebtemplate.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -40,9 +41,9 @@ public class MenuController {
     public Map findAllJson(int page, int limit) {
 
         Map map = new HashMap();
-        List<Menu> all = menuService.findAllNormal();
+        List<Menu> all = menuService.findAll();
         PageHelper.startPage(page, limit);
-        List<Menu> menus = menuService.findAllNormal();
+        List<Menu> menus = menuService.findAll();
         PageInfo<Menu> pageInfo = new PageInfo<>(menus);
 
         for (Menu menu : menus) {
@@ -86,11 +87,35 @@ public class MenuController {
         map.put("menu", menu);
         return url;
     }
+
     @PutMapping
-    public String edit(Menu menu){
-        System.out.println(menu);
-        menuService.update(menu);
-        return "redirect:/menu/view/"+menu.getId();
+    @ResponseBody
+    public Map<String, String> edit(Menu menu) {
+        //System.out.println(menu);
+        Map<String, String> map = new HashMap<>();
+        if (menu.getId() == null || menu.getId().equalsIgnoreCase("")) {
+            map.put("status", "1");
+            return map;
+        }
+        //BeanUtils.copyProperties(menu, menuService.findById(menu.getId()));
+        Menu byId = menuService.findById(menu.getId());
+        byId.setParentId(menu.getParentId());
+        byId.setEnName(menu.getEnName());
+        byId.setIcon(menu.getIcon());
+        byId.setName(menu.getName());
+        byId.setUrl(menu.getUrl());
+        byId.setOrdernum(menu.getOrdernum());
+        byId.setStatus(menu.getStatus());
+
+        //System.out.println(menuService.findById(menu.getId()));
+        //System.out.println(menu);
+        Menu count = menuService.update(menu);
+        if (count != null) {
+            map.put("status", "0");
+        } else {
+            map.put("status", "1");
+        }
+        return map;
     }
 
     @DeleteMapping("/{id}")

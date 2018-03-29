@@ -1,9 +1,16 @@
 package com.lazydsr.lazydsrwebtemplate.mapper;
 
 import com.lazydsr.lazydsrwebtemplate.entity.UserRole;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-@Mapper
+
 public interface UserRoleMapper {
     @Delete({
         "delete from sys_user_role",
@@ -12,7 +19,7 @@ public interface UserRoleMapper {
     int deleteByPrimaryKey(String id);
 
     @Insert({
-        "add into sys_user_role (id, u_id, ",
+        "insert into sys_user_role (id, u_id, ",
         "r_id, creator, create_date, ",
         "modifier, modify_date, ",
         "status)",

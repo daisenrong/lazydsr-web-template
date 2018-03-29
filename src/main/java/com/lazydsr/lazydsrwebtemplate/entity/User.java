@@ -1,7 +1,5 @@
 package com.lazydsr.lazydsrwebtemplate.entity;
 
-import com.lazydsr.util.time.UtilDateTime;
-
 public class User {
     private String id;
 
@@ -13,9 +11,9 @@ public class User {
 
     private String workcode;
 
-    private Integer sumPasswordWrong=0;
+    private Integer sumPasswordWrong;
 
-    private Integer passwordLock=1;
+    private Integer passwordLock;
 
     private String oldPassword1;
 
@@ -39,19 +37,19 @@ public class User {
 
     private String lastLoginDate;
 
-    private Double orderNum=1000.0;
+    private Double orderNum;
 
-    private Integer accountType=0;
+    private Integer accountType;
 
     private String creator;
 
-    private String createDate= UtilDateTime.getCurrDateTime();
+    private String createDate;
 
     private String modifier;
 
-    private String modifyDate=UtilDateTime.getCurrDateTime();
+    private String modifyDate;
 
-    private Integer status=0;
+    private Integer status;
 
     public String getId() {
         return id;

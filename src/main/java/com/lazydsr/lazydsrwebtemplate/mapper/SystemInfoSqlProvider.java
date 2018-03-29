@@ -66,7 +66,7 @@ public class SystemInfoSqlProvider {
         }
         
         if (record.getCpuCacheSize() != null) {
-            sql.VALUES("cpu_cachesize", "#{cpuCachesize,jdbcType=VARCHAR}");
+            sql.VALUES("cpu_cache_size", "#{cpuCacheSize,jdbcType=VARCHAR}");
         }
         
         if (record.getMemTotal() != null) {
@@ -86,7 +86,7 @@ public class SystemInfoSqlProvider {
         }
         
         if (record.getJvmAvailableProcessors() != null) {
-            sql.VALUES("jvm_availableprocessors", "#{jvmAvailableprocessors,jdbcType=INTEGER}");
+            sql.VALUES("jvm_available_processors", "#{jvmAvailableProcessors,jdbcType=INTEGER}");
         }
         
         if (record.getJvmVersion() != null) {
@@ -98,11 +98,11 @@ public class SystemInfoSqlProvider {
         }
         
         if (record.getJvmAppHome() != null) {
-            sql.VALUES("jvm_apphome", "#{jvmApphome,jdbcType=VARCHAR}");
+            sql.VALUES("jvm_app_home", "#{jvmAppHome,jdbcType=VARCHAR}");
         }
         
         if (record.getJvmClassVersion() != null) {
-            sql.VALUES("jvm_classversion", "#{jvmClassversion,jdbcType=VARCHAR}");
+            sql.VALUES("jvm_class_version", "#{jvmClassVersion,jdbcType=VARCHAR}");
         }
         
         if (record.getCreator() != null) {
@@ -185,7 +185,7 @@ public class SystemInfoSqlProvider {
         }
         
         if (record.getCpuCacheSize() != null) {
-            sql.SET("cpu_cachesize = #{cpuCachesize,jdbcType=VARCHAR}");
+            sql.SET("cpu_cache_size = #{cpuCacheSize,jdbcType=VARCHAR}");
         }
         
         if (record.getMemTotal() != null) {
@@ -205,7 +205,7 @@ public class SystemInfoSqlProvider {
         }
         
         if (record.getJvmAvailableProcessors() != null) {
-            sql.SET("jvm_availableprocessors = #{jvmAvailableprocessors,jdbcType=INTEGER}");
+            sql.SET("jvm_available_processors = #{jvmAvailableProcessors,jdbcType=INTEGER}");
         }
         
         if (record.getJvmVersion() != null) {
@@ -217,11 +217,11 @@ public class SystemInfoSqlProvider {
         }
         
         if (record.getJvmAppHome() != null) {
-            sql.SET("jvm_apphome = #{jvmApphome,jdbcType=VARCHAR}");
+            sql.SET("jvm_app_home = #{jvmAppHome,jdbcType=VARCHAR}");
         }
         
         if (record.getJvmClassVersion() != null) {
-            sql.SET("jvm_classversion = #{jvmClassversion,jdbcType=VARCHAR}");
+            sql.SET("jvm_class_version = #{jvmClassVersion,jdbcType=VARCHAR}");
         }
         
         if (record.getCreator() != null) {

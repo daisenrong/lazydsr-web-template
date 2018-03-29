@@ -1,9 +1,16 @@
 package com.lazydsr.lazydsrwebtemplate.mapper;
 
 import com.lazydsr.lazydsrwebtemplate.entity.SystemInfo;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-@Mapper
+
 public interface SystemInfoMapper {
     @Delete({
         "delete from sys_systeminfo",
@@ -85,48 +92,6 @@ public interface SystemInfoMapper {
         @Result(column="status", property="status", jdbcType=JdbcType.INTEGER)
     })
     SystemInfo selectByPrimaryKey(String id);
-
-    @Select({
-            "select",
-            "id, username, server_name, domain, net_name, ip, mac, host, os_arch, os_name, ",
-            "os_version, cpu_mhz, cpu_vendor, cpu_model, cpu_cache_size, mem_total, jvm_xmx, ",
-            "jvm_xms, jvm_xmn, jvm_available_processors, jvm_version, jvm_home, jvm_app_home, ",
-            "jvm_class_version, creator, create_date, modifier, modify_date, status ,max(create_date)",
-            "from sys_systeminfo",
-            //"where id = #{id,jdbcType=VARCHAR}"
-    })
-    @Results({
-            @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
-            @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-            @Result(column="server_name", property="serverName", jdbcType=JdbcType.VARCHAR),
-            @Result(column="domain", property="domain", jdbcType=JdbcType.VARCHAR),
-            @Result(column="net_name", property="netName", jdbcType=JdbcType.VARCHAR),
-            @Result(column="ip", property="ip", jdbcType=JdbcType.VARCHAR),
-            @Result(column="mac", property="mac", jdbcType=JdbcType.VARCHAR),
-            @Result(column="host", property="host", jdbcType=JdbcType.VARCHAR),
-            @Result(column="os_arch", property="osArch", jdbcType=JdbcType.VARCHAR),
-            @Result(column="os_name", property="osName", jdbcType=JdbcType.VARCHAR),
-            @Result(column="os_version", property="osVersion", jdbcType=JdbcType.VARCHAR),
-            @Result(column="cpu_mhz", property="cpuMhz", jdbcType=JdbcType.VARCHAR),
-            @Result(column="cpu_vendor", property="cpuVendor", jdbcType=JdbcType.VARCHAR),
-            @Result(column="cpu_model", property="cpuModel", jdbcType=JdbcType.VARCHAR),
-            @Result(column="cpu_cache_size", property="cpuCacheSize", jdbcType=JdbcType.VARCHAR),
-            @Result(column="mem_total", property="memTotal", jdbcType=JdbcType.DOUBLE),
-            @Result(column="jvm_xmx", property="jvmXmx", jdbcType=JdbcType.DOUBLE),
-            @Result(column="jvm_xms", property="jvmXms", jdbcType=JdbcType.DOUBLE),
-            @Result(column="jvm_xmn", property="jvmXmn", jdbcType=JdbcType.DOUBLE),
-            @Result(column="jvm_available_processors", property="jvmAvailableProcessors", jdbcType=JdbcType.INTEGER),
-            @Result(column="jvm_version", property="jvmVersion", jdbcType=JdbcType.VARCHAR),
-            @Result(column="jvm_home", property="jvmHome", jdbcType=JdbcType.VARCHAR),
-            @Result(column="jvm_app_home", property="jvmAppHome", jdbcType=JdbcType.VARCHAR),
-            @Result(column="jvm_class_version", property="jvmClassVersion", jdbcType=JdbcType.VARCHAR),
-            @Result(column="creator", property="creator", jdbcType=JdbcType.VARCHAR),
-            @Result(column="create_date", property="createDate", jdbcType=JdbcType.VARCHAR),
-            @Result(column="modifier", property="modifier", jdbcType=JdbcType.VARCHAR),
-            @Result(column="modify_date", property="modifyDate", jdbcType=JdbcType.VARCHAR),
-            @Result(column="status", property="status", jdbcType=JdbcType.INTEGER)
-    })
-    SystemInfo selectByMaxCreateDate();
 
     @UpdateProvider(type=SystemInfoSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(SystemInfo record);

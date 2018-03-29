@@ -14,11 +14,11 @@ public class PermissionRoleSqlProvider {
         }
         
         if (record.getpId() != null) {
-            sql.VALUES("pid", "#{pid,jdbcType=VARCHAR}");
+            sql.VALUES("p_id", "#{pId,jdbcType=VARCHAR}");
         }
         
         if (record.getrId() != null) {
-            sql.VALUES("rid", "#{rid,jdbcType=VARCHAR}");
+            sql.VALUES("r_id", "#{rId,jdbcType=VARCHAR}");
         }
         
         if (record.getCreator() != null) {
@@ -49,11 +49,11 @@ public class PermissionRoleSqlProvider {
         sql.UPDATE("sys_permission_role");
         
         if (record.getpId() != null) {
-            sql.SET("pid = #{pid,jdbcType=VARCHAR}");
+            sql.SET("p_id = #{pId,jdbcType=VARCHAR}");
         }
         
         if (record.getrId() != null) {
-            sql.SET("rid = #{rid,jdbcType=VARCHAR}");
+            sql.SET("r_id = #{rId,jdbcType=VARCHAR}");
         }
         
         if (record.getCreator() != null) {

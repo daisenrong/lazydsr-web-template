@@ -1,9 +1,16 @@
 package com.lazydsr.lazydsrwebtemplate.mapper;
 
 import com.lazydsr.lazydsrwebtemplate.entity.MonitorInfo;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-@Mapper
+
 public interface MonitorInfoMapper {
     @Delete({
         "delete from sys_monitorinfo",
@@ -12,7 +19,7 @@ public interface MonitorInfoMapper {
     int deleteByPrimaryKey(String id);
 
     @Insert({
-        "add into sys_monitorinfo (id, server_id, ",
+        "insert into sys_monitorinfo (id, server_id, ",
         "total_memory, free_memory, ",
         "max_memory, os_name, ",
         "total_memory_size, free_physical_memory_size, ",

@@ -1,39 +1,37 @@
 package com.lazydsr.lazydsrwebtemplate.entity;
 
-import com.lazydsr.util.time.UtilDateTime;
-
 public class MonitorInfo {
     private String id;
 
     private String serverId;
 
-    private Long totalMemory=0L;
+    private Long totalMemory;
 
-    private Long freeMemory=0L;
+    private Long freeMemory;
 
-    private Long maxMemory=0L;
+    private Long maxMemory;
 
     private String osName;
 
-    private Long totalMemorySize=0L;
+    private Long totalMemorySize;
 
-    private Long freePhysicalMemorySize=0L;
+    private Long freePhysicalMemorySize;
 
-    private Long usedMemory=0L;
+    private Long usedMemory;
 
-    private Integer totalThread=0;
+    private Integer totalThread;
 
-    private Double cpuRatio=0.0;
+    private Double cpuRatio;
 
     private String creator;
 
-    private String createDate= UtilDateTime.getCurrDateTime();
+    private String createDate;
 
     private String modifier;
 
-    private String modifyDate=UtilDateTime.getCurrDateTime();
+    private String modifyDate;
 
-    private Integer status=0;
+    private Integer status;
 
     public String getId() {
         return id;

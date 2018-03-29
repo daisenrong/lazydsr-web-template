@@ -1,9 +1,16 @@
 package com.lazydsr.lazydsrwebtemplate.mapper;
 
 import com.lazydsr.lazydsrwebtemplate.entity.PermissionRole;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-@Mapper
+
 public interface PermissionRoleMapper {
     @Delete({
         "delete from sys_permission_role",
@@ -12,12 +19,12 @@ public interface PermissionRoleMapper {
     int deleteByPrimaryKey(String id);
 
     @Insert({
-        "add into sys_permission_role (id, pid, ",
-        "rid, creator, create_date, ",
+        "insert into sys_permission_role (id, p_id, ",
+        "r_id, creator, create_date, ",
         "modifier, modify_date, ",
         "status)",
-        "values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, ",
-        "#{rid,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, ",
+        "values (#{id,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, ",
+        "#{rId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, ",
         "#{modifier,jdbcType=VARCHAR}, #{modifyDate,jdbcType=VARCHAR}, ",
         "#{status,jdbcType=INTEGER})"
     })
@@ -28,14 +35,14 @@ public interface PermissionRoleMapper {
 
     @Select({
         "select",
-        "id, pid, rid, creator, create_date, modifier, modify_date, status",
+        "id, p_id, r_id, creator, create_date, modifier, modify_date, status",
         "from sys_permission_role",
         "where id = #{id,jdbcType=VARCHAR}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
-        @Result(column="pid", property="pid", jdbcType=JdbcType.VARCHAR),
-        @Result(column="rid", property="rid", jdbcType=JdbcType.VARCHAR),
+        @Result(column="p_id", property="pId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="r_id", property="rId", jdbcType=JdbcType.VARCHAR),
         @Result(column="creator", property="creator", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier", property="modifier", jdbcType=JdbcType.VARCHAR),
@@ -49,8 +56,8 @@ public interface PermissionRoleMapper {
 
     @Update({
         "update sys_permission_role",
-        "set pid = #{pid,jdbcType=VARCHAR},",
-          "rid = #{rid,jdbcType=VARCHAR},",
+        "set p_id = #{pId,jdbcType=VARCHAR},",
+          "r_id = #{rId,jdbcType=VARCHAR},",
           "creator = #{creator,jdbcType=VARCHAR},",
           "create_date = #{createDate,jdbcType=VARCHAR},",
           "modifier = #{modifier,jdbcType=VARCHAR},",
