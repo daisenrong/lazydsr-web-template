@@ -1,5 +1,7 @@
 package com.lazydsr.lazydsrwebtemplate.entity;
 
+import com.lazydsr.util.time.UtilDateTime;
+
 public class UserRole {
     private String id;
 
@@ -9,13 +11,13 @@ public class UserRole {
 
     private String creator;
 
-    private String createDate;
+    private String createDate=UtilDateTime.getCurrDateTime();
 
     private String modifier;
 
-    private String modifyDate;
+    private String modifyDate=UtilDateTime.getCurrDateTime();
 
-    private Integer status;
+    private Integer status=0;
 
     public String getId() {
         return id;

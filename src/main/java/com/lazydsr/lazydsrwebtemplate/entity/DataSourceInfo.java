@@ -1,5 +1,7 @@
 package com.lazydsr.lazydsrwebtemplate.entity;
 
+import com.lazydsr.util.time.UtilDateTime;
+
 public class DataSourceInfo {
     private String id;
 
@@ -17,19 +19,19 @@ public class DataSourceInfo {
 
     private String password;
 
-    private Integer minActive;
+    private Integer minActive=0;
 
-    private Integer maxActive;
+    private Integer maxActive=0;
 
     private String creator;
 
-    private String createDate;
+    private String createDate=UtilDateTime.getCurrDateTime();
 
     private String modifier;
 
-    private String modifyDate;
+    private String modifyDate=UtilDateTime.getCurrDateTime();
 
-    private Integer status;
+    private Integer status=0;
 
     public String getId() {
         return id;
