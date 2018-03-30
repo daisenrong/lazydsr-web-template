@@ -87,5 +87,5 @@ logging:
 #      naming:
 #          physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
 #      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect #设置jpa的默认数据引擎为InnoDB
-#logging:
-#  config: classpath:config/logback-spring.xml
+logging:
+  config: classpath:config/logback-spring.xml

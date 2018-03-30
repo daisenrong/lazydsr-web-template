@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
-<head th:include="common/common_head :: commonHead('MENU')">
+<head th:include="commons/common_head :: commonHead('MENU')">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div>
@@ -49,7 +49,8 @@
             <div class="form-group">
                 <label for="parentId" class="col-sm-2 control-label">Parent</label>
                 <div class="col-sm-10">
-                    <input type="text" name="parentId" class="form-control" id="parentId" placeholder="parentId" th:value="${menu.parentId}">
+                    <span type="text" class="form-control" id="parentId_span" placeholder="parentId_span" th:value="${menu.parentId}">
+                    <input type="hidden" name="parentId" class="form-control" id="parentId" placeholder="parentId" th:value="${menu.parentId}">
                 </div>
             </div>
             <div class="form-group">
@@ -106,7 +107,7 @@
                     layer.closeAll();
                     layer.msg("更新成功");
                     parent.table.reload("menu", {});
-                    window.location.href=ctx+"/menu/view/"+$("#id").val();
+                    window.location.href = ctx + "/menu/view/" + $("#id").val();
                 }
             },
             error: function () {
@@ -117,7 +118,7 @@
 </script>
 
 <!-- ./wrapper -->
-<div th:include="common/common_js :: commonJs"></div>
+<div th:include="commons/common_js :: commonJs"></div>
 
 
 </body>
