@@ -25,10 +25,7 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
-    @GetMapping
-    public String findAll() {
-        return "test";
-    }
+
 
     @GetMapping("/{id}")
     public String findOne(@PathVariable String id, Model model) {
@@ -38,7 +35,7 @@ public class UserController {
     }
     @PostMapping
     public String save(User user){
-        userService.save(user);
+        userService.add(user);
         return "user/user";
     }
 }

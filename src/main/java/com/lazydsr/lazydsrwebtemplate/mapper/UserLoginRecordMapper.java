@@ -3,6 +3,9 @@ package com.lazydsr.lazydsrwebtemplate.mapper;
 import com.lazydsr.lazydsrwebtemplate.entity.UserLoginRecord;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
+
+import java.util.List;
+
 @Mapper
 public interface UserLoginRecordMapper {
     @Delete({
@@ -27,7 +30,7 @@ public interface UserLoginRecordMapper {
     })
     int insert(UserLoginRecord record);
 
-    @InsertProvider(type=UserLoginRecordSqlProvider.class, method="insertSelective")
+    @InsertProvider(type = UserLoginRecordSqlProvider.class, method = "insertSelective")
     int insertSelective(UserLoginRecord record);
 
     @Select({
@@ -38,22 +41,70 @@ public interface UserLoginRecordMapper {
             "where id = #{id,jdbcType=VARCHAR}"
     })
     @Results({
-            @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
-            @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR),
-            @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-            @Result(column="ip", property="ip", jdbcType=JdbcType.VARCHAR),
-            @Result(column="date", property="date", jdbcType=JdbcType.VARCHAR),
-            @Result(column="type", property="type", jdbcType=JdbcType.INTEGER),
-            @Result(column="login_status", property="loginStatus", jdbcType=JdbcType.INTEGER),
-            @Result(column="creator", property="creator", jdbcType=JdbcType.VARCHAR),
-            @Result(column="create_date", property="createDate", jdbcType=JdbcType.VARCHAR),
-            @Result(column="modifier", property="modifier", jdbcType=JdbcType.VARCHAR),
-            @Result(column="modify_date", property="modifyDate", jdbcType=JdbcType.VARCHAR),
-            @Result(column="status", property="status", jdbcType=JdbcType.INTEGER)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.VARCHAR, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "username", property = "username", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "ip", property = "ip", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "date", property = "date", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "type", property = "type", jdbcType = JdbcType.INTEGER),
+            @Result(column = "login_status", property = "loginStatus", jdbcType = JdbcType.INTEGER),
+            @Result(column = "creator", property = "creator", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "create_date", property = "createDate", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "modifier", property = "modifier", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "modify_date", property = "modifyDate", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "status", property = "status", jdbcType = JdbcType.INTEGER)
     })
     UserLoginRecord selectByPrimaryKey(String id);
 
-    @UpdateProvider(type=UserLoginRecordSqlProvider.class, method="updateByPrimaryKeySelective")
+    @Select({
+            "select",
+            "id, user_id, username, ip, date, type, login_status, creator, create_date, modifier, ",
+            "modify_date, status",
+            "from sys_user_login_record",
+            "where user_id = #{user_id,jdbcType=VARCHAR}",
+            "order by date desc"
+
+    })
+    @Results({
+            @Result(column = "id", property = "id", jdbcType = JdbcType.VARCHAR, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "username", property = "username", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "ip", property = "ip", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "date", property = "date", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "type", property = "type", jdbcType = JdbcType.INTEGER),
+            @Result(column = "login_status", property = "loginStatus", jdbcType = JdbcType.INTEGER),
+            @Result(column = "creator", property = "creator", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "create_date", property = "createDate", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "modifier", property = "modifier", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "modify_date", property = "modifyDate", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "status", property = "status", jdbcType = JdbcType.INTEGER)
+    })
+    List<UserLoginRecord> selectByUserId(String user_id);
+
+    @Select({
+            "select",
+            "id, user_id, username, ip, date, type, login_status, creator, create_date, modifier, ",
+            "modify_date, status",
+            "from sys_user_login_record"
+
+    })
+    @Results({
+            @Result(column = "id", property = "id", jdbcType = JdbcType.VARCHAR, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "username", property = "username", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "ip", property = "ip", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "date", property = "date", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "type", property = "type", jdbcType = JdbcType.INTEGER),
+            @Result(column = "login_status", property = "loginStatus", jdbcType = JdbcType.INTEGER),
+            @Result(column = "creator", property = "creator", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "create_date", property = "createDate", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "modifier", property = "modifier", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "modify_date", property = "modifyDate", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "status", property = "status", jdbcType = JdbcType.INTEGER)
+    })
+    List<UserLoginRecord> selectAll();
+
+    @UpdateProvider(type = UserLoginRecordSqlProvider.class, method = "updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(UserLoginRecord record);
 
     @Update({

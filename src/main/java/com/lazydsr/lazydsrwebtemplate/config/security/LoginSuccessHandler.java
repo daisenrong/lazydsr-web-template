@@ -4,12 +4,15 @@ import com.lazydsr.lazydsrwebtemplate.base.STATICVALUE;
 import com.lazydsr.lazydsrwebtemplate.entity.UserLoginRecord;
 import com.lazydsr.lazydsrwebtemplate.service.UserLoginRecordService;
 import com.lazydsr.lazydsrwebtemplate.service.UserService;
+import com.lazydsr.lazydsrwebtemplate.util.Util;
 import com.lazydsr.util.time.UtilDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -30,7 +33,7 @@ import java.io.IOException;
  */
 @Slf4j
 @Component
-public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Autowired
     private UserService userService;
     @Autowired
@@ -46,8 +49,11 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         user.setSumPasswordWrong(0);
         user.setLastLoginDate(user.getCurrentLoginDate());
         user.setCurrentLoginDate(currentDate);
-        userService.save(user);
+        userService.update(user);
+        //将当前登录的用户放到session中
+        request.getSession().setAttribute("currentLoginUser", user);
 
+        //对用户登录行为进行记录
         UserLoginRecord userLoginRecord = new UserLoginRecord();
         userLoginRecord.setUserId(user.getId());
         userLoginRecord.setUsername(user.getUsername());
@@ -55,11 +61,13 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         //TODO：后续优化
         userLoginRecord.setType(STATICVALUE.ENABLE);
         userLoginRecord.setLoginStatus(STATICVALUE.ENABLE);
-        userLoginRecord.setIp(request.getRemoteAddr());
+        //userLoginRecord.setIp(request.getRemoteAddr());
+        userLoginRecord.setIp(Util.getIpAddress(request));
         userLoginRecordService.add(userLoginRecord);
 
 
-        log.info("用户登录成功：username=" + userDetails.getUsername() + ", uri=" + request.getRemoteAddr());
+        log.info("用户登录成功：username=" + userDetails.getUsername() + ", uri=" + Util.getIpAddress(request));
+        //request.getSession().removeAttribute(WebAttributes.WEB_INVOCATION_PRIVILEGE_EVALUATOR_ATTRIBUTE);
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

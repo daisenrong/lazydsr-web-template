@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * PACKAGE_NAME: com.lazydsr.security.browser
  * Created by Lazy on 2018/1/21 18:52
  * Version: 0.1
- * Info: @TODO:...
+ * Info: 自定义密码验证规则
  */
 @Slf4j
 public class CustomPasswordEncoder implements PasswordEncoder {

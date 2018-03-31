@@ -1,7 +1,9 @@
 package com.lazydsr.lazydsrwebtemplate.entity;
 
 import com.lazydsr.util.time.UtilDateTime;
+import lombok.ToString;
 
+@ToString
 public class UserLoginRecord {
     private String id;
 

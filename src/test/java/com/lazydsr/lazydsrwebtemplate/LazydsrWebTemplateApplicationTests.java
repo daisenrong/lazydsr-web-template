@@ -3,13 +3,12 @@ package com.lazydsr.lazydsrwebtemplate;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lazydsr.lazydsrwebtemplate.config.system.SystemInfoConfiguration;
-import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
-import com.lazydsr.lazydsrwebtemplate.entity.Menu;
-import com.lazydsr.lazydsrwebtemplate.entity.SystemInfo;
-import com.lazydsr.lazydsrwebtemplate.entity.User;
+import com.lazydsr.lazydsrwebtemplate.entity.*;
+import com.lazydsr.lazydsrwebtemplate.mapper.UserLoginRecordMapper;
 import com.lazydsr.lazydsrwebtemplate.mapper.UserMapper;
 import com.lazydsr.lazydsrwebtemplate.service.MenuService;
 import com.lazydsr.lazydsrwebtemplate.service.SystemInfoService;
+import com.lazydsr.lazydsrwebtemplate.service.UserLoginRecordService;
 import com.lazydsr.lazydsrwebtemplate.service.UserService;
 import com.lazydsr.lazydsrwebtemplate.util.SpringContextUtil;
 import com.lazydsr.util.id.UtilUUId;
@@ -81,19 +80,33 @@ public class LazydsrWebTemplateApplicationTests {
         //System.out.println(list);
     }
 
+    @Autowired
+    private UserLoginRecordMapper userLoginRecordMapper;
+    @Autowired
+    private UserLoginRecordService userLoginRecordService;
+    @Test
+    public void userLoginRecord() {
+        List<UserLoginRecord> userLoginRecords = userLoginRecordService.findByUserId("DKT6B56QC6VVBUEJUV48PBU3PRD1JJKQ");
+        System.out.println(userLoginRecords);
+        //PageInfo<Menu> pageInfo = menuService.findAllNormal();
+        //List<Menu> list = pageInfo.getList();
+        //System.out.println(pageInfo);
+        //System.out.println(list);
+    }
+
     @Test
     public void menuAddOne() {
         //for (int i=0;i<1000;i++){
 
         Menu menu = new Menu();
         menu.setId(UtilUUId.getId());
-        menu.setParentId("MUUE9WW3TA1KCY2JGQMRTJ6ZNRMTKWGF");
-        menu.setName("菜单管理");
-        menu.setEnName("Menu Manager");
-        menu.setDescription("菜单管理");
+        menu.setParentId("32U455N29Z2QCP6JKA3NTW9K7YV9JET6");
+        menu.setName("登录记录");
+        menu.setEnName("Login Record");
+        menu.setDescription("登录记录");
         menu.setIcon("fa fa-bars");
         menu.setTarget("iframe");
-        menu.setUrl("/menu");
+        menu.setUrl("/userLoginRecord");
         menuService.add(menu);
         //}
     }

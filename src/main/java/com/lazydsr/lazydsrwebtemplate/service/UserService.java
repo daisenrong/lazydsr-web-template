@@ -1,5 +1,6 @@
 package com.lazydsr.lazydsrwebtemplate.service;
 
+import com.lazydsr.lazydsrwebtemplate.entity.Menu;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
 
 import java.util.List;
@@ -13,16 +14,17 @@ import java.util.List;
  * Info: @TODO:...
  */
 public interface UserService {
-    public User save(User user);
-    public User findByUsername(String username);
+    User add(User user);
 
-    //public List<User> findbyNameJdbc(String name);
-    //
-    //public List<User> findByNameLike(String name);
-    //
-    //public List<User> findByNameLikeCus(String username);
-    //
-    //public List<User> findByNameLikeCus1(String username);
-    //
-    //public List<User> findByNameLikeCus2(String username);
+    User findByUsername(String username);
+
+    int delete(String id);
+
+    User update(User user);
+
+    User findById(String id);
+
+    List<User> findAllNormal();
+
+    List<User> findAll();
 }

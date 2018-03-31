@@ -4,8 +4,11 @@ import com.lazydsr.lazydsrwebtemplate.dao.UserDao;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
 import com.lazydsr.lazydsrwebtemplate.mapper.UserMapper;
 import com.lazydsr.lazydsrwebtemplate.service.UserService;
+import com.lazydsr.util.id.UtilUUId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * UserServiceImpl
@@ -23,40 +26,48 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User save(User user) {
+    public User add(User user) {
+        if (user.getId() == null)
+            user.setId(UtilUUId.getId());
         //return userMapper.add(user);
+        int count = userMapper.insert(user);
+        if (count > 0)
+            return userMapper.selectByPrimaryKey(user.getId());
         return null;
     }
 
     @Override
     public User findByUsername(String username) {
-        //return userMapper.findByUsername(username);
         return userMapper.selectByUsername(username);
     }
 
+    @Override
+    public int delete(String id) {
+        return userMapper.deleteByPrimaryKey(id);
+    }
 
-    //@Override
-    //public List<User> findbyNameJdbc(String name) {
-    //    return null;
-    //}
-    //
-    //@Override
-    //public List<User> findByNameLike(String name) {
-    //    return null;
-    //}
-    //
-    //@Override
-    //public List<User> findByNameLikeCus(String username) {
-    //    return null;
-    //}
-    //
-    //@Override
-    //public List<User> findByNameLikeCus1(String username) {
-    //    return null;
-    //}
-    //
-    //@Override
-    //public List<User> findByNameLikeCus2(String username) {
-    //    return null;
-    //}
+    @Override
+    public User update(User user) {
+        int count = userMapper.updateByPrimaryKey(user);
+        if (count > 0)
+            return userMapper.selectByPrimaryKey(user.getId());
+        return null;
+    }
+
+    @Override
+    public User findById(String id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<User> findAllNormal() {
+        return userMapper.selectAllNormal();
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userMapper.selectAll();
+    }
+
+
 }

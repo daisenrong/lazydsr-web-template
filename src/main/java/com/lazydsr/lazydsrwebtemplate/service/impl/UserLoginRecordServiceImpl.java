@@ -7,6 +7,8 @@ import com.lazydsr.util.id.UtilUUId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * UserLoginRecordServiceImpl
  * PROJECT_NAME: lazydsr-web-template
@@ -27,5 +29,16 @@ public class UserLoginRecordServiceImpl implements UserLoginRecordService {
         userLoginRecordMapper.insert(userLoginRecord);
         return null;
 
+    }
+
+    @Override
+    public List<UserLoginRecord> findAll() {
+        return userLoginRecordMapper.selectAll();
+    }
+
+    @Override
+    public List<UserLoginRecord> findByUserId(String userId) {
+        List<UserLoginRecord> userLoginRecords = userLoginRecordMapper.selectByUserId(userId);
+        return userLoginRecords;
     }
 }

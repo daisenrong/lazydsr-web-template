@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons/common_head :: commonHead('UserLoginRecord')">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div>
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            [[${session.currentLoginUser.name}]]--登录记录[[${session.currentLoginUser.id}]]
+            <!--<small>菜单列表</small>-->
+        </h1>
+        <!--<ol class="breadcrumb">-->
+        <!--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>-->
+        <!--<li><a href="#">Charts</a></li>-->
+        <!--<li class="active">Flot</li>-->
+        <!--</ol>-->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!--menu列表-->
+
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="layui-hide" id="UserLoginRecord" lay-filter="UserLoginRecord"></table>
+                <!--<div  id="menu"></div>-->
+                <!--<table class="layui-table" lay-data="{height:'full-80',url:ctx+'/menu/json/page', page:true, id:'menu'}" lay-filter="menu">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                <!--<th lay-data="{type: 'checkbox'}">选择</th>-->
+                <!--<th lay-data="{field:'id', width:80, sort: true}">ID</th>-->
+                <!--<th lay-data="{field:'name', width:120}">名称</th>-->
+                <!--<th lay-data="{field:'icon', width:100, sort: true,templet:'#icon_convert'}">icon</th>-->
+                <!--<th lay-data="{field:'url', width:100, sort: true,templet:'#url'}">url</th>-->
+                <!--<th lay-data="{field:'parentId',width:100}">父菜单</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--</table>-->
+            </div>
+            <!-- /.col -->
+        </div>
+
+    </section>
+</div>
+
+<!-- ./wrapper -->
+<div th:include="commons/common_js :: commonJs"></div>
+
+
+<!--<script type="text/html" id="menuBar">-->
+<!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view">查看</a>-->
+<!--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
+<!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+<!--</script>-->
+
+<script th:inline="javascript">
+    var table
+    layui.use('table', function () {
+        table = layui.table, form = layui.form;
+        var currentLoginUserId = [[${session.currentLoginUser.id}]];
+        //第一个实例
+        table.render({
+            elem: '#UserLoginRecord'
+            // , height: 'full-162'
+            , height: 'full-80'
+            , url: ctx + '/userLoginRecord/json/page/' + currentLoginUserId //数据接口
+            , page: {page: true} //开启分页
+            , cols: [
+                [
+
+                    {field: 'username', title: '用户名', width: 100}
+                    // , {field: 'enName', title: '英文名称', width: 80, sort: true}
+                    , {field: 'ip', title: 'IP', width: 100}
+                    , {field: 'date', title: '登录时间', width: 200}
+                    , {
+                    field: 'type', title: '登录方式', width: 100, templet: function (d) {
+                        if (d.type == '0')
+                            return 'PC';
+                        else
+                            return '其他';
+                    }
+                }
+                    , {
+                    field: 'loginStatus', title: '登录状态', width: 120, align: 'center', templet: function (d) {
+                        if (d.loginStatus == '0')
+                            return '成功';
+                        else
+                            return '<span style="color: #f50305;">失败</span>';
+                        ;
+                    }
+                }
+
+
+                    // , {field: 'description', title: '描述', width: 100, sort: true}
+                    // , {field: 'allowDelete', title: '可删除', width: 110, sort: true, templet:function (d) {
+                    //     return getIsOrNo(d.allowDelete);
+                    // }, unresize: true}
+
+                ]
+            ]
+        });
+
+        // table.on('tool(menu)', function (obj) {
+        //     var data = obj.data;
+        //     if (obj.event === 'view') {
+        //         // layer.msg('ID：'+ data.id + ' 的查看操作');
+        //         layer.open({
+        //             type: 2,
+        //             title: '菜单查看',
+        //             area: ['400px', '600px'],
+        //             fixed: false, //不固定
+        //             maxmin: true,
+        //             content: ctx + '/menu/view/' + data.id
+        //         });
+        //     } else if (obj.event === 'del') {
+        //         layer.confirm('真的删除行么', function (index) {
+        //
+        //             layer.close(index);
+        //
+        //             $.ajax({
+        //                 type: 'delete',
+        //                 url: ctx + '/menu/' + data.id,
+        //                 contentType: 'application/json',
+        //                 dataType: "json",
+        //                 // data: JSON.stringify(arr),
+        //                 success: function (d) {
+        //                     if (d.status == "0") {
+        //                         layer.msg("删除成功");
+        //                         obj.del();
+        //                         table.reload("menu", {})
+        //                     } else {
+        //                         layer.msg("删除失败，请联系管理员或重试。");
+        //                     }
+        //                 }
+        //             });
+        //
+        //         });
+        //     } else if (obj.event === 'edit') {
+        //         layer.open({
+        //             type: 2,
+        //             title: '菜单修改',
+        //             area: ['400px', '600px'],
+        //             fixed: false, //不固定
+        //             maxmin: true,
+        //             content: ctx + '/menu/edit/' + data.id
+        //         });
+        //     }
+        // });
+
+    });
+</script>
+</body>
+</html>

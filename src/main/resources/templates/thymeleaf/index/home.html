@@ -9,9 +9,9 @@
     <!-- Content Wrapper. Contains page content -->
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
+        <h1 th:inline="text">
             系统运行状态
-            <small>详细信息</small>
+            <small>详细信息--获取时间：[[${systemInfo.getCreateDate()}]]</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

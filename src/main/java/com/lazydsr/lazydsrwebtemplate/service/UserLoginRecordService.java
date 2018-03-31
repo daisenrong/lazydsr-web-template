@@ -2,6 +2,8 @@ package com.lazydsr.lazydsrwebtemplate.service;
 
 import com.lazydsr.lazydsrwebtemplate.entity.UserLoginRecord;
 
+import java.util.List;
+
 /**
  * UserLoginRecordService
  * PROJECT_NAME: lazydsr-web-template
@@ -11,5 +13,8 @@ import com.lazydsr.lazydsrwebtemplate.entity.UserLoginRecord;
  * Info: @TODO:...
  */
 public interface UserLoginRecordService {
-    public UserLoginRecord add(UserLoginRecord userLoginRecord);
+    UserLoginRecord add(UserLoginRecord userLoginRecord);
+    List<UserLoginRecord> findAll();
+    List<UserLoginRecord> findByUserId(String userId);
+
 }

@@ -80,6 +80,7 @@ pagehelper:
 logging:
   level:
     com.lazydsr.lazydsrwebtemplate.mapper: debug
+    org: warn
 #  jpa:
 #      hibernate:
 #          ddl-auto: update
