@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/icon")
 public class IconController {
     @GetMapping
-    public String find(){
+    public String find() {
         return "icon/icon";
     }
 }

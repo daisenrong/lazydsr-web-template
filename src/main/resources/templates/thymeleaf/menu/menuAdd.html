@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons/common_head :: commonHead('MENU')">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div>
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1 th:inline="text">
+            添加菜单
+            <!--<small>信息修改</small>-->
+        </h1>
+        <!--<ol class="breadcrumb">-->
+        <!--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>-->
+        <!--<li><a href="#">Charts</a></li>-->
+        <!--<li class="active">Flot</li>-->
+        <!--</ol>-->
+    </section>
+
+    <!-- Main content -->
+    <section class="content" th:inline="text">
+        <!--menu列表-->
+
+        <!--<div class="row">-->
+        <!--<div class="col-xs-12">-->
+        <form class="form-horizontal" id="menu" th:action="@{/menu}" method="post">
+            <!--<input type="hidden" name="_method" th:value="put">-->
+            <!--<div class="form-group">-->
+            <!--<label for="id" class="col-sm-2 control-label">ID</label>-->
+            <!--<div class="col-sm-10">-->
+            <!--<input name="id" class="form-control" id="id" placeholder="ID">-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="enname" class="col-sm-2 control-label">EN Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="enName" class="form-control" id="enname" placeholder="EN Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="parentId" class="col-sm-2 control-label">Parent</label>
+                <div class="col-sm-10">
+                    <!--<span type="text" class="form-control" id="parentId_span" placeholder="parentId_span"></span>-->
+                    <input type="text" name="parentId" class="form-control" id="parentId" placeholder="parentId">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Icon</label>
+                <div class="col-sm-10">
+                    <span style="display: inline;float: left;position:relative;">
+                        <span style="float: left;">
+                            <input width="80%" type="text" name="icon" style="display:inline;float: left" class="form-control" id="icon" placeholder="icon">
+                        </span>
+                        <!--<span width="20%" style="display:inline;float: left">-->
+                        <span>
+                            <a style="display: inline;float: left; position: absolute; top: 50%; transform: translateY(-50%);margin-left: 10px" onclick="openView(ctx+'/icon');return;" class="fa fa-search"></a>
+                        </span>
+                    </span>
+                    <!--</span>-->
+                </div>
+            </div>
+            <div class="form-group" th:inline="text">
+                <label class="col-sm-2 control-label">URL</label>
+                <div class="col-sm-10">
+                    <input type="text" name="url" class="form-control" id="url" placeholder="URL">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="disalble" class="col-sm-2 control-label">是否禁用</label>
+                <div class="col-sm-10">
+                    <!--<input type="email" class="form-control" id="Parent" placeholder="Email" readonly th:value="${menu.parentId}">-->
+                    <select id="disalble" class="form-control" name="status">
+                        <option value="1">禁用</option>
+                        <option value="0">正常</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">ordernum</label>
+                <div class="col-sm-10">
+                    <input type="number" name="ordernum" class="form-control" id="ordernum" placeholder="orderNum">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button id="submit" type="button" class="btn btn-primary">添加</button>
+                </div>
+            </div>
+        </form>
+
+
+    </section>
+</div>
+<script type="text/javascript">
+    function openView(url) {
+
+        layer.open({
+            type: 2,
+            title: '选择',
+            area: ['400px', '500px'],
+            fixed: false, //不固定
+            maxmin: true,
+            content: url
+        });
+    }
+
+</script>
+
+<!-- ./wrapper -->
+<div th:include="commons/common_js :: commonJs"></div>
+
+
+</body>
+</html>

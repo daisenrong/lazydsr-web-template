@@ -1047,6 +1047,14 @@
 <!-- ./wrapper -->
 <div th:include="commons/common_js :: commonJs"></div>
 
+<script type="text/javascript">
+    $(".row .fontawesome-icon-list div").click(function () {
+        layer.msg($(this).children("i:first-child").attr("class"));
+        parent.$("#icon").val($(this).children("i:first-child").attr("class"));
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index);
+    });
 
+</script>
 </body>
 </html>

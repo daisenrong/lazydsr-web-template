@@ -31,19 +31,19 @@ public class IndexController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping({"/","index"})
+    @RequestMapping({"/", "index"})
     public String index(Map map) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.findByUsername(userDetails.getUsername());
-        map.put("user",user);
+        map.put("user", user);
         return "index/index";
     }
 
     @RequestMapping("home")
     public String home(Map map) {
         SystemInfo systemInfo = systemInfoService.findByMaxCreateDate();
-        map.put("systemInfo",systemInfo);
-        map.put("mainDataSourceInfo",mainDataSourceInfo);
+        map.put("systemInfo", systemInfo);
+        map.put("mainDataSourceInfo", mainDataSourceInfo);
         return "index/home";
     }
 

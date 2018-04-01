@@ -23,7 +23,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     //private boolean userStatus;
 
 
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         super.addResourceHandlers(registry);
@@ -41,6 +40,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
     /**
      * 添加过滤器，增加表单的put方法
+     *
      * @return
      */
     @Bean

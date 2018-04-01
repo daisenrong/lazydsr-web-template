@@ -13,11 +13,12 @@
             菜单管理
             <small>菜单列表</small>
         </h1>
-        <!--<ol class="breadcrumb">-->
-        <!--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>-->
-        <!--<li><a href="#">Charts</a></li>-->
-        <!--<li class="active">Flot</li>-->
-        <!--</ol>-->
+        <ol class="breadcrumb">
+            <!--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>-->
+            <!--<li><a href="#">Charts</a></li>-->
+            <!--<li class="active">Flot</li>-->
+            <a class="btn btn-primary" onclick="openIframe(ctx+'/page/menu/menuAdd')">新增</a>
+        </ol>
     </section>
 
     <!-- Main content -->
@@ -123,7 +124,7 @@
                 layer.open({
                     type: 2,
                     title:'菜单查看',
-                    area: ['400px', '600px'],
+                    area: ['600px', '800px'],
                     fixed: false, //不固定
                     maxmin: true,
                     content: ctx + '/menu/view/' + data.id
@@ -152,14 +153,23 @@
 
                 });
             } else if (obj.event === 'edit') {
-                layer.open({
-                    type: 2,
-                    title:'菜单修改',
-                    area: ['400px', '600px'],
-                    fixed: false, //不固定
-                    maxmin: true,
-                    content: ctx + '/menu/edit/' + data.id
-                });
+                openIframe(ctx + '/menu/edit/' + data.id);
+                // layer.open({
+                //     type: 2,
+                //     title:'菜单修改',
+                //     area: ['600px', '800px'],
+                //     fixed: false, //不固定
+                //     maxmin: true,
+                //     content: ctx + '/menu/edit/' + data.id
+                // });
+                // layer.open({
+                //     type: 2,
+                //     title: '',
+                //     area: ['600px', '800px'],
+                //     fixed: false, //不固定
+                //     maxmin: true,
+                //     content: ctx + '/menu/edit/' + data.id
+                // });
             }
         });
 

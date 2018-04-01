@@ -28,19 +28,40 @@
         }
     }
 });
+
 function getIsOrNo(v) {
 
-    if (v=="0"){
+    if (v == "0") {
         return "是";
-    }else {
+    } else {
         return "否";
     }
 }
-function getIsOrNoCus(v,str) {
 
-    if (v==0){
+function getIsOrNoCus(v, str) {
+
+    if (v == 0) {
         return str.split(",")[0];
-    }else {
+    } else {
         return str.split(",")[1];
     }
+}
+
+
+
+function openIframe(url,title) {
+    if (title == undefined) {
+        title = '选择';
+    }
+    if (layer == undefined) {
+        console.log("layer.js is require!")
+    }
+    layer.open({
+        type: 2,
+        title: ''+title,
+        area: ['56%', '96%'],
+        fixed: false, //不固定
+        maxmin: true,
+        content: url
+    });
 }

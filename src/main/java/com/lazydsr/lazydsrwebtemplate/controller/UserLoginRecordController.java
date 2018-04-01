@@ -43,7 +43,7 @@ public class UserLoginRecordController {
         //List<UserLoginRecord> records = userLoginRecordService.findAll();
         //map.put("currentLoginUser", Util.getCurrentUser());
         Map map = new HashMap();
-        PageHelper.offsetPage();
+        PageHelper.startPage(page, limit);
         List<UserLoginRecord> userLoginRecords = userLoginRecordService.findByUserId(userId);
         PageInfo<UserLoginRecord> pageInfo = new PageInfo<>(userLoginRecords);
         map.put("code", 0);

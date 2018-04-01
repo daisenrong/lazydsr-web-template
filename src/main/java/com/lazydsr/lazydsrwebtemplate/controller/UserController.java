@@ -33,8 +33,9 @@ public class UserController {
         System.out.println(id);
         return "test";
     }
+
     @PostMapping
-    public String save(User user){
+    public String save(User user) {
         userService.add(user);
         return "user/user";
     }

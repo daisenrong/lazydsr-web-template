@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class LoginController {
     @RequestMapping(value = {"/login"})
-    public String login(){
+    public String login() {
 
         return "login/login";
     }
+
     @RequestMapping(value = {"/logou"})
-    public String logout(){
+    public String logout() {
 
         return "login/login";
     }

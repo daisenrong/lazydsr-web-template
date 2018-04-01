@@ -20,17 +20,19 @@ public enum DatabaseTypeEnum {
         this.dbType = dbType;
         this.code = code;
     }
-    public static String getDbTypeByCode(int code){
-        for(DatabaseTypeEnum databaseTypeEnum:DatabaseTypeEnum.values()){
-            if (databaseTypeEnum.getCode()==code){
+
+    public static String getDbTypeByCode(int code) {
+        for (DatabaseTypeEnum databaseTypeEnum : DatabaseTypeEnum.values()) {
+            if (databaseTypeEnum.getCode() == code) {
                 return databaseTypeEnum.getDbType();
             }
         }
         return "";
     }
-    public static String getDriverClassNameByDbType(String dbType){
-        for(DatabaseTypeEnum databaseTypeEnum:DatabaseTypeEnum.values()){
-            if (databaseTypeEnum.dbType.equals(dbType)){
+
+    public static String getDriverClassNameByDbType(String dbType) {
+        for (DatabaseTypeEnum databaseTypeEnum : DatabaseTypeEnum.values()) {
+            if (databaseTypeEnum.dbType.equals(dbType)) {
                 return databaseTypeEnum.getDriverClassName();
             }
         }

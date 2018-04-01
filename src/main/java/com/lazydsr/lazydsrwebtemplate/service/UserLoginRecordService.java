@@ -14,7 +14,9 @@ import java.util.List;
  */
 public interface UserLoginRecordService {
     UserLoginRecord add(UserLoginRecord userLoginRecord);
+
     List<UserLoginRecord> findAll();
+
     List<UserLoginRecord> findByUserId(String userId);
 
 }

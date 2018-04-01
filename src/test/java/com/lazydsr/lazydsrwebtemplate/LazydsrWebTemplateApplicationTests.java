@@ -1,9 +1,10 @@
 package com.lazydsr.lazydsrwebtemplate;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.lazydsr.lazydsrwebtemplate.config.system.SystemInfoConfiguration;
-import com.lazydsr.lazydsrwebtemplate.entity.*;
+import com.lazydsr.lazydsrwebtemplate.entity.DataSourceInfo;
+import com.lazydsr.lazydsrwebtemplate.entity.Menu;
+import com.lazydsr.lazydsrwebtemplate.entity.User;
+import com.lazydsr.lazydsrwebtemplate.entity.UserLoginRecord;
 import com.lazydsr.lazydsrwebtemplate.mapper.UserLoginRecordMapper;
 import com.lazydsr.lazydsrwebtemplate.mapper.UserMapper;
 import com.lazydsr.lazydsrwebtemplate.service.MenuService;
@@ -31,6 +32,19 @@ public class LazydsrWebTemplateApplicationTests {
     private MenuService menuService;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserLoginRecordMapper userLoginRecordMapper;
+
+    @Test
+    public void testTkMapper() {
+        //List<User> users = userMapper.selectAll();
+        //System.out.println(userMa);
+        //System.out.println(userMapper.selectAll());
+        userMapper.selectAll().stream().forEach(user -> {
+            System.out.println(user);
+        });
+        System.out.println(userLoginRecordMapper.selectAll());
+    }
 
     @Test
     public void contextLoads002() {
@@ -80,8 +94,6 @@ public class LazydsrWebTemplateApplicationTests {
         //System.out.println(list);
     }
 
-    @Autowired
-    private UserLoginRecordMapper userLoginRecordMapper;
     @Autowired
     private UserLoginRecordService userLoginRecordService;
     @Test

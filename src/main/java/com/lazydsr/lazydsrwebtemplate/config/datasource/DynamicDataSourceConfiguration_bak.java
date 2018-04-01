@@ -33,8 +33,8 @@ import java.util.Map;
 public class DynamicDataSourceConfiguration_bak extends AbstractRoutingDataSource implements ApplicationContextAware {
 
     private static DynamicDataSourceConfiguration_bak instance;
-    private static byte[] lock=new byte[0];
-    private static Map<Object,Object> dataSourceMap=new HashMap<Object, Object>();
+    private static byte[] lock = new byte[0];
+    private static Map<Object, Object> dataSourceMap = new HashMap<Object, Object>();
 
     private ApplicationContext applicationContext;
     @Autowired
@@ -43,14 +43,14 @@ public class DynamicDataSourceConfiguration_bak extends AbstractRoutingDataSourc
     private DefaultListableBeanFactory beanDefinitionRegistry;
 
 
-    private   Map<Object, Object> targetDataSources;
+    private Map<Object, Object> targetDataSources;
 
 
-    public static synchronized DynamicDataSourceConfiguration_bak getInstance(){
-        if(instance==null){
-            synchronized (lock){
-                if(instance==null){
-                    instance=new DynamicDataSourceConfiguration_bak();
+    public static synchronized DynamicDataSourceConfiguration_bak getInstance() {
+        if (instance == null) {
+            synchronized (lock) {
+                if (instance == null) {
+                    instance = new DynamicDataSourceConfiguration_bak();
                 }
             }
         }
@@ -96,7 +96,6 @@ public class DynamicDataSourceConfiguration_bak extends AbstractRoutingDataSourc
                 String dataSourceName = dataSourceInfo.getName() + "_DataSource";
                 //javax.sql.DataSource buildDatasource = buildDatasource(dataSource);
                 dataSourceMap.put(dataSourceName, dataSourceName);
-
 
 
                 GenericBeanDefinition definition = new GenericBeanDefinition();

@@ -21,6 +21,7 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     @Override
     public List<User> findbyNameJdbc(String name) {
         List<User> list = jdbcTemplate.query("select * from user", new BeanPropertyRowMapper<>(User.class));
