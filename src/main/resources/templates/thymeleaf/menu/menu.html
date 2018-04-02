@@ -12,19 +12,27 @@
         <h1>
             菜单管理
             <small>菜单列表</small>
+
         </h1>
-        <ol class="breadcrumb">
-            <!--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>-->
-            <!--<li><a href="#">Charts</a></li>-->
-            <!--<li class="active">Flot</li>-->
-            <a class="btn btn-primary" onclick="openIframe(ctx+'/page/menu/menuAdd')">新增</a>
-        </ol>
+
+        <!--<ol class="">-->
+        <!--&lt;!&ndash;<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li><a href="#">Charts</a></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li class="active">Flot</li>&ndash;&gt;-->
+        <!--<li class="layui-btn layui-btn-sm" ><a onclick="openViewBig(ctx+'/page/menu/menuAdd','新增')">新增</a></li>-->
+        <!--</ol>-->
     </section>
 
     <!-- Main content -->
     <section class="content">
         <!--menu列表-->
 
+        <div class="layui-btn-group menu">
+            <button class="layui-btn" onclick="openViewBig(ctx+'/page/menu/menuAdd','新增')">新增</button>
+            <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
+            <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
+            <button class="layui-btn" data-type="isAll">验证是否全选</button>
+        </div>
         <div class="row">
             <div class="col-xs-12">
                 <table class="layui-hide" id="menu" lay-filter="menu"></table>
@@ -67,7 +75,8 @@
         table.render({
             elem: '#menu'
             // , height: 'full-162'
-            , height: 'full-80'
+            // , height: 'full-80'
+            , height: 'full-118'
             , url: ctx + '/menu/json/page' //数据接口
             , page: {page: true} //开启分页
             , cols: [
@@ -120,15 +129,7 @@
         table.on('tool(menu)', function (obj) {
             var data = obj.data;
             if (obj.event === 'view') {
-                // layer.msg('ID：'+ data.id + ' 的查看操作');
-                layer.open({
-                    type: 2,
-                    title:'菜单查看',
-                    area: ['600px', '800px'],
-                    fixed: false, //不固定
-                    maxmin: true,
-                    content: ctx + '/menu/view/' + data.id
-                });
+                openViewBig(ctx + '/menu/view/' + data.id, '菜单查看');
             } else if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
 
@@ -153,24 +154,56 @@
 
                 });
             } else if (obj.event === 'edit') {
-                openIframe(ctx + '/menu/edit/' + data.id);
-                // layer.open({
-                //     type: 2,
-                //     title:'菜单修改',
-                //     area: ['600px', '800px'],
-                //     fixed: false, //不固定
-                //     maxmin: true,
-                //     content: ctx + '/menu/edit/' + data.id
-                // });
-                // layer.open({
-                //     type: 2,
-                //     title: '',
-                //     area: ['600px', '800px'],
-                //     fixed: false, //不固定
-                //     maxmin: true,
-                //     content: ctx + '/menu/edit/' + data.id
-                // });
+                openViewBig(ctx + '/menu/edit/' + data.id, '修改');
+
             }
+        });
+
+        var $ = layui.$, active = {
+            getCheckData: function () { //获取选中数据
+                var checkStatus = table.checkStatus('menu')
+                    , data = checkStatus.data;
+                if (data.length == 0) {
+                    layer.msg("请选中数据后在点击按钮");
+                    return;
+                }
+                var ids = [];
+                for (var i = 0; i < data.length; i++) {
+                    ids.push(data[i].id);
+                }
+                $.ajax({
+                    type: 'delete',
+                    url: ctx + '/menu',
+                    contentType: 'application/json',
+                    dataType: "json",
+                    data: {ids: JSON.stringify(ids)},
+                    success: function (d) {
+                        if (d.status == "0") {
+                            layer.msg("删除成功");
+                            // obj.del();
+                            table.reload("menu", {})
+                        } else {
+                            layer.msg("删除失败，请联系管理员或重试。");
+                        }
+                    }
+                });
+
+                layer.alert(JSON.stringify(ids));
+            }
+            , getCheckLength: function () { //获取选中数目
+                var checkStatus = table.checkStatus('menu')
+                    , data = checkStatus.data;
+                layer.msg('选中了：' + data.length + ' 个');
+            }
+            , isAll: function () { //验证是否全选
+                var checkStatus = table.checkStatus('menu');
+                layer.msg(checkStatus.isAll ? '全选' : '未全选')
+            }
+        };
+
+        $('.menu .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
         });
 
     });

@@ -5,12 +5,10 @@ import com.github.pagehelper.PageInfo;
 import com.lazydsr.lazydsrwebtemplate.entity.Menu;
 import com.lazydsr.lazydsrwebtemplate.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,6 +121,27 @@ public class MenuController {
     public Map deleteById(@PathVariable("id") String id) {
         Map<String, String> map = new HashMap<>();
         int count = menuService.delete(id);
+        if (count > 0) {
+            map.put("status", "0");
+        } else {
+            map.put("status", "1");
+        }
+        return map;
+    }
+
+    @DeleteMapping
+    @ResponseBody
+    public Map deleteMu(List<String> ids) {
+        ids.stream().forEach(id ->{
+            System.out.println(id);
+        });
+        Map<String, String> map = new HashMap<>();
+        if (ids.size() == 0) {
+            map.put("status", "1");
+            return map;
+        }
+        int count = menuService.deleteMultipleById(ids);
+
         if (count > 0) {
             map.put("status", "0");
         } else {

@@ -48,20 +48,56 @@ function getIsOrNoCus(v, str) {
 }
 
 
+function openViewBig(url, title) {
+    if (title == undefined) {
+        title = '数据预览';
+    }
+    if (layer == undefined) {
+        console.log("layer.js is require!")
+    }
+    var index = layer.open({
+        type: 2,
+        title: '' + title,
+        area: ['56%', '96%'],
+        fixed: false, //不固定
+        maxmin: true,
+        content: url
+    });
+    return index;
+}
 
-function openIframe(url,title) {
+function openView(url, title) {
     if (title == undefined) {
         title = '选择';
     }
     if (layer == undefined) {
         console.log("layer.js is require!")
     }
-    layer.open({
+    var index = layer.open({
         type: 2,
-        title: ''+title,
-        area: ['56%', '96%'],
+        title: '选择',
+        area: ['400px', '500px'],
         fixed: false, //不固定
         maxmin: true,
         content: url
     });
+    return index;
+}
+
+function openViewSmall(url, title) {
+    if (title == undefined) {
+        title = '选择';
+    }
+    if (layer == undefined) {
+        console.log("layer.js is require!")
+    }
+    var index = layer.open({
+        type: 2,
+        title: '选择',
+        area: ['40%', '80%'],
+        fixed: false, //不固定
+        maxmin: true,
+        content: url
+    });
+    return index;
 }

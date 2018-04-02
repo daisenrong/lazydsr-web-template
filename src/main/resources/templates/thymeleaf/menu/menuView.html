@@ -28,45 +28,45 @@
         <!--<div class="col-xs-12">-->
         <form class="form-horizontal">
             <div class="form-group">
-                <label for="id" class="col-sm-4 control-label">ID</label>
-                <div class="col-sm-8">
+                <label for="id" class="col-sm-2 control-label">ID</label>
+                <div class="col-sm-10">
                     <input type="email" class="form-control" id="id" placeholder="Email" readonly th:value="${menu.id}">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-4 control-label">Name</label>
-                <div class="col-sm-8">
+                <label for="name" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
                     <input type="email" class="form-control" id="name" placeholder="Email" readonly th:value="${menu.name}">
                 </div>
             </div>
             <div class="form-group">
-                <label for="enname" class="col-sm-4 control-label">EN Name</label>
-                <div class="col-sm-8">
+                <label for="enname" class="col-sm-2 control-label">EN Name</label>
+                <div class="col-sm-10">
                     <input type="email" class="form-control" id="enname" placeholder="Email" readonly th:value="${menu.enName}">
                 </div>
             </div>
             <div class="form-group">
-                <label for="Parent" class="col-sm-4 control-label">Parent</label>
-                <div class="col-sm-8">
+                <label for="Parent" class="col-sm-2 control-label">Parent</label>
+                <div class="col-sm-10">
                     <input type="email" class="form-control" id="Parent" placeholder="Email" readonly th:value="${menu.parentId}">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-4 control-label">Icon</label>
-                <div class="col-sm-8">
+                <label class="col-sm-2 control-label">Icon</label>
+                <div class="col-sm-10">
                     <i style="font-size: 22px" th:class="${menu.icon}"></i>
                 </div>
             </div>
             <div class="form-group" th:inline="text">
-                <label class="col-sm-4 control-label">URL</label>
-                <div class="col-sm-8">
+                <label class="col-sm-2 control-label">URL</label>
+                <div class="col-sm-10">
                     <!--<input type="email" class="form-control" id="url" placeholder="Email" th:value="">-->
                     <a href="" target="_blank" th:href="@{${menu.url}}">[[${menu.url}]]　　点击预览</a>
                 </div>
             </div>
             <div class="form-group">
-                <label for="disalble" class="col-sm-4 control-label">是否禁用</label>
-                <div class="col-sm-8">
+                <label for="disalble" class="col-sm-2 control-label">是否禁用</label>
+                <div class="col-sm-10">
                     <!--<input type="email" class="form-control" id="Parent" placeholder="Email" readonly th:value="${menu.parentId}">-->
                     <select id="disalble" class="form-control" readonly>
                         <option value="1" th:selected="${menu.status==1}">禁用</option>

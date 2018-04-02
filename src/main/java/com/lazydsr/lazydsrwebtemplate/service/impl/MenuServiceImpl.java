@@ -6,7 +6,9 @@ import com.lazydsr.lazydsrwebtemplate.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +37,7 @@ public class MenuServiceImpl implements MenuService {
         return menuMapper.deleteByPrimaryKey(id);
     }
 
+
     @Override
     public Menu update(Menu menu) {
         int count = menuMapper.updateByPrimaryKey(menu);
@@ -53,6 +56,17 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<Menu> findAll() {
         return menuMapper.selectAll();
+    }
+
+    @Override
+    public int deleteMultipleById(List<String> ids) {
+        //ArrayList<String> ids = new ArrayList<>();
+        //menus.stream().forEach(menu -> {
+        //    ids.add(menu.getId());
+        //});
+        Example example = new Example(Menu.class);
+        example.createCriteria().andIn("id", ids);
+        return menuMapper.deleteByExample(example);
     }
 
     @Override

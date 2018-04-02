@@ -29,4 +29,6 @@ public interface MenuService {
     List<Menu> findAllNormal();
 
     List<Menu> findAll();
+
+    int deleteMultipleById(List<String> ids);
 }
