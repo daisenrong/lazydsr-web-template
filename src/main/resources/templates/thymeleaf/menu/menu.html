@@ -167,16 +167,21 @@
                     layer.msg("请选中数据后在点击按钮");
                     return;
                 }
-                var ids = [];
+                var ids =[];
                 for (var i = 0; i < data.length; i++) {
                     ids[i] = data[i].id;
                 }
+                var params = {
+                    ids: ids
+                };
                 $.ajax({
                     type: 'delete',
                     url: ctx + '/menu',
                     contentType: 'application/json',
                     dataType: "json",
-                    data: {ids:JSON.stringify(ids)},
+                    data: ids,
+                    traditional: true,
+                    // data: {ids: JSON.stringify(ids)},
                     success: function (d) {
                         if (d.status == "0") {
                             layer.msg("删除成功");
