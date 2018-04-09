@@ -22,7 +22,7 @@ import java.util.Map;
  * Info: @TODO:...
  */
 @Controller
-@RequestMapping("/")
+//@RequestMapping("/")
 public class IndexController {
     @Autowired
     private SystemInfoService systemInfoService;
@@ -32,6 +32,7 @@ public class IndexController {
     private UserService userService;
 
     @RequestMapping({"/", "index"})
+    //@RequestMapping()
     public String index(Map map) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.findByUsername(userDetails.getUsername());
@@ -39,7 +40,7 @@ public class IndexController {
         return "index/index";
     }
 
-    @RequestMapping("home")
+    @RequestMapping("/home")
     public String home(Map map) {
         SystemInfo systemInfo = systemInfoService.findByMaxCreateDate();
         map.put("systemInfo", systemInfo);
