@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("commons/browse")
 public class BrowseButtonController {
-    @GetMapping
+    @GetMapping("single")
     public String singleBrowse() {
         return "commons/browse/single";
     }

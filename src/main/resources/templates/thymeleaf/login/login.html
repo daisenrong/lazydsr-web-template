@@ -24,6 +24,14 @@
     <script th:src="@{/static/login/js/html5.js}" src="/static/login/js/html5.js"></script>
     <![endif]-->
     <script th:src="@{/static/plugins/jquery/js/jquery.min.js}" src="/static/plugins/jquery/js/jquery.min.js"></script>
+    <script th:src="@{/static/plugins/layer/layer.js}" src="/static/plugins/layer/layer.js"></script>
+    <script type="text/javascript" th:inline="text">
+        if(self!=top){
+            //不是顶层页面
+            layer.alert("您的登陆已超时，请重新登陆！");
+            top.location.reload();
+        }
+    </script>
 </head>
 <body>
 <div class="container demo-1">

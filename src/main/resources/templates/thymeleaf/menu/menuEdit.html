@@ -47,42 +47,38 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="parentId" class="col-sm-2 control-label">Parent</label>
+                <label class="col-sm-2 control-label">Parent</label>
                 <div class="col-sm-10">
-                    <span type="text" class="form-control" id="parentId_span" placeholder="parentId_span" th:value="${menu.parentId}"></span>
-                    <input type="hidden" name="parentId" class="form-control" id="parentId" placeholder="parentId" th:value="${menu.parentId}">
+                     <span style="display: inline;float: left;position:relative;">
+                        <span style="float: left;">
+                            <span type="text" class="form-control" id="parentId_span">
+                                <!--<a href="" th:onclick="'javascript:parent.openViewBig(\''+@{/menu/view/}+${menu.parentId}+'\');'">[[${menu.parentId}]]</a>-->[[${menu.parentId}]]
+                            </span>
+                            <input type="hidden" name="parentId" class="form-control" id="parentId" placeholder="parentId" th:value="${menu.parentId}">
+                        </span>
+                        <span>
+                            <a style="display: inline;float: left; position: absolute; top: 50%; transform: translateY(-50%);margin-left: 10px" onclick="openView(ctx+'/icon');return;" class="fa fa-search"></a>
+                        </span>
+                     </span>
                 </div>
             </div>
-      
+
             <div class="form-group">
                 <label class="col-sm-2 control-label">Icon</label>
                 <div class="col-sm-10">
                     <span style="display: inline;float: left;position:relative;">
                         <span style="float: left;">
-                            <input width="80%" type="text" name="icon" style="display:inline;float: left" class="form-control" id="icon" placeholder="icon" th:value="${menu.icon}">
+                            <span style="font-size: 20px" type="text" th:class="${menu.icon}" id="icon_span" placeholder="icon_span"></span>
+                            <input width="80%" type="hidden" name="icon" style="display:inline;float: left" class="form-control" id="icon" placeholder="icon" th:value="${menu.icon}">
                         </span>
                         <!--<span width="20%" style="display:inline;float: left">-->
                         <span>
                             <a style="display: inline;float: left; position: absolute; top: 50%; transform: translateY(-50%);margin-left: 10px" onclick="openView(ctx+'/icon');return;" class="fa fa-search"></a>
                         </span>
                     </span>
-                    <!--</span>-->
                 </div>
             </div>
 
-            <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label">Icon</label>-->
-            <!--<div class="col-sm-10">-->
-            <!--<span type="text" class="form-control" id="icon_span" th:value="${menu.icon}" style="margin: 0 auto">-->
-            <!--<span class="label label-default">-->
-            <!--<i th:class="${menu.icon}" style="width: 10px;height: 10px"></i>-->
-            <!--<i style="margin-left: 10px;display: none" class="fa fa-remove"></i>-->
-            <!--</span>-->
-            <!--</span>-->
-            <!--<input type="hidden" name="icon" class="form-control" id="icon" placeholder="Parent" th:value="${menu.icon}">-->
-
-            <!--</div>-->
-            <!--</div>-->
             <div class="form-group" th:inline="text">
                 <label class="col-sm-2 control-label">URL</label>
                 <div class="col-sm-10">

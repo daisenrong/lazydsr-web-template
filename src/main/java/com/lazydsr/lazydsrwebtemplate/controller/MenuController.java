@@ -73,8 +73,16 @@ public class MenuController {
         return "menu/menu";
     }
 
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Menu findById(@PathVariable("id") String id) {
+
+        Menu menu = menuService.findById(id);
+        return menu;
+    }
+
     @GetMapping("/{type}/{id}")
-    public String findById(@PathVariable("type") String type, @PathVariable("id") String id, Map map) {
+    public String findByTypeAndId(@PathVariable("type") String type, @PathVariable("id") String id, Map map) {
         String url = "";
         if (type != null && type.equalsIgnoreCase("edit")) {
             url = "menu/menuEdit";
@@ -95,7 +103,7 @@ public class MenuController {
             map.put("status", "1");
             return map;
         }
-        //BeanUtils.copyProperties(menu, menuService.findById(menu.getId()));
+        //BeanUtils.copyProperties(menu, menuService.findByTypeAndId(menu.getId()));
         Menu byId = menuService.findById(menu.getId());
         byId.setParentId(menu.getParentId());
         byId.setEnName(menu.getEnName());
@@ -105,7 +113,7 @@ public class MenuController {
         byId.setOrdernum(menu.getOrdernum());
         byId.setStatus(menu.getStatus());
 
-        //System.out.println(menuService.findById(menu.getId()));
+        //System.out.println(menuService.findByTypeAndId(menu.getId()));
         //System.out.println(menu);
         Menu count = menuService.update(menu);
         if (count != null) {
