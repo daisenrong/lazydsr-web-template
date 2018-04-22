@@ -34,6 +34,7 @@ public class ContextLoadEvent implements ApplicationRunner {
         log.error("多数据源加载结束");
 
         log.error("加载系统基本信息开始");
+        //该行代码报错的话，请检查一下系统中的库是不是存在
         SystemInfoConfiguration.getInstance().init();
         log.error("加载系统基本信息结束");
     }
