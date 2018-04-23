@@ -92,8 +92,8 @@ public interface SystemInfoMapper extends BaseMapper<SystemInfo> {
             "id, username, server_name, domain, net_name, ip, mac, host, os_arch, os_name, ",
             "os_version, cpu_mhz, cpu_vendor, cpu_model, cpu_cache_size, mem_total, jvm_xmx, ",
             "jvm_xms, jvm_xmn, jvm_available_processors, jvm_version, jvm_home, jvm_app_home, ",
-            "jvm_class_version, creator, create_date, modifier, modify_date, status ,max(create_date)",
-            "from sys_systeminfo",
+            "jvm_class_version, creator, create_date, modifier, modify_date, status ,create_date",
+            "from sys_systeminfo order by create_date desc limit 1",
             //"where id = #{id,jdbcType=VARCHAR}"
     })
     @Results({

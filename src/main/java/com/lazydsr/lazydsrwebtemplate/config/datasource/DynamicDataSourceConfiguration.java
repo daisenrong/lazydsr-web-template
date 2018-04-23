@@ -49,6 +49,9 @@ public class DynamicDataSourceConfiguration extends AbstractRoutingDataSource {
         setTargetDataSources(getDataSourceMap());
     }
 
+    /**
+     * 初始化主数据源信息，并放到容器中
+     */
     private void loadMainDataSourceInfo() {
         Connection connection = null;
         try {

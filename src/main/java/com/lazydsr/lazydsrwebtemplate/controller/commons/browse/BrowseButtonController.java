@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Map;
+
 /**
  * SingleBrowseController
  * PROJECT_NAME: lazydsr-web-template
@@ -16,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("commons/browse")
 public class BrowseButtonController {
     @GetMapping("single")
-    public String singleBrowse() {
+    public String singleBrowse(String browseName, Map map) {
+        map.put("","");
         return "commons/browse/single";
     }
 
