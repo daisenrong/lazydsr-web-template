@@ -41,19 +41,20 @@
             }
         };
         var zNodes = [
-            {id: 1, pId: 0, name: "[core] 基本功能 演示", open: true},
-            {id: 101, pId: 1, name: "最简单的树 --  标准 JSON 数据"},
-            {id: 102, pId: 1, name: "最简单的树 --  简单 JSON 数据"},
-            {id: 103, pId: 1, name: "不显示 连接线"},
-            {id: 104, pId: 1, name: "不显示 节点 图标"},
-            {id: 108, pId: 1, name: "异步加载 节点数据"},
-            {id: 109, pId: 1, name: "用 zTree 方法 异步加载 节点数据"},
-            {id: 110, pId: 1, name: "用 zTree 方法 更新 节点数据"},
-            {id: 111, pId: 1, name: "单击 节点 控制"},
-            {id: 112, pId: 1, name: "展开 / 折叠 父节点 控制"},
-            {id: 113, pId: 1, name: "根据 参数 查找 节点"},
-            {id: 114, pId: 1, name: "其他 鼠标 事件监听"},
-            {id: 2, pId: 0, name: "[excheck] 复/单选框功能 演示", open: false},
+            {id: 1, pId: 0, name: "根", open: true},
+            {id: 11, pId: 1, name: "[core] 基本功能 演示", open: true},
+            {id: 101, pId: 11, name: "最简单的树 --  标准 JSON 数据"},
+            {id: 102, pId: 11, name: "最简单的树 --  简单 JSON 数据"},
+            {id: 103, pId: 11, name: "不显示 连接线"},
+            {id: 104, pId: 11, name: "不显示 节点 图标"},
+            {id: 108, pId: 11, name: "异步加载 节点数据"},
+            {id: 109, pId: 11, name: "用 zTree 方法 异步加载 节点数据"},
+            {id: 110, pId: 11, name: "用 zTree 方法 更新 节点数据"},
+            {id: 111, pId: 11, name: "单击 节点 控制"},
+            {id: 112, pId: 11, name: "展开 / 折叠 父节点 控制"},
+            {id: 113, pId: 11, name: "根据 参数 查找 节点"},
+            {id: 114, pId: 11, name: "其他 鼠标 事件监听"},
+            {id: 2, pId: 1, name: "[excheck] 复/单选框功能 演示", open: false},
             {id: 201, pId: 2, name: "Checkbox 勾选操作"},
             {id: 206, pId: 2, name: "Checkbox nocheck 演示"},
             {id: 211, pId: 2, name: "Radio halfCheck 演示"},
@@ -72,7 +73,7 @@
             var btn = $("#addBtn_" + treeNode.tId);
             if (btn) btn.bind("click", function () {
                 var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                 zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
+                zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
                 return false;
             });
             // var aObj = $("#" + treeNode.tId + "_a");
@@ -88,7 +89,7 @@
         };
 
         function removeHoverDom(treeId, treeNode) {
-            // $("#addBtn_" + treeNode.tId).unbind().remove();
+            $("#addBtn_" + treeNode.tId).unbind().remove();
         };
     </script>
 </div>
