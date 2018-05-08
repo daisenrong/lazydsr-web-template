@@ -68,6 +68,7 @@ body {
   margin-left: 230px;
   z-index: 820;
 }
+
 .layout-top-nav .content-wrapper,
 .layout-top-nav .main-footer {
   margin-left: 0;
@@ -5705,3 +5706,8 @@ table.text-center th {
 ::-webkit-scrollbar-track{box-shadow: 1px 1px 5px rgba(0,0,0,.2) inset;}
 ::-webkit-scrollbar-thumb{min-height: 20px;background-clip: content-box;box-shadow: 0 0 0 5px rgba(0,0,0,.2) inset;}
 ::-webkit-scrollbar-corner{background: transparent;}
+
+/*针对main-footer样式进行修改*/
+.main-footer{
+  margin-left: 0;
+}
