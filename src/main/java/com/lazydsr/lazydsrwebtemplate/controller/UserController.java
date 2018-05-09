@@ -30,7 +30,6 @@ public class UserController {
     @GetMapping("/{id}")
     public String findOne(@PathVariable String id, Model model) {
         model.addAttribute("id", id);
-        System.out.println(id);
         return "test";
     }
 
