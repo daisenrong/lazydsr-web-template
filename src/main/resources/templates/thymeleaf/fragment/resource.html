@@ -15,13 +15,13 @@
 <body>
 
 <!--ztree插件开始-->
-<div th:fragment="ztree">
+<div th:fragment="ztree(id)">
     <link rel="stylesheet" th:href="@{/static/plugins/ztree/css/bootstrapStyle/bootstrapStyle.css}" href="/static/plugins/ztree/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
     <script type="text/javascript" th:src="@{/static/plugins/ztree/js/jquery.ztree.core.js}" src="/static/plugins/ztree/js/jquery.ztree.core.js"></script>
     <script type="text/javascript" th:src="@{/static/plugins/ztree/js/jquery.ztree.excheck.js}" src="/static/plugins/ztree/js/jquery.ztree.excheck.js"></script>
     <script type="text/javascript" th:src="@{/static/plugins/ztree/js/jquery.ztree.exedit.js}" src="/static/plugins/ztree/js/jquery.ztree.exedit.js"></script>
 
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="text">
         var setting = {
             view: {
                 addHoverDom: addHoverDom,
@@ -76,20 +76,6 @@
                 zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
                 return false;
             });
-            // var aObj = $("#" + treeNode.tId + "_a");
-            // if ($("#diyBtn_" + treeNode.id).length > 0) return;
-            // var editStr = "<span id='diyBtn_space_" + treeNode.id + "' > </span>"
-            //     + "<button type='button' class='diyBtn1' id='diyBtn_" + treeNode.id
-            //     + "' title='" + treeNode.name + "' onfocus='this.blur();'></button>";
-            // aObj.append(editStr);
-            // var btn = $("#diyBtn_" + treeNode.id);
-            // if (btn) btn.bind("click", function () {
-            //     alert("diy Button for " + treeNode.name);
-            // });
-
-
-
-
 
         };
 
