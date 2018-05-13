@@ -1,7 +1,10 @@
 package com.lazydsr.lazydsrwebtemplate.service.impl;
 
 import com.lazydsr.lazydsrwebtemplate.entity.ScheduleTask;
+import com.lazydsr.lazydsrwebtemplate.mapper.ScheduleTaskMapper;
 import com.lazydsr.lazydsrwebtemplate.service.ScheduleTaskService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,10 +16,15 @@ import java.util.List;
  * Version: 0.1
  * Info: 调度任务services impl
  */
+@Service
 public class ScheduleTaskServiceImpl implements ScheduleTaskService {
+    @Autowired
+    private ScheduleTaskMapper scheduleTaskMapper;
+
     @Override
     public ScheduleTask add(ScheduleTask scheduleTask) {
-        return null;
+        int insert = scheduleTaskMapper.insert(scheduleTask);
+        return scheduleTaskMapper.selectByPrimaryKey(scheduleTask.getId());
     }
 
     @Override
