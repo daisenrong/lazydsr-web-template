@@ -71,6 +71,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> findAllNormal() {
+        //List<Menu> menus = menuMapper.selectAllNormal();
         return menuMapper.selectAllNormal();
     }
 

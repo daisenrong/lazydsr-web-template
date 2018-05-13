@@ -65,14 +65,7 @@
             }
         },
         edit: {
-            enable: true,
-            showRemoveBtn: setRemoveBtn,
-            showRenameBtn: setRenameBtn
-        },
-        callback: {
-            beforeEditName: updateNode, // 用于捕获节点编辑按钮的 click 事件，并且根据返回值确定是否允许进入名称编辑状态
-            beforeRemove: deleteNode,     // 用于捕获节点被删除之前的事件回调函数，并且根据返回值确定是否允许删除操作
-            // onClick : showDetail            // 点击节点时，显示节点详细信息
+            enable: true
         }
     };
     var zNodes = [];
@@ -101,75 +94,27 @@
 
     function addHoverDom(treeId, treeNode) {
         var sObj = $("#" + treeNode.tId + "_span");
-        if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) {
-            return;
-        }
-        //添加
-        var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-            + "' title='添加菜单'  style='color:red;' onfocus='this.blur();'></span>";
+        if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
+        var addStr = "<span class='button add' id='addBtn_" + treeNode.tId + "' title='新增'  onfocus='this.blur();'></span>";
         sObj.after(addStr);
         var btn = $("#addBtn_" + treeNode.tId);
         if (btn) btn.bind("click", function () {
-            var zTree = $.fn.zTree.getZTreeObj(treeId);
-            addNode(treeId, treeNode);
+            var zTree = $.fn.zTree.getZTreeObj("ztree");
+            openViewBig(ctx + '/page/menu/menuAdd?pId=' + treeNode.id, '新增', function () {
+                // console.log("刷新ztree树");
+                loadData();
+
+                // zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
+            });
+
+            return false;
         });
 
-
-        return false;
     };
 
-    //隐藏按钮
     function removeHoverDom(treeId, treeNode) {
         $("#addBtn_" + treeNode.tId).unbind().remove();
-    }
-    function setRemoveBtn(treeId, treeNode) {
-        return !treeNode.isParent&&treeNode.showRemoveBtn;
-    }
-    function setRenameBtn(treeId, treeNode) {
-        return treeNode.showRenameBtn;
-    }
-
-    //添加
-    function addNode(treeId, treeNode) {
-        // var url = getPath() + "/manager/buildinfo/toAddJsp?structureid=" + id;
-        // location.href = url;
-        openViewBig(ctx + '/page/menu/menuAdd?pId=' + treeNode.id, '新增', function () {
-            // console.log("刷新ztree树");
-            loadData();
-            // zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
-        });
-    }
-
-    //修改
-    function updateNode(treeId, treeNode) {
-        var url = ctx + "/menu/edit/" + treeNode.id;
-        // location.href = url + "?id=" + id + "&isAdd=2";
-        openViewBig(url, '更新', function () {
-            // console.log("刷新ztree树");
-            loadData();
-            // zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
-        });
-        return false;
-    }
-
-    //删除
-    function deleteNode(treeId, treeNode) {
-        layer.confirm('您确定要删除 -->' + treeNode.name + "吗?", function (index) {
-            var url = ctx + "/menu/" + treeNode.id;
-            $.ajax({
-                type: "delete",
-                url: url,
-                contentType: 'application/json',
-                // data: JSON.stringify(arr),
-                success: function (data, status) {
-                    loadData();
-                }
-            });
-            layer.close(index);
-        })
-        return false;
-
-    }
+    };
 </script>
 </body>
 </html>

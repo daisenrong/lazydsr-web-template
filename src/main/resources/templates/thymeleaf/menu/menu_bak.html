@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons/common_head :: commonHead('MENU')">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div>
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            菜单管理
+            <small>菜单列表</small>
+
+        </h1>
+
+        <!--<ol class="">-->
+        <!--&lt;!&ndash;<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li><a href="#">Charts</a></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li class="active">Flot</li>&ndash;&gt;-->
+        <!--<li class="layui-btn layui-btn-sm" ><a onclick="openViewBig(ctx+'/page/menu/menuAdd','新增')">新增</a></li>-->
+        <!--</ol>-->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!--menu列表-->
+
+        <div class="layui-btn-group menu">
+            <button class="layui-btn" onclick="openViewBig(ctx+'/page/menu/menuAdd','新增')">新增</button>
+            <button class="layui-btn layui-btn-danger" data-type="getCheckData">删除</button>
+            <!--<button class="layui-btn" data-type="getCheckLength">获取选中数目</button>-->
+            <!--<button class="layui-btn" data-type="isAll">验证是否全选</button>-->
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="layui-hide" id="menu" lay-filter="menu"></table>
+                <!--<div  id="menu"></div>-->
+                <!--<table class="layui-table" lay-data="{height:'full-80',url:ctx+'/menu/json/page', page:true, id:'menu'}" lay-filter="menu">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                <!--<th lay-data="{type: 'checkbox'}">选择</th>-->
+                <!--<th lay-data="{field:'id', width:80, sort: true}">ID</th>-->
+                <!--<th lay-data="{field:'name', width:120}">名称</th>-->
+                <!--<th lay-data="{field:'icon', width:100, sort: true,templet:'#icon_convert'}">icon</th>-->
+                <!--<th lay-data="{field:'url', width:100, sort: true,templet:'#url'}">url</th>-->
+                <!--<th lay-data="{field:'parentId',width:100}">父菜单</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--</table>-->
+            </div>
+            <!-- /.col -->
+        </div>
+
+    </section>
+</div>
+
+<!-- ./wrapper -->
+<div th:include="commons/common_js :: commonJs"></div>
+
+
+<script type="text/html" id="menuBar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/javascript">
+    var table
+    layui.use('table', function () {
+        table = layui.table, form = layui.form;
+
+        //第一个实例
+        table.render({
+            elem: '#menu'
+            // , height: 'full-162'
+            // , height: 'full-80'
+            , height: 'full-118'
+            , url: ctx + '/menu/json/page' //数据接口
+            , page: {page: true} //开启分页
+            , cols: [
+                [
+                    {type: 'checkbox', fixed: 'left'}
+                    , {field: 'id', title: 'ID', width: 80, sort: true}
+                    , {field: 'name', title: '名称', width: 100}
+                    // , {field: 'enName', title: '英文名称', width: 80, sort: true}
+                    , {field: 'parentId', title: '父菜单', width: 100}
+                    , {
+                    field: 'icon', title: '图标', width: 80, align: 'center', templet: function (d) {
+                        return '<i class="' + d.icon + '"></i>';
+                    }
+                }
+                    , {
+                    field: 'url', title: 'URL', width: 80, sort: true, templet: function (d) {
+                        return '<a target="_blank" style="color: #5769ff;" href="' + ctx + d.url + '">' + d.url + '</a>';
+                    }
+                }
+                    // , {field: 'target', title: '打开方式', width: 80, sort: true}
+                    , {
+                    field: 'publics', title: '可公开', width: 80, sort: true, templet: function (d) {
+                        return getIsOrNo(d.publics);
+                    }, unresize: true
+                }
+                    , {
+                    field: 'allowEdit', title: '可编辑', width: 80, sort: true, templet: function (d) {
+                        return getIsOrNo(d.allowEdit);
+                    }, unresize: true
+                }
+                    , {field: 'ordernum', title: '排序', width: 80, sort: true}
+                    // , {field: 'description', title: '描述', width: 100, sort: true}
+                    // , {field: 'allowDelete', title: '可删除', width: 110, sort: true, templet:function (d) {
+                    //     return getIsOrNo(d.allowDelete);
+                    // }, unresize: true}
+                    , {
+                    field: 'status', title: '禁用', width: 80, sort: true, templet: function (d) {
+                        if (d.status == 0) {
+                            return '正常';
+                        } else {
+                            return '<span style="color: #f50305;">禁用</span>';
+                        }
+                    }, unresize: true
+                }
+                    , {fixed: 'right', title: '操作', width: 178, templet: '#menuBar', unresize: true}
+                ]
+            ]
+        });
+
+        table.on('tool(menu)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'view') {
+                openViewBig(ctx + '/menu/view/' + data.id, '菜单查看');
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+
+                    layer.close(index);
+
+                    $.ajax({
+                        type: 'delete',
+                        url: ctx + '/menu/' + data.id,
+                        contentType: 'application/json',
+                        dataType: "json",
+                        // data: JSON.stringify(arr),
+                        success: function (d) {
+                            if (d.status == "0") {
+                                layer.msg("删除成功");
+                                obj.del();
+                                table.reload("menu", {})
+                            } else {
+                                layer.msg("删除失败，请联系管理员或重试。");
+                            }
+                        }
+                    });
+
+                });
+            } else if (obj.event === 'edit') {
+                openViewBig(ctx + '/menu/edit/' + data.id, '修改');
+
+            }
+        });
+
+        var $ = layui.$, active = {
+            getCheckData: function () { //获取选中数据
+                var checkStatus = table.checkStatus('menu')
+                    , data = checkStatus.data;
+                if (data.length == 0) {
+                    layer.msg("请选中数据后在点击按钮");
+                    return;
+                }
+                var ids =[];
+                for (var i = 0; i < data.length; i++) {
+                    ids[i] = data[i].id;
+                }
+                var params = {
+                    ids: ids
+                };
+                $.ajax({
+                    type: 'delete',
+                    url: ctx + '/menu',
+                    contentType: 'application/json',
+                    dataType: "json",
+                    data: ids,
+                    traditional: true,
+                    // data: {ids: JSON.stringify(ids)},
+                    success: function (d) {
+                        if (d.status == "0") {
+                            layer.msg("删除成功");
+                            // obj.del();
+                            table.reload("menu", {})
+                        } else {
+                            layer.msg("删除失败，请联系管理员或重试。");
+                        }
+                    }
+                });
+
+                layer.alert(JSON.stringify({'ids': ids}));
+            }
+            , getCheckLength: function () { //获取选中数目
+                var checkStatus = table.checkStatus('menu')
+                    , data = checkStatus.data;
+                layer.msg('选中了：' + data.length + ' 个');
+            }
+            , isAll: function () { //验证是否全选
+                var checkStatus = table.checkStatus('menu');
+                layer.msg(checkStatus.isAll ? '全选' : '未全选')
+            }
+        };
+
+        $('.menu .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+    });
+</script>
+</body>
+</html>

@@ -48,7 +48,7 @@ function getIsOrNoCus(v, str) {
 }
 
 
-function openViewBig(url, title) {
+function openViewBig(url, title, callback) {
     if (title == undefined) {
         title = '数据预览';
     }
@@ -61,8 +61,15 @@ function openViewBig(url, title) {
         area: ['56%', '96%'],
         fixed: false, //不固定
         maxmin: true,
-        content: url
+        content: url,
+        cancel: function () {
+            return;
+        },
+        end: function () {
+            callback();
+        }
     });
+
     return index;
 }
 

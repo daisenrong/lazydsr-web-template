@@ -46,11 +46,11 @@
                     <input type="text" name="enName" class="form-control" id="enname" placeholder="EN Name">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none">
                 <label for="parentId" class="col-sm-2 control-label">Parent</label>
                 <div class="col-sm-10">
                     <!--<span type="text" class="form-control" id="parentId_span" placeholder="parentId_span"></span>-->
-                    <input type="text" name="parentId" class="form-control" id="parentId" placeholder="parentId">
+                    <input type="hidden" th:value="${#httpServletRequest.getParameter('pId')}" name="parentId" class="form-control" id="parentId" placeholder="parentId">
                 </div>
             </div>
             <div class="form-group">
@@ -58,14 +58,14 @@
                 <div class="col-sm-10">
                     <span style="display: inline;float: left;position:relative;">
                         <span style="float: left;">
-                            <input width="80%" type="text" name="icon" style="display:inline;float: left" class="form-control" id="icon" placeholder="icon">
+                            <span style="font-size: 20px" type="text" id="icon_span" placeholder="icon_span"></span>
+                            <input width="80%" type="hidden" name="icon" style="display:inline;float: left" class="form-control" id="icon" placeholder="icon">
                         </span>
                         <!--<span width="20%" style="display:inline;float: left">-->
                         <span>
                             <a style="display: inline;float: left; position: absolute; top: 50%; transform: translateY(-50%);margin-left: 10px" onclick="openView(ctx+'/icon');return;" class="fa fa-search"></a>
                         </span>
                     </span>
-                    <!--</span>-->
                 </div>
             </div>
             <div class="form-group" th:inline="text">
@@ -79,15 +79,15 @@
                 <div class="col-sm-10">
                     <!--<input type="email" class="form-control" id="Parent" placeholder="Email" readonly th:value="${menu.parentId}">-->
                     <select id="disalble" class="form-control" name="status">
-                        <option value="1">禁用</option>
                         <option value="0">正常</option>
+                        <option value="1">禁用</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">ordernum</label>
                 <div class="col-sm-10">
-                    <input type="number" name="ordernum" class="form-control" id="ordernum" placeholder="orderNum">
+                    <input type="number" value="0" name="ordernum" class="form-control" id="ordernum" placeholder="orderNum">
                 </div>
             </div>
             <div class="form-group">
@@ -101,17 +101,18 @@
     </section>
 </div>
 <script type="text/javascript">
-    // function openView(url) {
-    //
-    //     layer.open({
-    //         type: 2,
-    //         title: '选择',
-    //         area: ['400px', '500px'],
-    //         fixed: false, //不固定
-    //         maxmin: true,
-    //         content: url
-    //     });
-    // }
+    $("#submit").click(function () {
+        $.ajax({
+            type: 'POST',
+            url: ctx + '/menu',
+            data: $('#menu').serializeArray(),
+            success: function (data) {
+                parent.layer.closeAll();
+                parent.layer.msg("添加成功");
+            },
+            dataType: "json"
+        });
+    });
 
 </script>
 

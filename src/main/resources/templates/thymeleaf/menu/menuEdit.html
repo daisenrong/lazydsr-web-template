@@ -46,7 +46,7 @@
                     <input type="text" name="enName" class="form-control" id="enname" placeholder="EN Name" th:value="${menu.enName}">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none">
                 <label class="col-sm-2 control-label">Parent</label>
                 <div class="col-sm-10">
                      <span style="display: inline;float: left;position:relative;">
@@ -91,8 +91,8 @@
                 <div class="col-sm-10">
                     <!--<input type="email" class="form-control" id="Parent" placeholder="Email" readonly th:value="${menu.parentId}">-->
                     <select id="disalble" class="form-control" name="status">
-                        <option value="1" th:selected="${menu.status==1}">禁用</option>
                         <option value="0" th:selected="${menu.status==0}">正常</option>
+                        <option value="1" th:selected="${menu.status==1}">禁用</option>
                     </select>
                 </div>
             </div>
@@ -126,10 +126,10 @@
             success: function (result) {
                 console.log(result);//打印服务端返回的数据(调试用)
                 if (result.status == 0) {
-                    layer.closeAll();
-                    layer.msg("更新成功");
-                    parent.table.reload("menu", {});
-                    window.location.href = ctx + "/menu/view/" + $("#id").val();
+                    parent.layer.closeAll();
+                    parent.layer.msg("更新成功");
+                    // parent.table.reload("menu", {});
+                    // window.location.href = ctx + "/menu/view/" + $("#id").val();
                 }
             },
             error: function () {

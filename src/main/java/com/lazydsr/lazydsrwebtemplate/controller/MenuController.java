@@ -2,13 +2,16 @@ package com.lazydsr.lazydsrwebtemplate.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.lazydsr.commons.result.ResultBody;
 import com.lazydsr.lazydsrwebtemplate.entity.Menu;
 import com.lazydsr.lazydsrwebtemplate.service.MenuService;
+import com.lazydsr.lazydsrwebtemplate.vo.MenuZtreeVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,11 +31,52 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
+    @PostMapping
+    @ResponseBody
+    public Menu save(Menu menu) {
+        Menu newMenu = menuService.add(menu);
+        return newMenu;
+    }
+
     @GetMapping("json")
     @ResponseBody
     public List<Menu> findJson() {
         return menuService.findAllNormal();
     }
+
+    @GetMapping("json/ztree")
+    @ResponseBody
+    public ResultBody findJson2Ztree() {
+        List<Menu> menus = menuService.findAllNormal();
+        ArrayList<MenuZtreeVo> menuZtreeVos = new ArrayList<>();
+
+        for (Menu menu : menus) {
+            MenuZtreeVo menuZtreeVo = new MenuZtreeVo();
+            menuZtreeVo.setId(menu.getId());
+            if (menu.getParentId().equals("")) {
+                menuZtreeVo.setpId("0");
+            } else {
+                menuZtreeVo.setpId(menu.getParentId());
+            }
+            menuZtreeVo.setName(menu.getName());
+            //menuZtreeVo.setIcon(menu.getIcon());
+            //menuZtreeVo.setIconSkin(menu.getIcon());
+            menuZtreeVo.setTarget(menu.getTarget());
+            menuZtreeVo.setUrl(menu.getUrl());
+            menuZtreeVos.add(menuZtreeVo);
+        }
+        //添加根节点
+        MenuZtreeVo menuZtreeVo = new MenuZtreeVo();
+        menuZtreeVo.setName("根");
+        menuZtreeVo.setId("0");
+        menuZtreeVo.setOpen(true);
+        menuZtreeVo.setShowRemoveBtn(false);
+        menuZtreeVo.setShowRenameBtn(false);
+        menuZtreeVos.add(menuZtreeVo);
+
+        return ResultBody.success(menuZtreeVos);
+    }
+
 
     @GetMapping("json/page")
     @ResponseBody
@@ -81,6 +125,7 @@ public class MenuController {
         return menu;
     }
 
+    @Deprecated
     @GetMapping("/{type}/{id}")
     public String findByTypeAndId(@PathVariable("type") String type, @PathVariable("id") String id, Map map) {
         String url = "";

@@ -358,18 +358,25 @@
             $.each(data, function (i) {
                 //console.log(data);
                 var row = data[i];
-                if (row.parentId == "0") {
+                //针对pid为空的进行处理
+                if (row.parentId == "0" || row.parentId == "") {
                     if (i == 0) {
                         _html += '<li class="treeview active">';
                     } else {
                         _html += '<li class="treeview">';
                     }
-                    _html += '<a href="#">'
-                    _html += '<i class="' + row.icon + '"></i><span>' + row.name + '</span><i class="fa fa-angle-left pull-right"></i>'
-                    _html += '</a>'
                     var childNodes = $.learunindex.jsonWhere(data, function (v) {
                         return v.parentId == row.id
                     });
+                    //若无子菜单，那么不显示下拉的图标
+                    _html += '<a href="#">';
+                    _html += '<i class="' + row.icon + '"></i><span>' + row.name + '</span>';
+                    if (childNodes.length>0){
+                        _html+='<i class="fa fa-angle-left pull-right"></i>';
+                    }
+
+                    _html += '</a>';
+
                     if (childNodes.length > 0) {
                         _html += '<ul class="treeview-menu">';
                         $.each(childNodes, function (i) {
@@ -379,19 +386,19 @@
                             });
                             _html += '<li>';
                             if (subchildNodes.length > 0) {
-                                _html += '<a href="#"><i class="' + subrow.icon + '"></i>' + subrow.name + '';
+                                _html += '<a href="#"><i class="' + subrow.icon + '"></i><span>' + subrow.name + '</span>';
                                 _html += '<i class="fa fa-angle-left pull-right"></i></a>';
                                 _html += '<ul class="treeview-menu">';
                                 $.each(subchildNodes, function (i) {
                                     var subchildNodesrow = subchildNodes[i];
                                     // _html += '<li><a class="menuItem" data-id="'+ctx + subrow.F_ModuleId + '" href="'+ctx + subrow.F_UrlAddress + '"><i class="' + subchildNodesrow.F_Icon + '"></i>' + subchildNodesrow.F_FullName + '</a></li>';
-                                    _html += '<li><a class="menuItem" data-id="' + subrow.id + '" href="' + ctx + subrow.url + '"><i class="' + subchildNodesrow.icon + '"></i>' + subchildNodesrow.name + '</a></li>';
+                                    _html += '<li><a class="menuItem" data-id="' + subrow.id + '" href="' + ctx + subrow.url + '"><i class="' + subchildNodesrow.icon + '"></i><span>' + subchildNodesrow.name + '</span></a></li>';
                                 });
                                 _html += '</ul>';
 
                             } else {
                                 // _html += '<a class="menuItem" data-id="'+ctx + subrow.F_ModuleId + '" href="'+ctx + subrow.F_UrlAddress + '"><i class="' + subrow.F_Icon + '"></i>' + subrow.F_FullName + '</a>';
-                                _html += '<a class="menuItem" data-id="' + subrow.id + '" href="' + ctx + subrow.url + '"><i class="' + subrow.icon + '"></i>' + subrow.name + '</a>';
+                                _html += '<a class="menuItem" data-id="' + subrow.id + '" href="' + ctx + subrow.url + '"><i class="' + subrow.icon + '"></i><span>' + subrow.name + '</span></a>';
                             }
                             _html += '</li>';
                         });
