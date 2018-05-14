@@ -168,6 +168,7 @@ DROP TABLE IF EXISTS `sys_schedule_task`;
 CREATE TABLE `sys_schedule_task` (
   `id` varchar(32) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `group` varchar(255) NOT NULL,
   `classpath` varchar(1000) DEFAULT NULL,
   `cron` varchar(255) DEFAULT NULL,
   `description` varchar(1000) DEFAULT NULL,
