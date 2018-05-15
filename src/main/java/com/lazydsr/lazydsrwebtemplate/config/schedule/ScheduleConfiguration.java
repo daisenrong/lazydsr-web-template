@@ -48,7 +48,7 @@ public class ScheduleConfiguration {
         /*
          * 为需要执行的实体类对应的对象
          */
-        jobDetail.setTargetObject(task);
+        //jobDetail.setTargetObject(task);
 
         /*
          * sayHello为需要执行的方法
