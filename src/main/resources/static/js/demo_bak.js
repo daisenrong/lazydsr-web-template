@@ -188,7 +188,7 @@ $(function () {
     + 'Layout Options'
     + '</h4>'
     // Fixed layout
-    + '<div class="form-group">'
+    + '<div class="form-jobgroup">'
     + '<label class="control-sidebar-subheading">'
     + '<input type="checkbox"data-layout="fixed"class="pull-right"/> '
     + 'Fixed layout'
@@ -196,7 +196,7 @@ $(function () {
     + '<p>Activate the fixed layout. You can\'t use fixed and boxed layouts together</p>'
     + '</div>'
     // Boxed layout
-    + '<div class="form-group">'
+    + '<div class="form-jobgroup">'
     + '<label class="control-sidebar-subheading">'
     + '<input type="checkbox"data-layout="layout-boxed" class="pull-right"/> '
     + 'Boxed Layout'
@@ -204,7 +204,7 @@ $(function () {
     + '<p>Activate the boxed layout</p>'
     + '</div>'
     // Sidebar Toggle
-    + '<div class="form-group">'
+    + '<div class="form-jobgroup">'
     + '<label class="control-sidebar-subheading">'
     + '<input type="checkbox"data-layout="sidebar-collapse"class="pull-right"/> '
     + 'Toggle Sidebar'
@@ -212,7 +212,7 @@ $(function () {
     + '<p>Toggle the left sidebar\'s state (open or collapse)</p>'
     + '</div>'
     // Sidebar mini expand on hover toggle
-    + '<div class="form-group">'
+    + '<div class="form-jobgroup">'
     + '<label class="control-sidebar-subheading">'
     + '<input type="checkbox"data-enable="expandOnHover"class="pull-right"/> '
     + 'Sidebar Expand on Hover'
@@ -220,7 +220,7 @@ $(function () {
     + '<p>Let the sidebar mini expand on hover</p>'
     + '</div>'
     // Control Sidebar Toggle
-    + '<div class="form-group">'
+    + '<div class="form-jobgroup">'
     + '<label class="control-sidebar-subheading">'
     + '<input type="checkbox"data-controlsidebar="control-sidebar-open"class="pull-right"/> '
     + 'Toggle Right Sidebar Slide'
@@ -228,7 +228,7 @@ $(function () {
     + '<p>Toggle between slide over content and push content effects</p>'
     + '</div>'
     // Control Sidebar Skin Toggle
-    + '<div class="form-group">'
+    + '<div class="form-jobgroup">'
     + '<label class="control-sidebar-subheading">'
     + '<input type="checkbox"data-sidebarskin="toggle"class="pull-right"/> '
     + 'Toggle Right Sidebar Skin'

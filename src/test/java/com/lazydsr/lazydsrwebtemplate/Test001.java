@@ -1,11 +1,11 @@
 package com.lazydsr.lazydsrwebtemplate;
 
-import com.lazydsr.lazydsrwebtemplate.entity.ScheduleTask;
-import com.lazydsr.lazydsrwebtemplate.service.ScheduleTaskService;
-import org.hyperic.sigar.*;
+import org.hyperic.sigar.CpuInfo;
+import org.hyperic.sigar.Mem;
+import org.hyperic.sigar.Sigar;
+import org.hyperic.sigar.SigarException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -24,25 +24,25 @@ import java.lang.management.MemoryUsage;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class Test001 {
-    @Autowired
-    private ScheduleTaskService scheduleTaskService;
-    @Test
-    public void test1() {
-        String s = "aaa,vvv,ccc,";
-        String[] split = s.split(",");
-        System.out.println(split.length);
-
-    }
-    @Test
-    public void add(){
-        ScheduleTask scheduleTask = new ScheduleTask();
-        scheduleTask.setName("aaa");
-        scheduleTask.setClasspath("ss");
-        scheduleTask.setCron("sss");
-        System.out.println(scheduleTask);
-        ScheduleTask add = scheduleTaskService.add(scheduleTask);
-        System.out.println(add);
-    }
+    //@Autowired
+    //private ScheduleJobService scheduleJobService;
+    //@Test
+    //public void test1() {
+    //    String s = "aaa,vvv,ccc,";
+    //    String[] split = s.split(",");
+    //    System.out.println(split.length);
+    //
+    //}
+    //@Test
+    //public void add(){
+    //    ScheduleJob scheduleJob = new ScheduleJob();
+    //    scheduleJob.setName("aaa");
+    //    scheduleJob.setClasspath("ss");
+    //    scheduleJob.setCron("sss");
+    //    System.out.println(scheduleJob);
+    //    ScheduleJob add = scheduleJobService.add(scheduleJob);
+    //    System.out.println(add);
+    //}
 
     @Test
     public void test2() throws InterruptedException {

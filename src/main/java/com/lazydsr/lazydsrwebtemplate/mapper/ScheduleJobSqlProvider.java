@@ -8,13 +8,13 @@ import static org.apache.ibatis.jdbc.SqlBuilder.UPDATE;
 import static org.apache.ibatis.jdbc.SqlBuilder.VALUES;
 import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 
-import com.lazydsr.lazydsrwebtemplate.entity.ScheduleTask;
+import com.lazydsr.lazydsrwebtemplate.entity.ScheduleJob;
 
-public class ScheduleTaskSqlProvider {
+public class ScheduleJobSqlProvider {
 
-    public String insertSelective(ScheduleTask record) {
+    public String insertSelective(ScheduleJob record) {
         BEGIN();
-        INSERT_INTO("sys_schedule_task");
+        INSERT_INTO("sys_schedule_job");
         
         if (record.getId() != null) {
             VALUES("id", "#{id,jdbcType=VARCHAR}");
@@ -24,8 +24,20 @@ public class ScheduleTaskSqlProvider {
             VALUES("name", "#{name,jdbcType=VARCHAR}");
         }
         
+        if (record.getJobgroup() != null) {
+            VALUES("jobgroup", "#{jobgroup,jdbcType=VARCHAR}");
+        }
+        
         if (record.getClasspath() != null) {
             VALUES("classpath", "#{classpath,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMethod() != null) {
+            VALUES("method", "#{method,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getConcurrent() != null) {
+            VALUES("concurrent", "#{concurrent,jdbcType=VARCHAR}");
         }
         
         if (record.getCron() != null) {
@@ -34,6 +46,10 @@ public class ScheduleTaskSqlProvider {
         
         if (record.getDescription() != null) {
             VALUES("description", "#{description,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getJobstatus() != null) {
+            VALUES("jobstatus", "#{jobstatus,jdbcType=VARCHAR}");
         }
         
         if (record.getCreator() != null) {
@@ -59,16 +75,28 @@ public class ScheduleTaskSqlProvider {
         return SQL();
     }
 
-    public String updateByPrimaryKeySelective(ScheduleTask record) {
+    public String updateByPrimaryKeySelective(ScheduleJob record) {
         BEGIN();
-        UPDATE("sys_schedule_task");
+        UPDATE("sys_schedule_job");
         
         if (record.getName() != null) {
             SET("name = #{name,jdbcType=VARCHAR}");
         }
         
+        if (record.getJobgroup() != null) {
+            SET("jobgroup = #{jobgroup,jdbcType=VARCHAR}");
+        }
+        
         if (record.getClasspath() != null) {
             SET("classpath = #{classpath,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMethod() != null) {
+            SET("method = #{method,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getConcurrent() != null) {
+            SET("concurrent = #{concurrent,jdbcType=VARCHAR}");
         }
         
         if (record.getCron() != null) {
@@ -77,6 +105,10 @@ public class ScheduleTaskSqlProvider {
         
         if (record.getDescription() != null) {
             SET("description = #{description,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getJobstatus() != null) {
+            SET("jobstatus = #{jobstatus,jdbcType=VARCHAR}");
         }
         
         if (record.getCreator() != null) {

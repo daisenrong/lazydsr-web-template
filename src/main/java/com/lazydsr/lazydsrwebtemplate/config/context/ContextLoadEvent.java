@@ -1,8 +1,10 @@
 package com.lazydsr.lazydsrwebtemplate.config.context;
 
 import com.lazydsr.lazydsrwebtemplate.config.datasource.DynamicDataSourceConfiguration;
+import com.lazydsr.lazydsrwebtemplate.config.schedule.ScheduleConfiguration;
 import com.lazydsr.lazydsrwebtemplate.config.system.SystemInfoConfiguration;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -18,8 +20,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class ContextLoadEvent implements ApplicationRunner {
-    //@Autowired
-    //private DynamicDataSourceConfiguration dynamicDataSourceConfiguration;
+
+    @Autowired
+    private ScheduleConfiguration scheduleConfiguration;
 
     /**
      * Callback used to run the bean.
@@ -37,5 +40,10 @@ public class ContextLoadEvent implements ApplicationRunner {
         //该行代码报错的话，请检查一下系统中的库是不是存在
         SystemInfoConfiguration.getInstance().init();
         log.error("加载系统基本信息结束");
+
+        log.error("加载定时任务开始");
+        //该行代码报错的话，请检查一下系统中的库是不是存在
+        scheduleConfiguration.init();
+        log.error("加载定时任务结束");
     }
 }

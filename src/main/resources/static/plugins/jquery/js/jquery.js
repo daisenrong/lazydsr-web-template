@@ -2480,7 +2480,7 @@ select = Sizzle.select = function( selector, context, results, seed ) {
 
 	results = results || [];
 
-	// Try to minimize operations if there is no seed and only one group
+	// Try to minimize operations if there is no seed and only one jobgroup
 	if ( match.length === 1 ) {
 
 		// Take a shortcut and set the context if the root selector is an ID
