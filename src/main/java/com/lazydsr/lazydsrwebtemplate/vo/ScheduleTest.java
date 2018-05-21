@@ -14,6 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ScheduleTest {
     public void runschedule(){
-      log.error("ssssss"+UtilDateTime.getCurrDateTime());
+      //log.error("ssssss"+UtilDateTime.getCurrDateTime());
     }
 }
