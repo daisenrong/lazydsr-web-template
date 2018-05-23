@@ -5,6 +5,9 @@ import com.lazydsr.lazydsrwebtemplate.mapper.MenuMapper;
 import com.lazydsr.lazydsrwebtemplate.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -21,6 +24,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
+@CacheConfig(cacheNames = "menu")
 public class MenuServiceImpl implements MenuService {
     @Autowired
     private MenuMapper menuMapper;
@@ -49,6 +53,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @Cacheable( key="#id")
     public Menu findById(String id) {
         return menuMapper.selectByPrimaryKey(id);
     }
@@ -59,6 +64,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @CacheEvict
     public int deleteMultipleById(List<String> ids) {
         //ArrayList<String> ids = new ArrayList<>();
         //menus.stream().forEach(menu -> {
@@ -70,6 +76,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @Cacheable
     public List<Menu> findAllNormal() {
         //List<Menu> menus = menuMapper.selectAllNormal();
         return menuMapper.selectAllNormal();

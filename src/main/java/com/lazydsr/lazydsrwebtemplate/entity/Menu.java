@@ -6,10 +6,11 @@ import lombok.Data;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Table(name = "sys_menu")
 @Data
-public class Menu {
+public class Menu implements Serializable {
     @Id
     private String id = UtilUUId.getId();
 

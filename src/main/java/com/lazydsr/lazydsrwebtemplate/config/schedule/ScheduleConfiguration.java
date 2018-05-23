@@ -225,10 +225,10 @@ public class ScheduleConfiguration {
         scheduler.rescheduleJob(triggerKey, trigger);
     }
 
-    @Scheduled(cron = "0/1 0 * * * ?")
-    public void cronJob() {
-        //定时更新计划任务列表
-        log.error("aaaaaaaaaaaaaa");
-    }
+    //@Scheduled(cron = "0/1 0 * * * ?")
+    //public void cronJob() {
+    //    //定时更新计划任务列表
+    //    log.error("aaaaaaaaaaaaaa");
+    //}
 
 }
