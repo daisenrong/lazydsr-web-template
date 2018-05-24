@@ -8,6 +8,7 @@ import com.lazydsr.util.id.UtilUUId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -42,9 +43,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable(key="#result.id",unless = "#result eq null ")
+    @Cacheable(key = "#username", unless = "#result eq null ")
     public User findByUsername(String username) {
-        return userMapper.selectByUsername(username);
+        User result = userMapper.selectByUsername(username);
+        log.error(result.toString());
+        return result;
     }
 
     @Override

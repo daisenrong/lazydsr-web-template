@@ -54,8 +54,10 @@ public class RedisService {
         boolean result = false;
         try {
             ValueOperations<String, Object> operations = redisTemplate.opsForValue();
-            operations.set(key, value);
-            redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
+            //operations.set(key, value);
+            //redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
+
+            operations.set(key,value,expireTime,TimeUnit.SECONDS);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();

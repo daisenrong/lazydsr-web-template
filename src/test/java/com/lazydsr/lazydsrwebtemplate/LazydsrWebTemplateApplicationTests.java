@@ -14,18 +14,22 @@ import com.lazydsr.lazydsrwebtemplate.service.UserService;
 import com.lazydsr.lazydsrwebtemplate.util.SpringContextUtil;
 import com.lazydsr.util.id.UtilUUId;
 import com.lazydsr.util.time.UtilDateTime;
+import lombok.extern.slf4j.Slf4j;
 import org.hyperic.sigar.SigarException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class LazydsrWebTemplateApplicationTests {
 
     @Autowired
@@ -34,6 +38,31 @@ public class LazydsrWebTemplateApplicationTests {
     private UserMapper userMapper;
     @Autowired
     private UserLoginRecordMapper userLoginRecordMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+    @Test
+    public void testRedis(){
+        redisTemplate.opsForValue().set("s",11);
+        Object s = redisTemplate.opsForValue().get("s");
+
+        redisTemplate.opsForHash().put("map0","a",222);
+        Map entries = redisTemplate.opsForHash().entries("map0");
+        for (Object key:entries.keySet()){
+
+            log.error(key.toString());
+            log.error(entries.get(key).toString());
+        }
+        //redisTemplate.getConnectionFactory().getConnection().f
+        //
+        //Map entries = redisTemplate.opsForHash().("map0");
+        for (Object key:entries.keySet()){
+
+            log.error(key.toString());
+            log.error(entries.get(key).toString());
+        }
+
+    }
 
     @Test
     public void testTkMapper() {
