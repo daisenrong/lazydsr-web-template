@@ -42,8 +42,11 @@ public class ContextLoadEvent implements ApplicationRunner {
         log.error("加载系统基本信息结束");
 
         log.error("加载定时任务开始");
-        //该行代码报错的话，请检查一下系统中的库是不是存在
         scheduleConfiguration.init();
         log.error("加载定时任务结束");
+
+        log.error("初始化常用缓存信息开始");
+        //scheduleConfiguration.init();
+        log.error("初始化常用缓存信息结束");
     }
 }

@@ -1,5 +1,6 @@
 package com.lazydsr.lazydsrwebtemplate.service.impl;
 
+import com.lazydsr.lazydsrwebtemplate.config.cache.redis.RedisService;
 import com.lazydsr.lazydsrwebtemplate.dao.UserDao;
 import com.lazydsr.lazydsrwebtemplate.entity.User;
 import com.lazydsr.lazydsrwebtemplate.mapper.UserMapper;
@@ -8,6 +9,7 @@ import com.lazydsr.util.id.UtilUUId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -30,8 +32,11 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private RedisService redisService;
 
     @Override
+    @CachePut(key = "#user.id")
     public User add(User user) {
         if (user.getId() == null)
             user.setId(UtilUUId.getId());
@@ -43,19 +48,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable(key = "#username", unless = "#result eq null ")
+    //@Cacheable(key = "#username", unless = "#result eq null ")
     public User findByUsername(String username) {
-        User result = userMapper.selectByUsername(username);
-        log.error(result.toString());
-        return result;
+        User user = (User) redisService.get("user::" + username);
+        if (user == null) {
+            log.warn("缓存获取失败，查询数据库");
+            user = userMapper.selectByUsername(username);
+            if (user != null)
+                redisService.set("user::" + username, user);
+        }
+        return user;
     }
 
     @Override
+    @CacheEvict(key = "#id")
     public int delete(String id) {
         return userMapper.deleteByPrimaryKey(id);
     }
 
     @Override
+    @CachePut(key = "#user.id")
     public User update(User user) {
         int count = userMapper.updateByPrimaryKey(user);
         if (count > 0)
@@ -64,16 +76,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(key = "#id")
     public User findById(String id) {
         return userMapper.selectByPrimaryKey(id);
     }
 
     @Override
+    @Cacheable
     public List<User> findAllNormal() {
         return userMapper.selectAllNormal();
     }
 
     @Override
+    @Cacheable
     public List<User> findAll() {
         return userMapper.selectAll();
     }

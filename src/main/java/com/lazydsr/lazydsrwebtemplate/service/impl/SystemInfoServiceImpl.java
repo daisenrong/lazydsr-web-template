@@ -5,7 +5,12 @@ import com.lazydsr.lazydsrwebtemplate.mapper.SystemInfoMapper;
 import com.lazydsr.lazydsrwebtemplate.service.SystemInfoService;
 import com.lazydsr.util.id.UtilUUId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+
 
 /**
  * SystemInfoServiceImpl
@@ -16,11 +21,14 @@ import org.springframework.stereotype.Service;
  * Info: @TODO:...
  */
 @Service
+@CacheConfig(cacheNames = "systemInfo")
 public class SystemInfoServiceImpl implements SystemInfoService {
     @Autowired
     private SystemInfoMapper systemInfoMapper;
 
     @Override
+    //@Cacheable(key = "#systemInfo.id")
+    @CacheEvict(allEntries = true)
     public SystemInfo add(SystemInfo systemInfo) {
         if (systemInfo.getId() == null || systemInfo.getId().equals(""))
             systemInfo.setId(UtilUUId.getId());
@@ -30,6 +38,7 @@ public class SystemInfoServiceImpl implements SystemInfoService {
     }
 
     @Override
+    @Cacheable
     public SystemInfo findByMaxCreateDate() {
         //return systemInfoMapper.findTopByOrderByCreateDateDesc();
         return systemInfoMapper.selectByMaxCreateDate();

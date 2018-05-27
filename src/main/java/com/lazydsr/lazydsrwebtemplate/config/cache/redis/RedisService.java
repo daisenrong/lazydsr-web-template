@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -18,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * Info: redis操作service
  */
 @Service
-public class RedisService {
+public class RedisService<T> {
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -57,7 +56,7 @@ public class RedisService {
             //operations.set(key, value);
             //redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
 
-            operations.set(key,value,expireTime,TimeUnit.SECONDS);
+            operations.set(key, value, expireTime, TimeUnit.SECONDS);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,6 +120,7 @@ public class RedisService {
         return result;
     }
 
+
     /**
      * 哈希 添加
      *
@@ -153,7 +153,27 @@ public class RedisService {
      */
     public void setList(String key, Object value) {
         ListOperations<String, Object> list = redisTemplate.opsForList();
-        list.rightPush(key, value);
+        list.leftPush(key, value);
+    }
+    /**
+     * 列表添加
+     *
+     * @param key   key
+     * @param list list
+     */
+    public void setListAll(String key, List<T> list) {
+        ListOperations<String, Object> opsForList = redisTemplate.opsForList();
+        opsForList.leftPushAll(key, list);
+    }
+
+    /**
+     * 列表获取
+     *
+     * @param key key
+     * @return list
+     */
+    public List<T> getList(String key) {
+        return getList(key,0,-1);
     }
 
     /**
@@ -164,9 +184,9 @@ public class RedisService {
      * @param end   end
      * @return list
      */
-    public List<Object> getList(String key, long start, long end) {
+    public List<T> getList(String key, long start, long end) {
         ListOperations<String, Object> list = redisTemplate.opsForList();
-        return list.range(key, start, end);
+        return (List<T>)list.range(key, start, end);
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.lazydsr.lazydsrwebtemplate.service.impl;
 
+import com.lazydsr.lazydsrwebtemplate.config.cache.redis.RedisService;
 import com.lazydsr.lazydsrwebtemplate.entity.Menu;
 import com.lazydsr.lazydsrwebtemplate.mapper.MenuMapper;
 import com.lazydsr.lazydsrwebtemplate.service.MenuService;
@@ -7,11 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,8 +27,11 @@ import java.util.List;
 @Slf4j
 @CacheConfig(cacheNames = "menu")
 public class MenuServiceImpl implements MenuService {
+    private static final String prefix = "menu";
     @Autowired
     private MenuMapper menuMapper;
+    @Autowired
+    private RedisService<Menu> redisService;
 
     @Override
     public Menu add(Menu menu) {
@@ -43,6 +47,8 @@ public class MenuServiceImpl implements MenuService {
 
 
     @Override
+    @CachePut(key = "#menu.id")
+
     public Menu update(Menu menu) {
         int count = menuMapper.updateByPrimaryKey(menu);
         if (count > 0) {
@@ -53,12 +59,13 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    @Cacheable( key="#id")
+    @Cacheable(key = "#id")
     public Menu findById(String id) {
         return menuMapper.selectByPrimaryKey(id);
     }
 
     @Override
+    @Cacheable
     public List<Menu> findAll() {
         return menuMapper.selectAll();
     }
@@ -76,10 +83,17 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    @Cacheable
     public List<Menu> findAllNormal() {
         //List<Menu> menus = menuMapper.selectAllNormal();
-        return menuMapper.selectAllNormal();
+        log.error("test");
+        List<Menu> list = redisService.getList(prefix + "::findAllNormal");
+        if (list == null) {
+            log.error("缓存为空，查询数据库，添加缓存");
+            list = menuMapper.selectAllNormal();
+            if (list != null)
+                redisService.setListAll(prefix + "::findAllNormal", list);
+        }
+        return list;
     }
 
     //@Override
