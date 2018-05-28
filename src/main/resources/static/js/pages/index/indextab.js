@@ -398,7 +398,12 @@
 
                             } else {
                                 // _html += '<a class="menuItem" data-id="'+ctx + subrow.F_ModuleId + '" href="'+ctx + subrow.F_UrlAddress + '"><i class="' + subrow.F_Icon + '"></i>' + subrow.F_FullName + '</a>';
-                                _html += '<a class="menuItem" data-id="' + subrow.id + '" href="' + ctx + subrow.url + '"><i class="' + subrow.icon + '"></i><span>' + subrow.name + '</span></a>';
+                                //添加判断条件，若包含http或者https，那么就不添加根路径
+                                if(subrow.url.indexOf("http://")==0||subrow.url.indexOf("https://")==0){
+                                    _html += '<a class="menuItem" data-id="' + subrow.id + '" href="' + subrow.url + '"><i class="' + subrow.icon + '"></i><span>' + subrow.name + '</span></a>';
+                                }else {
+                                    _html += '<a class="menuItem" data-id="' + subrow.id + '" href="' + ctx + subrow.url + '"><i class="' + subrow.icon + '"></i><span>' + subrow.name + '</span></a>';
+                                }
                             }
                             _html += '</li>';
                         });
