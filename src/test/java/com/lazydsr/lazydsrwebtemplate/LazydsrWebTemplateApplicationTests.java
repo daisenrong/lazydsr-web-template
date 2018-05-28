@@ -20,10 +20,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,24 +45,54 @@ public class LazydsrWebTemplateApplicationTests {
     private RedisTemplate redisTemplate;
     @Test
     public void testRedis(){
-        redisTemplate.opsForValue().set("s",11);
-        Object s = redisTemplate.opsForValue().get("s");
+        ListOperations opsForList = redisTemplate.opsForList();
+        List<Object> list=new ArrayList<>();
+        list.add(new ArrayList<>());
+        list.add(1);
+        list.add("3");
+        list.add(new Integer(1));
+        list.add(new Integer(2));
+        list.add(new Integer(3));
 
-        redisTemplate.opsForHash().put("map0","a",222);
-        Map entries = redisTemplate.opsForHash().entries("map0");
-        for (Object key:entries.keySet()){
+        opsForList.leftPushAll("testList1",list);
+        List testList01 = opsForList.range("testList1", 0, -1);
+        //System.out.println(list);
+        System.out.println(testList01);
 
-            log.error(key.toString());
-            log.error(entries.get(key).toString());
-        }
-        //redisTemplate.getConnectionFactory().getConnection().f
+
+
+        Object testList0 = opsForList.index("testList1", 0);
+        System.out.println(testList0);
+        opsForList.set("testList1",0,4444);
+        Object testList1 = opsForList.index("testList1", 0);
+        System.out.println(testList1);
+
+
+        //opsForList.leftPushAll("testList0",1,2,3);
+        //Object testList0 = opsForList.leftPop("testList0");
+        //System.out.println(testList0);
+        List testList02 = opsForList.range("testList1", 0, -1);
+        //System.out.println(list);
+        System.out.println(testList02);
+
+        //redisTemplate.opsForValue().set("s",11);
+        //Object s = redisTemplate.opsForValue().get("s");
         //
-        //Map entries = redisTemplate.opsForHash().("map0");
-        for (Object key:entries.keySet()){
-
-            log.error(key.toString());
-            log.error(entries.get(key).toString());
-        }
+        //redisTemplate.opsForHash().put("map0","a",222);
+        //Map entries = redisTemplate.opsForHash().entries("map0");
+        //for (Object key:entries.keySet()){
+        //
+        //    log.error(key.toString());
+        //    log.error(entries.get(key).toString());
+        //}
+        ////redisTemplate.getConnectionFactory().getConnection().f
+        ////
+        ////Map entries = redisTemplate.opsForHash().("map0");
+        //for (Object key:entries.keySet()){
+        //
+        //    log.error(key.toString());
+        //    log.error(entries.get(key).toString());
+        //}
 
     }
 

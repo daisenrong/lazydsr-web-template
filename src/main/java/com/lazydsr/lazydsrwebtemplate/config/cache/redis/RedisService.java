@@ -21,6 +21,14 @@ public class RedisService<T> {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    public RedisTemplate getRedisTemplate() {
+        return redisTemplate;
+    }
+
+    public void setRedisTemplate(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+
     /**
      * 写入缓存
      *
@@ -151,7 +159,7 @@ public class RedisService<T> {
      * @param key   key
      * @param value value
      */
-    public void setList(String key, Object value) {
+    public void setList(String key, T value) {
         ListOperations<String, Object> list = redisTemplate.opsForList();
         list.leftPush(key, value);
     }
@@ -162,7 +170,7 @@ public class RedisService<T> {
      * @param list list
      */
     public void setListAll(String key, List<T> list) {
-        ListOperations<String, Object> opsForList = redisTemplate.opsForList();
+        ListOperations<String, T> opsForList = redisTemplate.opsForList();
         opsForList.leftPushAll(key, list);
     }
 

@@ -31,7 +31,7 @@ public class MenuServiceImpl implements MenuService {
     @Autowired
     private MenuMapper menuMapper;
     @Autowired
-    private RedisService<Menu> redisService;
+    private RedisService redisService;
 
     @Override
     public Menu add(Menu menu) {
@@ -83,17 +83,16 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> findAllNormal() {
-        //List<Menu> menus = menuMapper.selectAllNormal();
         List<Menu> list = redisService.getList(prefix + "::findAllNormal");
-        log.error("缓存" + list.toString());
-        list = null;
+        log.info("缓存" + list.toString());
 
         if (list == null || list.size() == 0) {
             log.warn("缓存为空，查询数据库，添加缓存");
             list = menuMapper.selectAllNormal();
-            log.error("数据库" + list.toString());
+            log.info("数据库" + list.toString());
             if (list != null)
-                redisService.setList(prefix + "::findAllNormal", list);
+                //redisService.getRedisTemplate().opsForList().leftPushAll(prefix + "::findAllNormal",list);
+                redisService.setListAll(prefix + "::findAllNormal", list);
         }
         return list;
     }

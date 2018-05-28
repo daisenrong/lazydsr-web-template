@@ -27,7 +27,7 @@ public class DataSourceInfoServiceImpl implements DataSourceInfoService {
     @Autowired
     private DataSourceInfoMapper dataSourceInfoMapper;
     @Autowired
-    private RedisService<DataSourceInfo> redisService;
+    private RedisService redisService;
 
     @Override
     public DataSourceInfo add(DataSourceInfo dataSourceInfo) {
