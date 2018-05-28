@@ -186,8 +186,7 @@ public class RedisService<T> {
      */
     public List<T> getList(String key, long start, long end) {
         ListOperations<String, Object> opsForList = redisTemplate.opsForList();
-        opsForList.
-        return (List<T>)list.range(key, start, end);
+        return (List<T>)opsForList.range(key, start, end);
     }
 
     /**
