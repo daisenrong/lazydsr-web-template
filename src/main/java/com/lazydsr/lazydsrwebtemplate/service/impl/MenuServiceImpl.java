@@ -48,7 +48,6 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @CachePut(key = "#menu.id")
-
     public Menu update(Menu menu) {
         int count = menuMapper.updateByPrimaryKey(menu);
         if (count > 0) {
@@ -85,13 +84,16 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<Menu> findAllNormal() {
         //List<Menu> menus = menuMapper.selectAllNormal();
-        log.error("test");
         List<Menu> list = redisService.getList(prefix + "::findAllNormal");
-        if (list == null) {
-            log.error("缓存为空，查询数据库，添加缓存");
+        log.error("缓存" + list.toString());
+        list = null;
+
+        if (list == null || list.size() == 0) {
+            log.warn("缓存为空，查询数据库，添加缓存");
             list = menuMapper.selectAllNormal();
+            log.error("数据库" + list.toString());
             if (list != null)
-                redisService.setListAll(prefix + "::findAllNormal", list);
+                redisService.setList(prefix + "::findAllNormal", list);
         }
         return list;
     }

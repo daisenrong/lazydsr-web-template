@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: dev1
   jackson:
     default-property-inclusion: non_null
 #server:
